@@ -1,4 +1,4 @@
-package com.controller;
+package com.app.controller;
 
 import com.app.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;

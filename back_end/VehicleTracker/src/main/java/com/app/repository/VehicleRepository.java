@@ -1,7 +1,9 @@
-package com.repository;
+package com.app.repository;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.app.model.Vehicle;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.controller;
+package com.app.controller;
 
 import com.app.model.User;
 import java.util.List;
