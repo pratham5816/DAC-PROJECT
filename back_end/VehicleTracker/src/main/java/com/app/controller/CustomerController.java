@@ -40,4 +40,10 @@ public class CustomerController {
     }
 
 
+//    @GetMapping("/validateCusmoter")
+//    public ResponseEntity<Boolean> checkUser(@RequestBody Customer customer){
+//
+//    }
+
+
 }

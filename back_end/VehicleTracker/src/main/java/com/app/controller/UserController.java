@@ -6,13 +6,13 @@ import java.util.List;
 
 import com.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@CrossOrigin("http://localhost:5500")
 public class UserController {
 
     @Autowired
@@ -24,9 +24,9 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public BodyBuilder add(@RequestBody User user){
+    public ResponseEntity<String> add(@RequestBody User user){
         userService.addMyUser(user);
-        return ResponseEntity.status(203);
+        return ResponseEntity.status(HttpStatus.CREATED).body("User has been Created " + user.getEmail());
     }
 
     @DeleteMapping("/deleteUser/{id}")

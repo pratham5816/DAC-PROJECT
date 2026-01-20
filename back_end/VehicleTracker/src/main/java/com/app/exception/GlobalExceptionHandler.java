@@ -5,10 +5,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleDriverNotFound(DriverNotFound ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Driver not found with email " + ex.getMessage());
+    }
     @ExceptionHandler(UserNotFound.class)
     public ResponseEntity<String> handlerUserNotFound(UserNotFound ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());

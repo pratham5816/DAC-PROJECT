@@ -4,16 +4,13 @@ package com.app.service;
 import com.app.exception.UserAlreadyExists;
 import com.app.exception.UserNotFound;
 import com.app.model.User;
-import com.app.repo.UserRepository;
-
+import com.app.repository.UserRepository;
 import jakarta.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class UserService {
@@ -52,7 +49,7 @@ public class UserService {
     }
 
     @Transactional
-    public User addMyUser(@RequestBody User user) {  ///  "present" "absent"
+    public User addMyUser(User user) {  ///  "present" "absent"
 
         List<User> temp = userRepository.findByEmail(user.getEmail());
 

@@ -3,14 +3,15 @@ package com.app.service;
 import java.util.List;
 
 import com.app.exception.UserNotFound;
+import com.app.exception.VehicleAlreadyExists;
 import com.app.model.User;
-import com.app.repo.UserRepository;
+import com.app.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.model.Vehicle;
-import com.app.repo.VehicleRepository;
+import com.app.repository.VehicleRepository;
 
 @Service
 public class VehicleService {
