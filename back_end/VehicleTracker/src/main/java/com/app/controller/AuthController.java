@@ -4,11 +4,11 @@ package com.app.controller;
 import com.app.dto.LoginRequest;
 import com.app.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("Auth")
+
 public class AuthController {
 
 
