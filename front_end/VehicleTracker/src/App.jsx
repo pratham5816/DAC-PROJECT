@@ -1,21 +1,16 @@
-
 import './App.css'
+
 import LoginPage from './Components/LoginPage'
-import LoginHeader from './Components/LoginHeader'
-import LoginFooter from './Components/LoginFooter'
 
-function App() {
 
+ function App() {
 
   return (
     <>
-     {/* <LoginHeader/> */}
-      <LoginPage/>
-{/*      
-      <LoginFooter/> */}
-   
-    </>
+    <LoginPage/>
+   </>
   )
 }
 
 export default App
+
