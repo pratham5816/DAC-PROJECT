@@ -8,8 +8,8 @@ import com.app.model.User;
 import com.app.repository.DriverRepository;
 import com.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -21,24 +21,19 @@ public class AuthService {
     @Autowired
     private DriverRepository driverRepository;
 
-    private final PasswordEncoder passwordEncoder;
-
-    public AuthService(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public boolean authenticateUser(LoginRequest loginRequest) {
-
         // Authentication logic for user
         List<User> temp =  userRepository.findByEmail(loginRequest.getEmail());
 
         if(temp.isEmpty()) throw new UserNotFound(loginRequest);
 
-        //password verification logic here
+        // Add password verification logic here
+        // will be adding later
 
         User user = temp.get(0);
 
-        if(passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+        if(user.getPassword().equals(loginRequest.getPassword())) {
             return true;
         }else{
             return false;
@@ -51,13 +46,15 @@ public class AuthService {
 
         if(temp.isEmpty()) throw new DriverNotFound(loginRequest);
 
-        //password verification logic here
+        // Add password verification logic here
+        // will be adding later
+
         Driver driver = temp.get(0);
 
-        if(passwordEncoder.matches(loginRequest.getPassword(), driver.getPassword())) {
+        if(driver.getPassword().equals(loginRequest.getPassword())) {
 //            System.out.println("Driver authenticated: " + driver.getEmail());
-//            System.out.println("From Object" + driver.getPassword());
-//            System.out.println("From Api" + loginRequest.getPassword());
+            System.out.println("From Object" + driver.getPassword());
+            System.out.println("From Api" + loginRequest.getPassword());
             return true;
         }else{
             return false;
