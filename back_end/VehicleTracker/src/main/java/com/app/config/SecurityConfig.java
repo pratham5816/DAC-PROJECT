@@ -26,7 +26,6 @@ public class SecurityConfig {
                 .build();
 
                 // Disable CSRF for simplicity for  Apis.
-
     }
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

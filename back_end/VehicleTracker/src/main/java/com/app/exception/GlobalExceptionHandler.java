@@ -9,10 +9,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler
+    public ResponseEntity<String> handlerCheckpointAlreadyExists(CheckpointAlreadyExists ex){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
+    @ExceptionHandler
+    public ResponseEntity<String> handleCheckpointNotFound(Exception ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
 
     @ExceptionHandler
     public ResponseEntity<String> handleDriverNotFound(DriverNotFound ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
     @ExceptionHandler(UserNotFound.class)
     public ResponseEntity<String> handlerUserNotFound(UserNotFound ex){
@@ -27,7 +35,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CustomerNotFound.class)
     public ResponseEntity<String> handlerCustomerNotFound(CustomerNotFound ex)
     {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
     @ExceptionHandler(CustomerAlreadyExists.class)
