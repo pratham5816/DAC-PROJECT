@@ -13,6 +13,8 @@ import com.app.model.Customer;
 
 @RestController
 @RequestMapping("Customer")
+@CrossOrigin("http://localhost:5173")
+
 public class CustomerController {
     
     @Autowired

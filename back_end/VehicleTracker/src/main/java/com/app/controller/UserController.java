@@ -1,5 +1,6 @@
 package com.app.controller;
 
+import com.app.dto.EmailRequest;
 import com.app.model.User;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("User")
+@CrossOrigin("http://localhost:5173")
+
 public class UserController {
 
     @Autowired
@@ -23,13 +26,17 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @PostMapping("/getUserIDbyEmail")
+    public ResponseEntity<String> getUserID(@RequestBody EmailRequest emailRequest){
+        String id = userService.getUserIDbyEmail(emailRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(id);
+    }
+
     @PostMapping("/addUser")
     public ResponseEntity<String> add(@RequestBody User user){
         userService.addMyUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("User has been Created " + user.getEmail());
     }
-
-
 
     @DeleteMapping("/deleteUser/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Integer id){

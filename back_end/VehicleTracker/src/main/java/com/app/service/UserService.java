@@ -1,6 +1,7 @@
 package com.app.service;
 
 
+import com.app.dto.EmailRequest;
 import com.app.exception.UserAlreadyExists;
 import com.app.exception.UserNotFound;
 import com.app.model.User;
@@ -28,6 +29,18 @@ public class UserService {
     }
 
     @Transactional
+    public String getUserIDbyEmail(EmailRequest emailRequest) {
+
+        emailRequest.setEmail(emailRequest.getEmail().trim());
+
+        Optional<User> temp = userRepository.findByEmail(emailRequest.getEmail());
+
+        if(temp.isEmpty()) throw new UserNotFound(emailRequest);     // handler with parameter EmailRequest will handler.
+
+        return String.valueOf(temp.get().getId());
+    }
+
+    @Transactional
     public User deleteUserById(Integer id) {
         Optional<User> temp = userRepository.findById(id);
 
@@ -48,7 +61,7 @@ public class UserService {
 
         Optional<User> temp = userRepository.findById(id);
 
-        if (temp.isEmpty()) throw new UserNotFound(id.toString());
+        if (temp.isEmpty()) throw new UserNotFound(id);
         else {
             userRepository.delete(temp.get());
         }
@@ -60,7 +73,7 @@ public class UserService {
     @Transactional
     public User addMyUser(User user) {  ///  "present" "absent"
 
-        List<User> temp = userRepository.findByEmail(user.getEmail());
+        Optional<User> temp = userRepository.findByEmail(user.getEmail());
 
         if (!temp.isEmpty()) {
             throw new UserAlreadyExists(user.getEmail());

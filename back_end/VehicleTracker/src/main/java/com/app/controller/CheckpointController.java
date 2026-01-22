@@ -4,13 +4,12 @@ import com.app.model.Checkpoint;
 import com.app.service.CheckpointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("checkpoint")
+@CrossOrigin("http://localhost:5173")
+
 public class CheckpointController {
 
     @Autowired
@@ -18,15 +17,16 @@ public class CheckpointController {
 
     @PostMapping("/addCheckpoint")
     public ResponseEntity<?> addCheckpoint(@RequestBody Checkpoint checkpoint) {
-       // checkpointService.addCheckpoint(Checkpoint);
+
+        checkpointService.addCheckpoint(checkpoint);
 
         return ResponseEntity.status(201).body("Checkpoint added successfully: " + checkpoint.getName());
     }
 
-    @PostMapping("/")
-    public ResponseEntity<?> getCheckpoint(@RequestBody Checkpoint checkpoint) {
-
-    }
+//    @PostMapping("/getCheckpoint")
+//    public ResponseEntity<?> getCheckpoint(@RequestBody Checkpoint checkpoint) {
+//
+//    }
 
 
 }

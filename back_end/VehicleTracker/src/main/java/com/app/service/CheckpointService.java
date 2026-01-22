@@ -16,7 +16,7 @@ public class CheckpointService {
     public Checkpoint addCheckpoint(Checkpoint checkpoint) {
         List<Checkpoint> temp = checkpointRepository.findByName(checkpoint.getName());
 
-        if(temp.isEmpty()) throw new
+//        if(temp.isEmpty()) throw new
 
 
         return checkpointRepository.save(checkpoint);

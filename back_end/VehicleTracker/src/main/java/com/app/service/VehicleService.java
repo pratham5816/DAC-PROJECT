@@ -43,7 +43,7 @@ public class VehicleService {
 
         Integer id = vehicle.getUser().getId();
 
-        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound(String.valueOf(id)));
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound(id));
 
         vehicle.setUser(user);
 
