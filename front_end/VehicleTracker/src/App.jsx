@@ -1,16 +1,43 @@
-import './App.css'
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import LoginPage from './Pages/LoginPage';
+import DriverPage from "./Pages/DriverPage";
+import UserPage from "./Pages/UserPage";
+import CustomerPage from "./Pages/CustomerPage";
+import './App.css';
 
-import LoginPage from './Components/LoginPage'
 
+// Wrapper to pass navigate into LoginPage
+function LoginPageWrapper() {
+  const navigate = useNavigate();
 
- function App() {
+  const handleLogin = (role, email) => {
+    console.log("Logged in as:", role, "with email:", email);
 
-  return (
-    <>
-    <LoginPage/>
-   </>
-  )
+    if (role === "driver") {
+      navigate("/driver");   // ✅ Navigate to DriverPage
+    } else if (role === "user") {
+      navigate("/user");     // later add UserPage
+    } else if (role === "customer") {
+      navigate("/customer"); // later add CustomerPage
+    }
+
+  };
+
+  return <LoginPage onLogin={handleLogin} />;
 }
 
-export default App
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPageWrapper />} />
+        <Route path="/driver" element={<DriverPage />} />
+        <Route path="/user" element={<UserPage />} />
+        <Route path="/customer" element={<CustomerPage />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
 
