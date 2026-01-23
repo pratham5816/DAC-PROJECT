@@ -6,8 +6,8 @@ const AddVehicle = () => {
   const [vehicle, setVehicle] = useState({
     vehicleNumber: "",
     vehicleType: "",
-    challanExp: "",
-    vehicleExp: "",
+    challanExp: 0,
+    vehicleExp: 0,
   });
 
   const [error, setError] = useState("");
@@ -28,20 +28,23 @@ const AddVehicle = () => {
     }
 
     try {
+
+      console.log("Vehicle Number: " + vehicle.vehicleNumber)
+
       await axios.post("http://localhost:8080/Vehicle/addVehicle", {
-        vechicle_number: vehicle.vehicleNumber,
-        vehicle_type: vehicle.vehicleType,
-        challan_exp: vehicle.challanExp,
-        vehicle_exp: vehicle.vehicleExp,
-        user: 1 // auto-filled from logged-in user
+        vehicleNumber: vehicle.vehicleNumber,
+        vehicleType: vehicle.vehicleType,
+        challan_Exp: vehicle.challanExp,
+        vehicle_Exp: vehicle.vehicleExp,
+        userId: 4 // auto-filled from logged-in user
       });
 
       setSuccess("Vehicle registered successfully!");
       setVehicle({
         vehicleNumber: "",
         vehicleType: "",
-        challanExp: "",
-        vehicleExp: "",
+        challanExp: 0,
+        vehicleExp: 0,
       });
     } catch (err) {
       console.log(err);

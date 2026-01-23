@@ -42,6 +42,7 @@ const LoginPage = ({ onLogin }) => {
       console.log(email);
       console.log(password);
 
+      localStorage.setItem("Email" , email)
 
       const loginApiMap = {
                driver: "http://localhost:8080/Auth/DriverLogin",
