@@ -56,6 +56,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Optional<User> getUserById(Integer id) {
+        return userRepository.findById(id);
+    }
+
     @Transactional
     public void deleteUser(Integer id) {
 
