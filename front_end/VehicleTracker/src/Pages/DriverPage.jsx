@@ -1,6 +1,7 @@
 import React from "react";
 
 const DriverPage = () => {
+  
   return (
     <div className="p-4">
       <h2>Driver Dashboard</h2>
