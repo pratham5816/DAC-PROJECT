@@ -1,8 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate, BrowserRouter } from "react-router-dom";
+import AppLayout from "./Layout/AppLayout";
 import LoginPage from './Pages/LoginPage';
 import DriverPage from "./Pages/DriverPage";
 import UserPage from "./Pages/UserPage";
 import CustomerPage from "./Pages/CustomerPage";
+
 import './App.css';
 
 
@@ -28,14 +30,19 @@ function LoginPageWrapper() {
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
+    
       <Routes>
+      
         <Route path="/" element={<LoginPageWrapper />} />
+          <Route element={<AppLayout />}>
         <Route path="/driver" element={<DriverPage />} />
         <Route path="/user" element={<UserPage />} />
         <Route path="/customer" element={<CustomerPage />} />
+        </Route>
       </Routes>
-    </Router>
+
+    </BrowserRouter>
   );
 }
 
