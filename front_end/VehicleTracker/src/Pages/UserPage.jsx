@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Container, Card, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
+
+
 const AddVehicle = () => {
   const [vehicle, setVehicle] = useState({
     vehicleNumber: "",
@@ -27,16 +29,32 @@ const AddVehicle = () => {
       return;
     }
 
+    const userEmail = localStorage.getItem("email");
+    console.log("User Email: "+userEmail);
+
     try {
 
       console.log("Vehicle Number: " + vehicle.vehicleNumber)
+        const userEmail = localStorage.getItem("Email");
+         console.log("User Email: "+userEmail);
+
+      
+      
+      const response = await axios.post("http://localhost:8080/User/getUserIDbyEmail",{
+        email:userEmail
+      });
+
+      const userIdfromApi = parseInt(response.data);
+
+
+
 
       await axios.post("http://localhost:8080/Vehicle/addVehicle", {
         vehicleNumber: vehicle.vehicleNumber,
         vehicleType: vehicle.vehicleType,
         challan_Exp: vehicle.challanExp,
         vehicle_Exp: vehicle.vehicleExp,
-        userId: 4 // auto-filled from logged-in user
+        userId: userIdfromApi   // auto-filled from logged-in user
       });
 
       setSuccess("Vehicle registered successfully!");
@@ -94,7 +112,7 @@ const AddVehicle = () => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Challan Expiry (Days)</Form.Label>
+            <Form.Label>Challan Expenditure (₹)</Form.Label>
             <Form.Control
               type="number"
               placeholder="e.g. 30"
@@ -105,7 +123,7 @@ const AddVehicle = () => {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Vehicle Expiry (Days)</Form.Label>
+            <Form.Label>Vehicle Expenditure (₹)</Form.Label>
             <Form.Control
               type="number"
               placeholder="e.g. 365"

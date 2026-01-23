@@ -39,10 +39,10 @@ const LoginPage = ({ onLogin }) => {
       return;
     }
     
-      console.log(email);
-      console.log(password);
+      // console.log(email);
+      // console.log(password);
 
-      localStorage.setItem("Email" , email)
+      localStorage.setItem("Email" , email);  // local storage used so that we can call apis 
 
       const loginApiMap = {
                driver: "http://localhost:8080/Auth/DriverLogin",
