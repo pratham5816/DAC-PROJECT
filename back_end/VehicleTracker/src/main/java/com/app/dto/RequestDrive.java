@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RequestDrive {
     private Integer driveId;
+    private Integer driverId;
     private Integer vehicleId;
     private String status;
     private Double latitude;

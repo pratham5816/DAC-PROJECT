@@ -36,10 +36,10 @@ public class Drive {
     private String status;
     // CREATED, ACTIVE, COMPLETED, CANCELLED
 
-    @Column(name = "recent_longitude", nullable = false)
+    @Column(name = "recent_longitude", nullable = false , columnDefinition = "DOUBLE DEFAULT 0.0")
     private Double longitude;
 
-    @Column(name = "recent_latitude", nullable = false)
+    @Column(name = "recent_latitude", nullable = false , columnDefinition = "DOUBLE DEFAULT 0.0")
     private Double latitude;
 
     @ManyToOne

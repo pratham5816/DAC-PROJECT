@@ -7,4 +7,8 @@ public class DriverNotFound extends RuntimeException {
     {
         super("Driver Not Found with Email " + loginRequest.getEmail());
     }
+
+    public DriverNotFound(String message) {
+        super(message);
+    }
 }
