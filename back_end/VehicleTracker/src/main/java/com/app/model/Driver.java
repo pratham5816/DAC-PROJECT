@@ -1,10 +1,7 @@
 package com.app.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -17,8 +14,14 @@ public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int driverId;
+    @Column(nullable = false)
     private String driverName;
+    @Column(nullable = false)
     private String licenseNumber;
+    @Column(nullable = false , unique = true)
     private String email;
+    @Column(nullable = false)
     private String password;
+    @Column(columnDefinition = "boolean default false")
+    private boolean isActive;
 }
