@@ -22,4 +22,6 @@ public class Driver {
     private String email;
     @Column(nullable = false)
     private String password;
+    @Column(columnDefinition = "boolean default false")
+    private boolean isActive;
 }
