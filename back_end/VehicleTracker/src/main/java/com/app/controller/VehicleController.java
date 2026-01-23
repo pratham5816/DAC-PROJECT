@@ -1,5 +1,6 @@
 package com.app.controller;
 
+import com.app.dto.VehicleRequest;
 import com.app.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,8 @@ public class VehicleController {
 
 
     @PostMapping("/addVehicle")
-    public ResponseEntity<String> addVehicle(@RequestBody Vehicle vehicle){
-        Vehicle saved = vehicleService.addVehicle(vehicle);
+    public ResponseEntity<String> addVehicle(@RequestBody VehicleRequest vehicleRequest){
+        Vehicle saved = vehicleService.addVehicle(vehicleRequest);
         // return only the vehicle identifier to avoid recursive toString/json issues
         return ResponseEntity.status(201).body("Vehicle added successfully: " + saved.getVechicleNumber());
     }

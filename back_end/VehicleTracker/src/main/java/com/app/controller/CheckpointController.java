@@ -18,6 +18,11 @@ public class CheckpointController {
     @PostMapping("/addCheckpoint")
     public ResponseEntity<?> addCheckpoint(@RequestBody Checkpoint checkpoint) {
 
+
+        if(checkpoint == null || checkpoint.getName() == null || checkpoint.getName().isEmpty()) {
+            return ResponseEntity.badRequest().body("Checkpoint data is required");
+        }
+
         checkpointService.addCheckpoint(checkpoint);
 
         return ResponseEntity.status(201).body("Checkpoint added successfully: " + checkpoint.getName());

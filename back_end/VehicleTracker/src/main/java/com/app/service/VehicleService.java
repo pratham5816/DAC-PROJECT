@@ -1,7 +1,9 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.app.dto.VehicleRequest;
 import com.app.exception.UserNotFound;
 import com.app.exception.VehicleAlreadyExists;
 import com.app.model.User;
@@ -22,30 +24,32 @@ public class VehicleService {
     @Autowired
     private UserRepository userRepository;
 
-    @Transactional
+    @Autowired
+    private UserService userService;
+
+
     public List<Vehicle> fetchAllVehicle(){
         return vehicleRepository.findAll();
     }
 
 
     @Transactional
-    public Vehicle addVehicle(Vehicle vehicle){
+    public Vehicle addVehicle(VehicleRequest vehicleRequest){
+        Optional<User> user = userService.getUserById(vehicleRequest.getUserId());
 
-        //if (vehicle == null) throw new IllegalArgumentException("Vehicle must not be null");
+        if(user.isEmpty()) throw new UserNotFound(vehicleRequest.getUserId());
 
-//        if (vehicle.getVechicleNumber() == null || vehicle.getVechicleNumber().isBlank())
-//            throw new IllegalArgumentException("Vehicle number must be provided");
+        if (vehicleRepository.existsByVechicleNumber(vehicleRequest.getVehicleNumber()))
+            throw new VehicleAlreadyExists("Vehicle with vehicle number "+ vehicleRequest.getVehicleNumber() + " already exists");
 
-        if (vehicleRepository.existsByVechicleNumber(vehicle.getVechicleNumber()))
-            throw new VehicleAlreadyExists("Vehicle with vehicle number "+ vehicle.getVechicleNumber() + " already exists");
 
-        if (vehicle.getUser() == null) throw new IllegalArgumentException("Vehicle must be associated with a user id");
-
-        Integer id = vehicle.getUser().getId();
-
-        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound(id));
-
-        vehicle.setUser(user);
+        Integer id = vehicleRequest.getUserId();
+        Vehicle vehicle = new Vehicle();
+        vehicle.setVechicleNumber(vehicleRequest.getVehicleNumber());
+        vehicle.setVehicleType(vehicleRequest.getVehicleType());
+        vehicle.setVehicle_Exp(vehicleRequest.getVehicle_Exp());
+        vehicle.setChallan_Exp(vehicleRequest.getChallan_Exp());
+        vehicle.setUser(user.get());
 
         return  vehicleRepository.save(vehicle);
 

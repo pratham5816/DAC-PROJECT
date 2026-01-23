@@ -33,6 +33,7 @@ public class CustomerService {
 
    @Transactional
     public Customer addMyCustomer(Customer customer){
+
         customer.setName(customer.getName().trim().toLowerCase());
 
        List<Customer> temp =  customerRepository.findByEmail(customer.getEmail());
