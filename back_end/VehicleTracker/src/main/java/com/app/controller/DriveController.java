@@ -1,14 +1,14 @@
 package com.app.controller;
 
+import com.app.dto.LocationNameRequest;
 import com.app.dto.RequestDrive;
 import com.app.dto.UpdateLocationRequest;
+import com.app.dto.VehicleNumberRequest;
+import com.app.model.Drive;
 import com.app.service.DriveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("drive")
@@ -18,15 +18,20 @@ public class DriveController {
     private DriveService driveService;
 
     @PostMapping("/createDrive")
-    public ResponseEntity<String> drive(@RequestBody RequestDrive requestDrive){
-        driveService.startDrive(requestDrive);
-        return ResponseEntity.ok("Drive created successfully");
+    public Drive drive(@RequestBody RequestDrive requestDrive){
+        return driveService.startDrive(requestDrive);
     }
 
     @PostMapping("/updateLocation")
-    public ResponseEntity<String> updateLocation(@RequestBody UpdateLocationRequest updateLocationRequest){
+    public ResponseEntity<?> updateLocation(@RequestBody UpdateLocationRequest updateLocationRequest){
             driveService.upateLocationInDrive(updateLocationRequest);
         return  ResponseEntity.ok("Location updated successfully");
+    }
+
+    @GetMapping("/getCurrentCheckpointLocation")
+    public ResponseEntity<?> getCurrentCheckpointLocation(@RequestBody VehicleNumberRequest vehicleNumberRequest){
+        LocationNameRequest locationNameRequest = driveService.getNearByCheckpointLocation(vehicleNumberRequest);
+        return ResponseEntity.ok(locationNameRequest);
     }
 
 }

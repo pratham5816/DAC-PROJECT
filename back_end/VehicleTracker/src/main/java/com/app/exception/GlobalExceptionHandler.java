@@ -69,4 +69,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
+    @ExceptionHandler(UnexpectedException.class)
+    public ResponseEntity<String> handlerDriverNotFound(DriverNotFound ex){
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(LocationNotUpdatedByDriver.class)
+    public ResponseEntity<String> handlerLocationNotUpdatedByDriver(LocationNotUpdatedByDriver ex){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
+
 }

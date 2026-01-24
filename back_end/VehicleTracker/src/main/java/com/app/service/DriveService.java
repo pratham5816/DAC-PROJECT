@@ -1,7 +1,11 @@
 package com.app.service;
 
+import com.app.dto.LocationNameRequest;
 import com.app.dto.RequestDrive;
+import com.app.dto.UpdateLocationRequest;
+import com.app.dto.VehicleNumberRequest;
 import com.app.exception.*;
+import com.app.util.DiatanceUtil;
 import com.app.model.Checkpoint;
 import com.app.model.Drive;
 import com.app.model.Driver;
@@ -13,6 +17,8 @@ import com.app.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,7 +36,7 @@ public class DriveService {
     @Autowired
     private CheckpointRepository checkpointRepository;
 
-    public void startDrive(RequestDrive requestDrive) {
+    public Drive startDrive(RequestDrive requestDrive) {
 
         if(driveRepository.existsByDriver_DriverId(requestDrive.getDriverId())) throw new DriverIsAlreadyActive("Driver is already active in another drive.");
         if(driveRepository.existsByVehicle_VechicleNumber(requestDrive.getVehicleNumber())) throw new DriveAlreadyExists("Vehicle is already active.");
@@ -51,7 +57,7 @@ public class DriveService {
         //Fetch End Checkpoint
         Checkpoint endCheckpoint = checkpointRepository
                 .findById(requestDrive.getEndpointId())
-                .orElseThrow(() -> new RuntimeException("End checkpoint not found"));
+                .orElseThrow(() -> new CheckpointNotFound("End checkpoint not found"));
 
         Drive drive = new Drive();
         drive.setStatus("ACTIVE");
@@ -62,17 +68,48 @@ public class DriveService {
         drive.setLatitude(requestDrive.getLatitude());
         drive.setLongitude(requestDrive.getLongitude());
 
-        driveRepository.save(drive);
+        return driveRepository.save(drive);
     }
 
 
-    public void upateLocationInDrive(com.app.dto.UpdateLocationRequest updateLocationRequest) {
+    public void upateLocationInDrive(UpdateLocationRequest updateLocationRequest) {
+
         Drive drive = driveRepository.findByVehicle_VechicleNumber(updateLocationRequest.getVehicleNumber())
                 .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
 
-        drive.setLatitude(updateLocationRequest.getLatitude());
-        drive.setLongitude(updateLocationRequest.getLongitude());
+        try {
+            drive.setLatitude(updateLocationRequest.getLatitude());
+            drive.setLongitude(updateLocationRequest.getLongitude());
+        }
+        catch (Exception e) {
+            throw new UnexpectedException(e.getMessage());
+        }
 
         driveRepository.save(drive);
     }
+
+
+//    public LocationNameRequest getNearByCheckpointLocation(VehicleNumberRequest vehicleNumberRequest) {
+//
+//        Drive drive = driveRepository.findByVehicle_VechicleNumber(vehicleNumberRequest.getVehicleNumber())
+//                .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
+//
+//        // we need to iterate over all checkpoints to find the nearest one to the current location of the drive.
+//        // using the util class to calculate distance between two lat long points in one point
+//
+//        List<Checkpoint> checkpoints = checkpointRepository.findAll();
+//
+//        if(checkpoints.isEmpty()) throw new CheckpointNotFound("Checkpoints not found");
+//
+//        // now we need to get the latest updated coordinates by driver from drive to compare with our checkpoints coordinates in database
+//
+//        // default coordinate 0 check.
+//
+//        if(drive.getLatitude() == 0.0 || drive.getLongitude() == 0.0) throw new LocationNotUpdatedByDriver(vehicleNumberRequest);
+//
+//        for(Checkpoint checkpoint : checkpoints) {
+//
+//        }
+//        return locationNameRequest;
+//    }
 }
