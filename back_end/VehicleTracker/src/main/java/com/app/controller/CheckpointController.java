@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import com.app.dto.CheckpointResponse;
+import com.app.dto.CheckpointUpdateCoordinatesRequest;
 import com.app.model.Checkpoint;
 import com.app.service.CheckpointService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,15 @@ public class CheckpointController {
         return checkpointService.getAllCheckpoints();
     }
 
+    @PatchMapping("/updateCheckpoint")
+    public ResponseEntity<?> updateCheckpoint(@RequestBody CheckpointUpdateCoordinatesRequest checkpointUpdateCoordinatesRequest) {
+        checkpointUpdateCoordinatesRequest.setCheckpointName(checkpointUpdateCoordinatesRequest.getCheckpointName().toLowerCase());
+        checkpointService.updateCoordinates(checkpointUpdateCoordinatesRequest);
+        return ResponseEntity.ok().body(checkpointUpdateCoordinatesRequest);
+    }
+
+    @GetMapping("/getAll")
+    public List<Checkpoint> getAll() {
+        return checkpointService.getAllCheckpoint2();
+    }
 }

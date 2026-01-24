@@ -89,27 +89,52 @@ public class DriveService {
     }
 
 
-//    public LocationNameRequest getNearByCheckpointLocation(VehicleNumberRequest vehicleNumberRequest) {
-//
-//        Drive drive = driveRepository.findByVehicle_VechicleNumber(vehicleNumberRequest.getVehicleNumber())
-//                .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
-//
-//        // we need to iterate over all checkpoints to find the nearest one to the current location of the drive.
-//        // using the util class to calculate distance between two lat long points in one point
-//
-//        List<Checkpoint> checkpoints = checkpointRepository.findAll();
-//
-//        if(checkpoints.isEmpty()) throw new CheckpointNotFound("Checkpoints not found");
-//
-//        // now we need to get the latest updated coordinates by driver from drive to compare with our checkpoints coordinates in database
-//
-//        // default coordinate 0 check.
-//
-//        if(drive.getLatitude() == 0.0 || drive.getLongitude() == 0.0) throw new LocationNotUpdatedByDriver(vehicleNumberRequest);
-//
-//        for(Checkpoint checkpoint : checkpoints) {
-//
-//        }
-//        return locationNameRequest;
-//    }
+    public LocationNameRequest getNearByCheckpointLocation(VehicleNumberRequest vehicleNumberRequest) {
+
+        Drive drive = driveRepository.findByVehicle_VechicleNumber(vehicleNumberRequest.getVehicleNumber())
+                .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
+
+        // we need to iterate over all checkpoints to find the nearest one to the current location of the drive.
+        // using the util class to calculate distance between two lat long points in one point
+
+        List<Checkpoint> checkpoints = checkpointRepository.findAll();
+
+        if(checkpoints.isEmpty()) throw new CheckpointNotFound("Checkpoints not found");
+
+        // now we need to get the latest updated coordinates by driver from drive to compare with our checkpoints coordinates in database
+
+        // default coordinate 0 check.
+
+        if(drive.getLatitude() == 0.0 || drive.getLongitude() == 0.0) throw new LocationNotUpdatedByDriver(vehicleNumberRequest);
+        // we have to compare each checkpoint with the current location of the drive to find the nearest one.
+
+        // all this logic is on runtime we can say because we have not decided how to implement it yet.
+
+        double lat = drive.getLatitude();
+        double lon = drive.getLongitude();
+
+        double minDistance = Double.MAX_VALUE;
+
+        Checkpoint nearestCheckpoint = null;
+        System.out.println("---------------------------------Current Location: Lat " + lat + " Long " + lon + "---------------------------------");
+
+        for(Checkpoint checkpoint : checkpoints) {
+           double check_lat = checkpoint.getLatitude();
+           double check_long = checkpoint.getLongitude();
+           System.out.println(checkpoint.getName() + " Checkpoint Location: Lat " + check_lat + " Long " + check_long);
+           double distance = DiatanceUtil.haversine(lat, lon, check_lat, check_long);
+           System.out.println("Current Location: Distance " + distance + " Kms");
+              if(distance < minDistance) {
+                    minDistance = distance;
+                    nearestCheckpoint = checkpoint;
+              }
+        }
+
+        LocationNameRequest result = new LocationNameRequest();
+        if(nearestCheckpoint != null) result.setLocationName(nearestCheckpoint.getName());
+
+        if(nearestCheckpoint == null) throw new UnexpectedException("No checkpoints found nearby.");
+        System.out.println("Nearest Checkpoint: " + nearestCheckpoint.getName() + " at distance " + minDistance + " km");
+        return result;
+    }
 }

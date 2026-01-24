@@ -18,16 +18,6 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-    @ExceptionHandler(DriveNotFound.class)
-    public ResponseEntity<String> handleDriverNotFound(DriverNotFound ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    }
-
-    @ExceptionHandler(VehicleNotFound.class)
-    public ResponseEntity<String> handleVehicleNotFound(VehicleNotFound ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    }
-
     @ExceptionHandler(UserNotFound.class)
     public ResponseEntity<String> handlerUserNotFound(UserNotFound ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
