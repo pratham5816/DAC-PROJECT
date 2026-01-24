@@ -73,70 +73,7 @@ const AddVehicle = () => {
   };
 
   return (
-    // <Container className="d-flex justify-content-center align-items-center vh-100">
-    //   <Card className="shadow-lg p-4">
-    //     <h4 className="text-center mb-3">🚗 Add Vehicle</h4>
 
-    //     {error && <div className="alert alert-danger">{error}</div>}
-    //     {success && <div className="alert alert-success">{success}</div>}
-
-    //     <Form onSubmit={handleSubmit}>
-    //       <Form.Group className="mb-3">
-    //         <Form.Label>Vehicle Number</Form.Label>
-    //         <Form.Control
-    //           type="text"
-    //           placeholder="MH12AB1234"
-    //           name="vehicleNumber"
-    //           value={vehicle.vehicleNumber}
-    //           onChange={handleChange}
-    //         />
-    //       </Form.Group>
-
-    //       <Form.Group className="mb-3">
-    //         <Form.Label>Vehicle Type</Form.Label>
-    //         <Form.Select
-    //           name="vehicleType"
-    //           value={vehicle.vehicleType}
-    //           onChange={handleChange}
-    //         >
-    //           <option value="">Select Vehicle Type</option>
-    //           <option>Truck</option>
-    //           <option>Van</option>
-    //           <option>Trailer</option>
-    //           <option>Crane</option>
-    //           <option>JCB</option>
-    //           <option>Fuel Tanker</option>
-    //         </Form.Select>
-    //       </Form.Group>
-
-    //       <Form.Group className="mb-3">
-    //         <Form.Label>Challan Expenditure (₹)</Form.Label>
-    //         <Form.Control
-    //           type="number"
-    //           placeholder="e.g. 30"
-    //           name="challanExp"
-    //           value={vehicle.challanExp}
-    //           onChange={handleChange}
-    //         />
-    //       </Form.Group>
-
-    //       <Form.Group className="mb-3">
-    //         <Form.Label>Vehicle Expenditure (₹)</Form.Label>
-    //         <Form.Control
-    //           type="number"
-    //           placeholder="e.g. 365"
-    //           name="vehicleExp"
-    //           value={vehicle.vehicleExp}
-    //           onChange={handleChange}
-    //         />
-    //       </Form.Group>
-
-    //       <Button type="submit" className="w-100">
-    //         Add Vehicle
-    //       </Button>
-    //     </Form>
-    //   </Card>
-    // </Container>
     <div className="add-vehicle-wrapper">
     <Card className="add-vehicle-card shadow-lg p-4">
       <h4 className="text-center mb-3">🚗 Add Vehicle</h4>
