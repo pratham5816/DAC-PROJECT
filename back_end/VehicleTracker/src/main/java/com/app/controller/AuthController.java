@@ -5,7 +5,12 @@ import com.app.dto.LoginRequest;
 import com.app.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @RequestMapping("Auth")
@@ -27,13 +32,14 @@ public class AuthController {
 
 
     @PostMapping("/DriverLogin")
-    public ResponseEntity<?> customerLogin(@RequestBody LoginRequest loginRequest) {
- 
-        boolean valid = authService.authenticateUser(loginRequest);
+    public ResponseEntity<?> driverLogin(@RequestBody LoginRequest loginRequest) {
+
+        boolean valid = authService.authenticateDriver(loginRequest);
 
         if(!valid) return ResponseEntity.status(401).body("Invalid credentials");
 
         return ResponseEntity.ok("User authenticated successfully");
     }
+
 
 }

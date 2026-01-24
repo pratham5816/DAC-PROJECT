@@ -7,7 +7,6 @@ import com.app.model.Driver;
 import com.app.model.User;
 import com.app.repository.DriverRepository;
 import com.app.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
 @Service
 public class AuthService {
 
@@ -64,9 +62,9 @@ public class AuthService {
         if(temp.isEmpty()) throw new DriverNotFound(loginRequest);
         // Add password verification logic here
         // will be adding later
-        //
-        //
+
         Driver driver = temp.get(0);
+
 //            System.out.println("Driver authenticated: " + driver.getEmail());
 //            System.out.println("From Object" + driver.getPassword());
 //            System.out.println("From Api" + loginRequest.getPassword());
