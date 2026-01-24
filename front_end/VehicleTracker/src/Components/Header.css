@@ -1,0 +1,35 @@
+/* Header background same as LoginPage */
+.app-header {
+  background: linear-gradient(135deg, #6f42c1, #6610f2);
+  padding: 0.6rem 1rem;
+}
+
+/* Brand */
+.header-brand {
+  font-weight: 700;
+  color: #ffffff !important;
+  cursor: pointer;
+}
+
+/* Nav links */
+.header-link {
+  color: #f8f9fa !important;
+  font-weight: 500;
+  margin-right: 12px;
+}
+
+.header-link:hover {
+  color: #ffe9ff !important;
+}
+
+/* Mobile behavior */
+@media (max-width: 768px) {
+  .header-link {
+    padding: 10px 0;
+    font-size: 1rem;
+  }
+
+  .app-header {
+    padding: 0.8rem;
+  }
+}
