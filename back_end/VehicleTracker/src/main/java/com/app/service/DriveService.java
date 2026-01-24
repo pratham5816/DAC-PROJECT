@@ -33,10 +33,10 @@ public class DriveService {
     public void startDrive(RequestDrive requestDrive) {
 
         if(driveRepository.existsByDriver_DriverId(requestDrive.getDriverId())) throw new DriverIsAlreadyActive("Driver is already active in another drive.");
-        if(driveRepository.existsByVehicle_VechicleNumber(requestDrive.getVechicleNumber())) throw new DriveAlreadyExists("Vehicle is already active.");
+        if(driveRepository.existsByVehicle_VechicleNumber(requestDrive.getVehicleNumber())) throw new DriveAlreadyExists("Vehicle is already active.");
 
         //Fetch Vehicle
-        Optional<Vehicle> vehicle = vehicleRepository.findByVechicleNumber(requestDrive.getVechicleNumber());
+        Optional<Vehicle> vehicle = vehicleRepository.findByVechicleNumber(requestDrive.getVehicleNumber());
         if(vehicle.isEmpty()) throw new VehicleNotFound("Vehicle not found");
 
         //Fetch Driver
@@ -60,6 +60,8 @@ public class DriveService {
         drive.setStart_point(startCheckpoint);
         drive.setEnd_point(endCheckpoint);
         drive.setLatitude(requestDrive.getLatitude());
-//        drive
+        drive.setLongitude(requestDrive.getLongitude());
+
+        driveRepository.save(drive);
     }
 }

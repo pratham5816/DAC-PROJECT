@@ -1,8 +1,7 @@
 package com.app.controller;
 
 import com.app.dto.RequestDrive;
-import com.app.model.Drive;
-import com.app.repository.DriveRepository;
+import com.app.dto.UpdateLocationRequest;
 import com.app.service.DriveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +21,11 @@ public class DriveController {
     public ResponseEntity<String> drive(@RequestBody RequestDrive requestDrive){
         driveService.startDrive(requestDrive);
         return ResponseEntity.ok("Drive created successfully");
+    }
+
+    @PostMapping("/updateLocation")
+    public ResponseEntity<String> updateLocation(@RequestBody UpdateLocationRequest updateLocationRequest){
+        return  ResponseEntity.ok("Location updated successfully");
     }
 
 }
