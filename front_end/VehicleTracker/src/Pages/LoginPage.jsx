@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Container, Row, Col, Form, Button, Tab, Nav } from "react-bootstrap";
 import axios from 'axios'
+import "./LoginPage.css";
 
 const LoginPage = ({ onLogin }) => {
     const [activeTab, setActiveTab] = useState("driver");
@@ -91,17 +92,10 @@ const LoginPage = ({ onLogin }) => {
   
   return (
 
-    <Container fluid className="vh-100">
+    <Container fluid className="login-container">
       <Row className="h-100">
         {/* Left Panel */}
-        <Col
-        
-          md={6}
-          className="d-flex flex-column justify-content-center align-items-center text-white text-center p-5"
-          style={{
-            background: "linear-gradient(135deg, #6f42c1, #6610f2)",
-          }}
-        >
+        <Col md={6} className="login-left"  >
           <h1 className="fw-bold mb-3"> VehicleTracker </h1>
       
           <p className="lead text-center mb-2"  style={{ fontSize: "15px" }}>
@@ -125,11 +119,8 @@ const LoginPage = ({ onLogin }) => {
         </Col>
 
         {/* Right Panel */}
-        <Col
-          md={6}
-          className="d-flex flex-column justify-content-center align-items-center  p-5"
-        >
-          <div className="w-100" style={{ maxWidth: "400px" }}>
+        <Col md={6} className="login-right">
+          <div className="login-form-wrapper">
             <h2 className="fw-semibold mb-2">Welcome Back!</h2>
             <p className="text-muted mb-4">Sign in to access your dashboard</p>
 

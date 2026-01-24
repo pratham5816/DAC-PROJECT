@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Card, Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
+import './CreateDrive.css'
 
 const CreateDrive = () => {
   const [driver, setDriver] = useState({
@@ -67,106 +68,186 @@ const CreateDrive = () => {
   };
 
   return (
-    <Container>
-      <Card className="p-5 shadow-lg" style={{ width: "600px" }}>
-        <h4 className="text-center mb-3">🚚 Create Drive</h4>
+    // <Container>
+    //   <Card className="p-5 shadow-lg" style={{ width: "100%" }}>
+    //     <h4 className="text-center mb-3">🚚 Create Drive</h4>
 
-        {error && <div className="alert alert-danger">{error}</div>}
-        {success && <div className="alert alert-success">{success}</div>}
+    //     {error && <div className="alert alert-danger">{error}</div>}
+    //     {success && <div className="alert alert-success">{success}</div>}
 
-        <Form onSubmit={handleSubmit}>
-          {/* Vehicle */}
-          <h6>🚗 Vehicle Details</h6>
-          <Form.Control
-            className="mb-3"
-            placeholder="Vehicle Number"
-            value={vehicleNumber}
-            onChange={(e) => setVehicleNumber(e.target.value)}
-          />
+    //     <Form onSubmit={handleSubmit}>
+    //       {/* Vehicle */}
+    //       <h6>🚗 Vehicle Details</h6>
+    //       <Form.Control
+    //         className="mb-3"
+    //         placeholder="Vehicle Number"
+    //         value={vehicleNumber}
+    //         onChange={(e) => setVehicleNumber(e.target.value)}
+    //       />
 
-          {/* Driver */}
-          <h6>👤 Driver Details</h6>
-          <Row>
-            <Col>
-              <Form.Control
-                className="mb-2"
-                placeholder="Driver Name"
-                name="name"
-                onChange={handleDriverChange}
-              />
-            </Col>
-            <Col>
-              <Form.Control
-                className="mb-2"
-                placeholder="Phone"
-                name="phone"
-                onChange={handleDriverChange}
-              />
-            </Col>
-          </Row>
+    //       {/* Driver */}
+    //       <h6>👤 Driver Details</h6>
+    //       <Row>
+    //         <Col>
+    //           <Form.Control
+    //             className="mb-2"
+    //             placeholder="Driver Name"
+    //             name="name"
+    //             onChange={handleDriverChange}
+    //           />
+    //         </Col>
+    //         <Col>
+    //           <Form.Control
+    //             className="mb-2"
+    //             placeholder="Phone"
+    //             name="phone"
+    //             onChange={handleDriverChange}
+    //           />
+    //         </Col>
+    //       </Row>
 
-          <Form.Control
-            className="mb-2"
-            placeholder="Email"
-            name="email"
-            onChange={handleDriverChange}
-          />
+    //       <Form.Control
+    //         className="mb-2"
+    //         placeholder="Email"
+    //         name="email"
+    //         onChange={handleDriverChange}
+    //       />
 
-          <Form.Control
-            className="mb-3"
-            placeholder="License Number"
-            name="license"
-            onChange={handleDriverChange}
-          />
-          <Form.Control
-            className="mb-3"
-            placeholder="Status-Active/UnActive"
-            name="license"
-            onChange={handleDriverChange}
-          />
+    //       <Form.Control
+    //         className="mb-3"
+    //         placeholder="License Number"
+    //         name="license"
+    //         onChange={handleDriverChange}
+    //       />
+    //       <Form.Control
+    //         className="mb-3"
+    //         placeholder="Status-Active/UnActive"
+    //         name="license"
+    //         onChange={handleDriverChange}
+    //       />
 
-          {/* Checkpoints
-          <h6>📍 Route Checkpoints</h6>
-          {checkpoints.map((cp, index) => (
+    //       {/* Checkpoints
+    //       <h6>📍 Route Checkpoints</h6>
+    //       {checkpoints.map((cp, index) => (
+    //         <Form.Control
+    //           key={index}
+    //           className="mb-2"
+    //           placeholder={`Checkpoint ${index + 1}`}
+    //           value={cp}
+    //           onChange={(e) =>
+    //             handleCheckpointChange(index, e.target.value)
+    //           }
+    //         />
+    //       ))} */}
+
+    //       {/* <Button
+    //         variant="secondary"
+    //         className="mb-3"
+    //         onClick={addCheckpoint}
+    //       >
+    //         + Add Checkpoint
+    //       </Button> */}
+
+    //       <Form.Control
+    //         className="mb-3"
+    //         placeholder="Start Destination"
+    //         value={finalPoint}
+    //         onChange={(e) => setFinalPoint(e.target.value)}
+    //       />
+
+    //       <Form.Control
+    //         className="mb-3"
+    //         placeholder="Final Destination"
+    //         value={finalPoint}
+    //         onChange={(e) => setFinalPoint(e.target.value)}
+    //       />
+
+    //       <Button type="submit" className="w-100">
+    //         Create Ride
+    //       </Button>
+    //     </Form>
+    //   </Card>
+    // </Container>
+
+     <div className="create-drive-wrapper">
+    <Card className="create-drive-card shadow-lg p-4">
+      <h4 className="text-center mb-3">🚚 Create Drive</h4>
+
+      {error && <div className="alert alert-danger">{error}</div>}
+      {success && <div className="alert alert-success">{success}</div>}
+
+      <Form onSubmit={handleSubmit}>
+        {/* Vehicle */}
+        <h6>🚗 Vehicle Details</h6>
+        <Form.Control
+          className="mb-3"
+          placeholder="Vehicle Number"
+          value={vehicleNumber}
+          onChange={(e) => setVehicleNumber(e.target.value)}
+        />
+
+        {/* Driver */}
+        <h6>👤 Driver Details</h6>
+        <Row className="g-2">
+          <Col xs={12} md={6}>
             <Form.Control
-              key={index}
-              className="mb-2"
-              placeholder={`Checkpoint ${index + 1}`}
-              value={cp}
-              onChange={(e) =>
-                handleCheckpointChange(index, e.target.value)
-              }
+              placeholder="Driver Name"
+              name="name"
+              onChange={handleDriverChange}
             />
-          ))} */}
+          </Col>
+          <Col xs={12} md={6}>
+            <Form.Control
+              placeholder="Phone"
+              name="phone"
+              onChange={handleDriverChange}
+            />
+          </Col>
+        </Row>
 
-          {/* <Button
-            variant="secondary"
-            className="mb-3"
-            onClick={addCheckpoint}
-          >
-            + Add Checkpoint
-          </Button> */}
+        <Form.Control
+          className="my-2"
+          placeholder="Email"
+          name="email"
+          onChange={handleDriverChange}
+        />
 
-          <Form.Control
-            className="mb-3"
-            placeholder="Start Destination"
-            value={finalPoint}
-            onChange={(e) => setFinalPoint(e.target.value)}
-          />
+        <Form.Control
+          className="mb-2"
+          placeholder="License Number"
+          name="license"
+          onChange={handleDriverChange}
+        />
 
-          <Form.Control
-            className="mb-3"
-            placeholder="Final Destination"
-            value={finalPoint}
-            onChange={(e) => setFinalPoint(e.target.value)}
-          />
+        <Form.Control
+          className="mb-3"
+          placeholder="Status (Active / Inactive)"
+          name="status"
+          onChange={handleDriverChange}
+        />
 
-          <Button type="submit" className="w-100">
-            Create Ride
-          </Button>
-        </Form>
-      </Card>
-    </Container>
+        {/* Route */}
+        <h6>📍 Route Details</h6>
+        <Form.Control
+          className="mb-2"
+          placeholder="Start Destination"
+          value={finalPoint}
+          onChange={(e) => setFinalPoint(e.target.value)}
+        />
+
+        <Form.Control
+          className="mb-3"
+          placeholder="Final Destination"
+          value={finalPoint}
+          onChange={(e) => setFinalPoint(e.target.value)}
+        />
+
+        <Button type="submit" className="w-100">
+          Create Ride
+        </Button>
+      </Form>
+    </Card>
+  </div>
   );
 };
 

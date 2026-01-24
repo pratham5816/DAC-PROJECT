@@ -1,10 +1,11 @@
+
 import React from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "./Header.css";
 
 const Header = () => {
   const navigate = useNavigate();
-
   const role = localStorage.getItem("role"); // USER / DRIVER / CUSTOMER
 
   const logout = () => {
@@ -13,24 +14,45 @@ const Header = () => {
   };
 
   return (
-   
+    <Navbar expand="lg" sticky="top" className="app-header">
+      <Container fluid>
+        {/* Brand */}
+        <Navbar.Brand
+          className="header-brand"
+          onClick={() => navigate("/")}
+        >
+          🚚 TrackRide
+        </Navbar.Brand>
 
-    <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-      <Container>
-      <nav className="navbar navbar-dark bg-dark px-4">
-  <span className="navbar-brand">🚚 TrackRide</span>
-  <button className="btn btn-outline-light">Logout</button>
-</nav>
+        {/* Mobile toggle */}
+        <Navbar.Toggle className="border-0 text-white" />
 
-        <Navbar.Toggle />
+        {/* Collapsible menu */}
         <Navbar.Collapse>
-          <Nav className="me-auto">
-            {role === "USER" && <Nav.Link onClick={() => navigate("/user")}>Dashboard</Nav.Link>}
-            {role === "DRIVER" && <Nav.Link onClick={() => navigate("/driver")}>Driver Panel</Nav.Link>}
-            {role === "CUSTOMER" && <Nav.Link onClick={() => navigate("/customer")}>Live Track</Nav.Link>}
+          <Nav className="me-auto mt-3 mt-lg-0">
+            {role === "USER" && (
+              <Nav.Link className="header-link" onClick={() => navigate("/user")}>
+                Dashboard
+              </Nav.Link>
+            )}
+            {role === "DRIVER" && (
+              <Nav.Link className="header-link" onClick={() => navigate("/driver")}>
+                Driver Panel
+              </Nav.Link>
+            )}
+            {role === "CUSTOMER" && (
+              <Nav.Link className="header-link" onClick={() => navigate("/customer")}>
+                Live Track
+              </Nav.Link>
+            )}
           </Nav>
 
-          <Button variant="outline-light" size="sm" onClick={logout}>
+          <Button
+            variant="outline-light"
+            size="sm"
+            className="mt-3 mt-lg-0"
+            onClick={logout}
+          >
             Logout
           </Button>
         </Navbar.Collapse>

@@ -1,0 +1,41 @@
+/* Wrapper that controls height & centering */
+.add-vehicle-wrapper {
+  min-height: calc(100vh - 80px); /* header height safe */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Card sizing */
+.add-vehicle-card {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .add-vehicle-wrapper {
+    min-height: auto;
+    padding: 1rem 0.5rem;
+  }
+
+  .add-vehicle-card {
+    max-width: 100%;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .add-vehicle-card h4 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .add-vehicle-card {
+    box-shadow: none;
+    border: 1px solid #eee;
+  }
+}
