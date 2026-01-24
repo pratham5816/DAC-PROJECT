@@ -11,12 +11,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestDrive {
-    private Integer driveId;
-    private Integer driverId;
-    private Integer vehicleId;
-    private String status;
-    private Double latitude;
+    private Integer driverId;          // Driver.driverId
+
+    private String vechicleNumber;     // Vehicle.vechicleNumber (String!)
+
+    private Double latitude;            // optional initial location
     private Double longitude;
-    private Integer startpointId;
-    private  Integer endpointId;
+
+    private Integer startpointId;       // Checkpoint.id
+    private Integer endpointId;         // Checkpoint.id
 }

@@ -13,6 +13,8 @@ import com.app.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class DriveService {
 
@@ -30,12 +32,12 @@ public class DriveService {
 
     public void startDrive(RequestDrive requestDrive) {
 
-        if(driveRepository.existsByDriver_Id(requestDrive.getDriverId())) throw new DriverIsAlreadyActive("Driver is already active in another drive.");
-        if(driveRepository.existsByVehicle_Id(requestDrive.getVehicleId())) throw new DriveAlreadyExists("Vehicle is already active.");
-        //
+        if(driveRepository.existsByDriver_DriverId(requestDrive.getDriverId())) throw new DriverIsAlreadyActive("Driver is already active in another drive.");
+        if(driveRepository.existsByVehicle_VechicleNumber(requestDrive.getVechicleNumber())) throw new DriveAlreadyExists("Vehicle is already active.");
+
         //Fetch Vehicle
-        Vehicle vehicle = vehicleRepository.findById(requestDrive.getVehicleId())
-                .orElseThrow(() -> new VehicleNotFound("Vehicle not found"));
+        Optional<Vehicle> vehicle = vehicleRepository.findByVechicleNumber(requestDrive.getVechicleNumber());
+        if(vehicle.isEmpty()) throw new VehicleNotFound("Vehicle not found");
 
         //Fetch Driver
         Driver driver = driverRepository.findById(requestDrive.getDriverId())
@@ -52,6 +54,12 @@ public class DriveService {
                 .orElseThrow(() -> new RuntimeException("End checkpoint not found"));
 
         Drive drive = new Drive();
-
+        drive.setStatus("ACTIVE");
+        drive.setDriver(driver);
+        drive.setVehicle(vehicle.get());
+        drive.setStart_point(startCheckpoint);
+        drive.setEnd_point(endCheckpoint);
+        drive.setLatitude(requestDrive.getLatitude());
+//        drive
     }
 }

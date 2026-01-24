@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.app.model.Vehicle;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface VehicleRepository extends JpaRepository<Vehicle,Integer> {
-    List<Vehicle> findByVechicleNumber(String vechicleNumber);
+    Optional<Vehicle> findByVechicleNumber(String vechicleNumber);
     boolean existsByVechicleNumber(String vechicleNumber);
 }
