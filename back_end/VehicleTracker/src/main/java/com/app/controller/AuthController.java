@@ -28,7 +28,7 @@ public class AuthController {
 
     @PostMapping("/DriverLogin")
     public ResponseEntity<?> customerLogin(@RequestBody LoginRequest loginRequest) {
-
+ 
         boolean valid = authService.authenticateUser(loginRequest);
 
         if(!valid) return ResponseEntity.status(401).body("Invalid credentials");
