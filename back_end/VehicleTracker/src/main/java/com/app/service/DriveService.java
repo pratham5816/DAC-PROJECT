@@ -64,4 +64,15 @@ public class DriveService {
 
         driveRepository.save(drive);
     }
+
+
+    public void upateLocationInDrive(com.app.dto.UpdateLocationRequest updateLocationRequest) {
+        Drive drive = driveRepository.findByVehicle_VechicleNumber(updateLocationRequest.getVehicleNumber())
+                .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
+
+        drive.setLatitude(updateLocationRequest.getLatitude());
+        drive.setLongitude(updateLocationRequest.getLongitude());
+
+        driveRepository.save(drive);
+    }
 }

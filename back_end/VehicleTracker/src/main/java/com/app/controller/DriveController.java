@@ -25,6 +25,7 @@ public class DriveController {
 
     @PostMapping("/updateLocation")
     public ResponseEntity<String> updateLocation(@RequestBody UpdateLocationRequest updateLocationRequest){
+            driveService.upateLocationInDrive(updateLocationRequest);
         return  ResponseEntity.ok("Location updated successfully");
     }
 

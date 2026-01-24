@@ -9,19 +9,25 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler
+    @ExceptionHandler(CheckpointAlreadyExists.class)
     public ResponseEntity<String> handlerCheckpointAlreadyExists(CheckpointAlreadyExists ex){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
-    @ExceptionHandler
+    @ExceptionHandler(CheckpointNotFound.class)
     public ResponseEntity<String> handleCheckpointNotFound(Exception ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(DriveNotFound.class)
     public ResponseEntity<String> handleDriverNotFound(DriverNotFound ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+
+    @ExceptionHandler(VehicleNotFound.class)
+    public ResponseEntity<String> handleVehicleNotFound(VehicleNotFound ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
     @ExceptionHandler(UserNotFound.class)
     public ResponseEntity<String> handlerUserNotFound(UserNotFound ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
@@ -52,4 +58,15 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handlerVehicleNotFound(VehicleNotFound ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+
+    @ExceptionHandler(InvalidCredential.class)
+    public ResponseEntity<String> handlerInvalidCredential(InvalidCredential ex){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(DriveNotFound.class)
+    public ResponseEntity<String> handlerDriveNotFound(DriveNotFound ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
 }
