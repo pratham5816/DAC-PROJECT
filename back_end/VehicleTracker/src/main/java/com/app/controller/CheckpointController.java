@@ -1,10 +1,13 @@
 package com.app.controller;
 
+import com.app.dto.CheckpointResponse;
 import com.app.model.Checkpoint;
 import com.app.service.CheckpointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("checkpoint")
@@ -33,5 +36,10 @@ public class CheckpointController {
 //
 //    }
 
+
+    @GetMapping("/getAllCheckpoints")
+    public List<CheckpointResponse> getAllCheckpoints() {
+        return checkpointService.getAllCheckpoints();
+    }
 
 }
