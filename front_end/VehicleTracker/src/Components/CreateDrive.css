@@ -1,44 +1,76 @@
-/* Wrapper */
+
+
+/* ===== Root Wrapper ===== */
 .create-drive-wrapper {
   width: 100%;
   padding: 2rem 1rem;
   display: flex;
   justify-content: center;
+  background: #faf7ff; /* very light purple background */
 }
 
-/* Card */
+/* ===== Card ===== */
 .create-drive-card {
   width: 100%;
   max-width: 700px;
-  border-radius: 12px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid #e6d8ff;
 }
 
-/* Headings */
-.create-drive-card h4 {
+/* ===== Headings ===== */
+.create-drive-card h4,
+.create-drive-card h6 {
   font-weight: 600;
+  color: black; /* purple heading */
 }
 
-/* Mobile styles */
+/* ===== Inputs ===== */
+.create-drive-card input,
+.create-drive-card select {
+  border-radius: 12px;
+  border: 1px solid #e0c9ff;
+}
+
+.create-drive-card input:focus {
+  border-color: #a855f7;
+  box-shadow: 0 0 0 0.15rem rgba(168, 85, 247, 0.25);
+}
+
+/* ===== Create Ride Button ===== */
+.createRide-btn {
+  background: linear-gradient(135deg, #a855f7, #c084fc);
+  border: none;
+  border-radius: 16px;
+  padding: 12px;
+  font-weight: 600;
+  color: white;
+  margin-top: 1rem;
+}
+
+.createRide-btn:hover {
+  background: linear-gradient(135deg, #9333ea, #a855f7);
+}
+
+/* ===== Mobile ===== */
 @media (max-width: 768px) {
   .create-drive-wrapper {
     padding: 1rem 0.5rem;
   }
 
   .create-drive-card {
-    max-width: 100%;
     padding: 1rem !important;
-    border-radius: 10px;
+    border-radius: 14px;
   }
 
   .create-drive-card h4 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
 }
 
-/* Very small devices */
+/* ===== Very small devices ===== */
 @media (max-width: 480px) {
   .create-drive-card {
     box-shadow: none;
-    border: 1px solid #eee;
   }
 }

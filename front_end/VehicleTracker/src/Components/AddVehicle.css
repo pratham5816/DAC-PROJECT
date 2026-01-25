@@ -31,6 +31,16 @@
     font-size: 1.1rem;
   }
 }
+.addVehicle-btn{
+   background: linear-gradient(135deg, #a855f7, #c084fc);
+  border: none;
+  border-radius: 16px;
+  padding: 12px;
+  font-weight: 600;
+  color: white;
+  margin-top: 1rem;
+ 
+}
 
 /* Small phones */
 @media (max-width: 480px) {

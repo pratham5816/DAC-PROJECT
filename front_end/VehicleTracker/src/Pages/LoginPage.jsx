@@ -1,7 +1,11 @@
 import React, {useState} from 'react';
 import { Container, Row, Col, Form, Button, Tab, Nav } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import "./LoginPage.css";
+import DriverSignup from '../Components/DriverSignup';
+
+
 
 const LoginPage = ({ onLogin }) => {
     const [activeTab, setActiveTab] = useState("driver");
@@ -85,6 +89,13 @@ const LoginPage = ({ onLogin }) => {
     setPassword(password);
     onLogin(activeTab,email);
   };
+
+
+const navigate = useNavigate();
+
+const handleSignup = () => {
+  navigate(`/signup/${activeTab}`);
+};
 
 
 
@@ -210,10 +221,15 @@ const LoginPage = ({ onLogin }) => {
                 Continue with Google
               </Button>
 
-              <p className="text-center mt-3">
-                Don't have an account?{" "}
-                <a href="#" className="text-primary">Sign up</a>
-              </p>
+              <p>
+  Don't have an account?{" "}
+  <span
+    style={{ color: "blue", cursor: "pointer" }}
+    onClick={handleSignup}
+  >
+    Sign up
+  </span>
+</p>
             </Form>
 
 

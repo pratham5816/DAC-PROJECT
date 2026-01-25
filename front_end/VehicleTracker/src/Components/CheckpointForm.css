@@ -1,0 +1,61 @@
+/* Wrapper spacing */
+.checkpoint-section {
+  margin-top: 1.5rem;
+}
+
+/* Section title */
+.checkpoint-title {
+  font-weight: 600;
+  color: black; /* light purple */
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+/* Inputs */
+.checkpoint-input {
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+}
+
+/* Button */
+.checkpoint-btn {
+  background: linear-gradient(135deg, #a855f7, #c084fc);
+  border: none;
+  border-radius: 14px;
+  padding: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Hover */
+.checkpoint-btn:hover {
+  opacity: 0.95;
+}
+
+/* Mobile-first */
+@media (max-width: 576px) {
+  .checkpoint-input {
+    font-size: 15px;
+    padding: 14px;
+  }
+
+  .checkpoint-title {
+    font-size: 1rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 577px) and (max-width: 992px) {
+  .checkpoint-input {
+    font-size: 14px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 993px) {
+  .checkpoint-section {
+    max-width: 100%;
+  }
+}
+

@@ -130,7 +130,7 @@ const AddVehicle = () => {
           />
         </Form.Group>
 
-        <Button type="submit" className="w-100">
+        <Button type="submit" className="addVehicle-btn w-100">
           Add Vehicle
         </Button>
       </Form>
