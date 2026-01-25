@@ -4,7 +4,6 @@ import com.app.dto.CheckpointResponse;
 import com.app.dto.CheckpointUpdateCoordinatesRequest;
 import com.app.model.Checkpoint;
 import com.app.service.CheckpointService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +15,11 @@ import java.util.List;
 
 public class CheckpointController {
 
-    @Autowired
-    private CheckpointService checkpointService;
+    private final CheckpointService checkpointService;
 
+    public CheckpointController(CheckpointService checkpointService) {
+        this.checkpointService = checkpointService;
+    }
     @PostMapping("/addCheckpoint")
     public ResponseEntity<?> addCheckpoint(@RequestBody Checkpoint checkpoint) {
 

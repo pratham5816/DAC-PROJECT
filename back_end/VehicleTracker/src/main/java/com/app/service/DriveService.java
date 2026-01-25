@@ -3,7 +3,6 @@ package com.app.service;
 import com.app.dto.LocationNameRequest;
 import com.app.dto.RequestDrive;
 import com.app.dto.UpdateLocationRequest;
-import com.app.dto.VehicleNumberRequest;
 import com.app.exception.*;
 import com.app.util.DiatanceUtil;
 import com.app.model.Checkpoint;
@@ -14,7 +13,6 @@ import com.app.repository.CheckpointRepository;
 import com.app.repository.DriveRepository;
 import com.app.repository.DriverRepository;
 import com.app.repository.VehicleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -24,17 +22,23 @@ import java.util.Optional;
 @Service
 public class DriveService {
 
-    @Autowired
-    private DriveRepository driveRepository;
+    private final DriveRepository driveRepository;
 
-    @Autowired
-    private VehicleRepository vehicleRepository;
+    private final VehicleRepository vehicleRepository;
 
-    @Autowired
-    private DriverRepository driverRepository;
+    private final DriverRepository driverRepository;
 
-    @Autowired
-    private CheckpointRepository checkpointRepository;
+    private final CheckpointRepository checkpointRepository;
+
+
+    public DriveService(DriveRepository driveRepository, VehicleRepository vehicleRepository, DriverRepository driverRepository , CheckpointRepository checkpointRepository) {
+        this.driveRepository = driveRepository;
+        this.vehicleRepository = vehicleRepository;
+        this.driverRepository = driverRepository;
+        this.checkpointRepository = checkpointRepository;
+    }
+
+
 
     public Drive startDrive(RequestDrive requestDrive) {
 
@@ -89,9 +93,9 @@ public class DriveService {
     }
 
 
-    public LocationNameRequest getNearByCheckpointLocation(VehicleNumberRequest vehicleNumberRequest) {
+    public String getNearByCheckpointLocation(String VehicleNumber) {
 
-        Drive drive = driveRepository.findByVehicle_VechicleNumber(vehicleNumberRequest.getVehicleNumber())
+        Drive drive = driveRepository.findByVehicle_VechicleNumber(VehicleNumber)
                 .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
 
         // we need to iterate over all checkpoints to find the nearest one to the current location of the drive.
@@ -105,7 +109,7 @@ public class DriveService {
 
         // default coordinate 0 check.
 
-        if(drive.getLatitude() == 0.0 || drive.getLongitude() == 0.0) throw new LocationNotUpdatedByDriver(vehicleNumberRequest);
+        if(drive.getLatitude() == 0.0 || drive.getLongitude() == 0.0) throw new LocationNotUpdatedByDriver("Driver has not updated the location yet.");
         // we have to compare each checkpoint with the current location of the drive to find the nearest one.
 
         // all this logic is on runtime we can say because we have not decided how to implement it yet.
@@ -135,6 +139,6 @@ public class DriveService {
 
         if(nearestCheckpoint == null) throw new UnexpectedException("No checkpoints found nearby.");
         System.out.println("Nearest Checkpoint: " + nearestCheckpoint.getName() + " at distance " + minDistance + " km");
-        return result;
+        return nearestCheckpoint.getName();
     }
 }

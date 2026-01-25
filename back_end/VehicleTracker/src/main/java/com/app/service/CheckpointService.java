@@ -15,8 +15,12 @@ import java.util.Optional;
 @Service
 public class CheckpointService {
 
-    @Autowired
-    private CheckpointRepository checkpointRepository;
+
+    private final CheckpointRepository checkpointRepository;
+
+    public CheckpointService(CheckpointRepository checkpointRepository) {
+        this.checkpointRepository = checkpointRepository;
+    }
 
     public Checkpoint addCheckpoint(Checkpoint checkpoint) {
         Optional<Checkpoint> temp = checkpointRepository.findByName(checkpoint.getName());

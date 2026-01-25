@@ -1,17 +1,25 @@
 package com.app.controller;
 
+import com.app.model.Driver;
 import com.app.service.DriverService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("http://localhost:5173")
 public class DriverController {
 
-    @Autowired
-    private DriverService driverService;
+    private final DriverService driverService;
+
+    public DriverController(DriverService driverService) {
+        this.driverService = driverService;
+    }
+
+
+    @PostMapping("/addDriver")
+    public ResponseEntity<Driver> addDriver(@RequestBody Driver driver) {
+        driverService.registerDriver(driver);
+        return ResponseEntity.ok().body(driver);
+    }
 
 }

@@ -18,16 +18,18 @@ import com.app.repository.VehicleRepository;
 @Service
 public class VehicleService {
 
-    @Autowired
-    private VehicleRepository vehicleRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final VehicleRepository vehicleRepository;
 
-    @Autowired
-    private UserService userService;
+    private final UserRepository userRepository;
 
+    private final UserService userService;
 
+    public VehicleService(VehicleRepository vehicleRepository, UserRepository userRepository, UserService userService) {
+        this.vehicleRepository = vehicleRepository;
+        this.userRepository = userRepository;
+        this.userService = userService;
+    }
     public List<Vehicle> fetchAllVehicle(){
         return vehicleRepository.findAll();
     }

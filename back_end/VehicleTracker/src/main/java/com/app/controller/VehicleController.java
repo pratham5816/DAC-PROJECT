@@ -15,8 +15,12 @@ import java.util.List;
 @CrossOrigin("http://localhost:5173")
 public class VehicleController {
     
-    @Autowired
-    private VehicleService vehicleService;
+
+    private final VehicleService vehicleService;
+
+    public VehicleController(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
+    }
 
     @GetMapping("/getAll")
     public List<Vehicle> getAllVehicles(){

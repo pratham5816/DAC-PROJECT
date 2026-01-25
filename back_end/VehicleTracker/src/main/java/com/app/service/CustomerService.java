@@ -18,13 +18,12 @@ public class CustomerService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public CustomerService(PasswordEncoder passwordEncoder) {
+    private final CustomerRepository customerRepository;
+
+    public CustomerService(PasswordEncoder passwordEncoder, CustomerRepository customerRepository) {
         this.passwordEncoder = passwordEncoder;
+        this.customerRepository = customerRepository;
     }
-
-    @Autowired
-    private CustomerRepository customerRepository;
-
 
     public List<Customer> getAllCustomers(){
         return customerRepository.findAll(); 

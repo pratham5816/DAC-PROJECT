@@ -1,12 +1,10 @@
 package com.app.controller;
 
-import com.app.dto.LocationNameRequest;
+
 import com.app.dto.RequestDrive;
 import com.app.dto.UpdateLocationRequest;
-import com.app.dto.VehicleNumberRequest;
 import com.app.model.Drive;
 import com.app.service.DriveService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("drive")
 public class DriveController {
 
-    @Autowired
-    private DriveService driveService;
+
+    private final DriveService driveService;
+
+    public DriveController(DriveService driveService) {
+        this.driveService = driveService;
+    }
 
     @PostMapping("/createDrive")
     public Drive drive(@RequestBody RequestDrive requestDrive){
@@ -28,10 +30,10 @@ public class DriveController {
         return  ResponseEntity.ok("Location updated successfully");
     }
 
-    @GetMapping("/getCurrentCheckpointLocation")
-    public ResponseEntity<?> getCurrentCheckpointLocation(@RequestBody VehicleNumberRequest vehicleNumberRequest){
-        LocationNameRequest locationNameRequest = driveService.getNearByCheckpointLocation(vehicleNumberRequest);
-        return ResponseEntity.ok(locationNameRequest);
+    @GetMapping("/getCurrentCheckpointLocation")    // url?vehicleNumber=KA01AB1234
+    public ResponseEntity<?> getCurrentCheckpointLocation(@RequestParam("vehicleNumber") String vehicleNumber){
+        String cityName = driveService.getNearByCheckpointLocation(vehicleNumber);
+        return ResponseEntity.ok().body(cityName);
     }
 
 }
