@@ -7,7 +7,7 @@ import com.app.model.Vehicle;
 
 import java.util.Optional;
 
-public interface VehicleRepository extends JpaRepository<Vehicle,Integer> {
-    Optional<Vehicle> findByVechicleNumber(String vechicleNumber);
-    boolean existsByVechicleNumber(String vechicleNumber);
+public interface VehicleRepository extends JpaRepository<Vehicle,String> {
+    Optional<Vehicle> findByVechicleNumber(String vehicleNumber);
+    boolean existsByVechicleNumber(String vehicleNumber);
 }

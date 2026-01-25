@@ -18,15 +18,15 @@ import java.util.Optional;
 public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
-    
-    @Autowired
-    private UserRepository userRepository;
 
-    @Autowired
-    private DriverRepository driverRepository;
+    private final UserRepository userRepository;
 
-    public AuthService(PasswordEncoder passwordEncoder) {
+    private final DriverRepository driverRepository;
+
+    public AuthService(PasswordEncoder passwordEncoder , UserRepository userRepository, DriverRepository driverRepository) {
         this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+        this.driverRepository = driverRepository;
         // after researching constructor injection makes more sence  rather than @autowired for mandatory dependencies
     }
 

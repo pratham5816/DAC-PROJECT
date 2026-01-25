@@ -13,7 +13,7 @@ import lombok.Setter;
 public class RequestDrive {
     private Integer driverId;          // Driver.driverId
 
-    private String vechicleNumber;     // Vehicle.vechicleNumber (String!)
+    private String vehicleNumber;     // Vehicle.vechicleNumber (String!)
 
     private Double latitude;            // optional initial location
     private Double longitude;
