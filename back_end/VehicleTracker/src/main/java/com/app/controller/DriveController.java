@@ -1,6 +1,7 @@
 package com.app.controller;
 
 
+import com.app.dto.EmailRequest;
 import com.app.dto.RequestDrive;
 import com.app.dto.UpdateLocationRequest;
 import com.app.model.Drive;
@@ -35,5 +36,15 @@ public class DriveController {
         String cityName = driveService.getNearByCheckpointLocation(vehicleNumber);
         return ResponseEntity.ok().body(cityName);
     }
+
+
+    @PostMapping("/checkDriverAssigned")
+    public ResponseEntity<?> getDriverAssigned(@RequestBody EmailRequest emailRequest){
+
+        Drive temp = driveService.checkDriverDrive(emailRequest);
+
+        return ResponseEntity.ok().body(temp);
+    }
+
 
 }

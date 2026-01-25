@@ -30,7 +30,7 @@ public class AuthController {
 
         if(!valid) return ResponseEntity.status(401).body("Invalid credentials");
 
-        return ResponseEntity.ok("Login successful");
+        return ResponseEntity.ok(loginRequest);
     }
 
 
@@ -41,7 +41,7 @@ public class AuthController {
 
         if(!valid) return ResponseEntity.status(401).body("Invalid credentials");
 
-        return ResponseEntity.ok("Login successful");
+        return ResponseEntity.ok(loginRequest);
     }
 
 

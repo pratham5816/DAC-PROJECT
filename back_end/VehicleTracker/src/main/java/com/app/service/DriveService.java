@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.dto.EmailRequest;
 import com.app.dto.LocationNameRequest;
 import com.app.dto.RequestDrive;
 import com.app.dto.UpdateLocationRequest;
@@ -39,6 +40,16 @@ public class DriveService {
     }
 
 
+    public Drive checkDriverDrive(EmailRequest emailRequest) {
+
+        List<Driver> curDriver = driverRepository.findByEmail(emailRequest.getEmail());
+
+        if(curDriver.isEmpty()) throw new DriveNotFound("Drive not found with driver email: " + emailRequest.getEmail());
+
+        Optional<Drive> drive = driveRepository.findByDriver_DriverId(curDriver.get(0).getDriverId());
+
+        return drive.orElseThrow(()->new DriveNotFound("Drive not found with driver email: " + emailRequest.getEmail()));
+    }
 
     public Drive startDrive(RequestDrive requestDrive) {
 
