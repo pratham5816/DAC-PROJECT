@@ -2,6 +2,7 @@ package com.app.controller;
 
 
 import com.app.dto.LoginRequest;
+import com.app.dto.LoginResponse;
 import com.app.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("Auth")
+@RequestMapping("auth")
 @CrossOrigin("http://localhost:5173")
 public class AuthController {
 
@@ -30,7 +31,7 @@ public class AuthController {
 
         if(!valid) return ResponseEntity.status(401).body("Invalid credentials");
 
-        return ResponseEntity.ok(loginRequest);
+        return ResponseEntity.ok().body(new LoginResponse(loginRequest.getEmail()));
     }
 
 
@@ -41,8 +42,16 @@ public class AuthController {
 
         if(!valid) return ResponseEntity.status(401).body("Invalid credentials");
 
-        return ResponseEntity.ok(loginRequest);
+        return ResponseEntity.ok(new LoginResponse(loginRequest.getEmail()));
     }
 
+    @PostMapping("/customer/login")
+    public ResponseEntity<?> customerLogin(@RequestBody LoginRequest loginRequest) {
+        boolean valid = authService.authenticateCustomer(loginRequest);
+
+        if(!valid) return ResponseEntity.status(401).body("Invalid credentials");
+
+        return ResponseEntity.ok(new LoginResponse(loginRequest.getEmail()));
+    }
 
 }

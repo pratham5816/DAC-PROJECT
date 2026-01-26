@@ -37,7 +37,7 @@ public class CustomerService {
 
         customer.setName(customer.getName().trim().toLowerCase());
 
-       List<Customer> temp =  customerRepository.findByEmail(customer.getEmail());
+       Optional<Customer> temp =  customerRepository.findByEmail(customer.getEmail());
        if(!temp.isEmpty()) throw new CustomerAlreadyExists(customer.getEmail());
        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
        customerRepository.save(customer);
