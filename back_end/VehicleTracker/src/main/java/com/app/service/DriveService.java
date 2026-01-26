@@ -42,11 +42,11 @@ public class DriveService {
 
     public Drive checkDriverDrive(EmailRequest emailRequest) {
 
-        List<Driver> curDriver = driverRepository.findByEmail(emailRequest.getEmail());
+        Optional<Driver> curDriver = driverRepository.findByEmail(emailRequest.getEmail());
 
         if(curDriver.isEmpty()) throw new DriveNotFound("Drive not found with driver email: " + emailRequest.getEmail());
 
-        Optional<Drive> drive = driveRepository.findByDriver_DriverId(curDriver.get(0).getDriverId());
+        Optional<Drive> drive = driveRepository.findByDriver_DriverId(curDriver.get().getDriverId());
 
         return drive.orElseThrow(()->new DriveNotFound("Drive not found with driver email: " + emailRequest.getEmail()));
     }

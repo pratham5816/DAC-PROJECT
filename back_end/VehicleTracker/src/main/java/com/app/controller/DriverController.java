@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import com.app.dto.EmailRequest;
+import com.app.dto.RegisterDriverResponse;
 import com.app.model.Driver;
 import com.app.service.DriverService;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,10 @@ public class DriverController {
     }
 
 
-    @PostMapping("/addDriver")
-    public ResponseEntity<Driver> addDriver(@RequestBody Driver driver) {
-        driverService.registerDriver(driver);
-        return ResponseEntity.ok().body(driver);
+    @PostMapping("/register")
+    public ResponseEntity<?> addDriver(@RequestBody Driver driver) {
+        RegisterDriverResponse  res = driverService.registerDriver(driver);
+        return ResponseEntity.ok().body(res);
     }
 
     @PostMapping("/getDriverByEmail")
