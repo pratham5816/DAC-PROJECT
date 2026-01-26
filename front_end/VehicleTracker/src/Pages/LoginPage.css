@@ -32,6 +32,8 @@
   max-width: 400px;
 }
 
+
+
 /* ===== Tablets (≤ 992px) ===== */
 
 @media (max-width: 992px) {
@@ -106,3 +108,4 @@
     display: none;
   }
 } */
+

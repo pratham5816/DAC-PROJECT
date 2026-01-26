@@ -17,6 +17,7 @@ const CreateDrive = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+
   const handleDriverChange = (e) => {
     setDriver({ ...driver, [e.target.name]: e.target.value });
   };
@@ -41,19 +42,22 @@ const CreateDrive = () => {
 
       const driverId = driverRes.data.driverId;
 
-      const res = await axios.post("http://localhost:8080/drive/createDrive", {
-        vehicleNumber: vehicleNumber,
-        driverId: driverId,
-        startpointId: startPoint, // later add start point
-        endpointId: finalPoint, // later add end point
-        latitude: 0, // later add latitude
-        longitude: 0, // later add longitude
-        // logged-in user
-      });
+      const ResponseApi = await axios.post(
+        "http://localhost:8080/drive/createDrive",
+        {
+          vehicleNumber: vehicleNumber,
+          driverId: driverId,
+          startpointId: startPoint, // later add start point
+          endpointId: finalPoint, // later add end point
+          latitude: 0, // later add latitude
+          longitude: 0, // later add longitude
+          // logged-in user
+        },
+      );
 
       setSuccess("Ride created successfully!");
     } catch (error) {
-      console.error("Error creating ride: ", res.data.error);
+      console.error("Error creating ride: " + error);
       setError("Failed to create ride");
     }
   };

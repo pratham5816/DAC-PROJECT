@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button, Tab, Nav } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LoginPage.css";
+import "../Components/LoginPasswordIcon.jsx";
 import DriverSignup from "../Components/DriverSignup";
 
 const LoginPage = ({ onLogin }) => {
@@ -11,6 +12,7 @@ const LoginPage = ({ onLogin }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loginResult, setLoginResult] = useState(null);
+  
 
   // Regex patterns
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // basic email validation
@@ -90,6 +92,8 @@ const LoginPage = ({ onLogin }) => {
   const handleSignup = () => {
     navigate(`/signup/${activeTab}`);
   };
+
+
 
   return (
     <Container fluid className="login-container">
