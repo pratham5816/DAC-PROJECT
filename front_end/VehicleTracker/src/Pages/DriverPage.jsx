@@ -4,9 +4,19 @@ import axios from "axios";
 import "./DriverPage.css";
 
 const DriverPage = () => {
-  const [driver, setDriver] = useState({
-    name: "",
-    phone: "",
+  // const [driver, setDriver] = useState({
+  //   name: "",
+  //   phone: "Number Not Found",
+  //   driveAssigned: false,
+  //   vehicle: null,
+  //   location: "",
+  // });
+
+  const [driver2, setDriver2] = useState({
+    name: "Name not found",
+    lisenceNumber: "lisence not found",
+    email: "Email not found",
+    phone: "Number Not Found",
     driveAssigned: false,
     vehicle: null,
     location: "",
@@ -15,11 +25,31 @@ const DriverPage = () => {
   const [checkpointLocation, setCheckpointLocation] = useState("");
 
   const [loading, setLoading] = useState(true);
+
   const [updatingLocation, setUpdatingLocation] = useState(false);
 
-  const ResponseObj = JSON.parse(localStorage.getItem("loginResponseObj"));
+  const ResponseObj = JSON.parse(localStorage.getItem("loginResponseObj")); // getting data entered at login
 
   // 🔹 Fetch driver + drive info
+  useEffect(() => {
+    axios
+      .post("http://localhost:8080/driver/getDriverByEmail", {
+        email: localStorage.getItem("Email"),
+      })
+      .then((res) => {
+        const data = res.data;
+        console.log(data.driverName); // pappu
+        setDriver2((prev) => ({
+          ...prev,
+            name: data.driverName,
+            lisenceNumber: data.licenseNumber,
+            email: data.email,
+        }));
+      })
+      .catch((err) => {
+        console.error("Error fetching driver details: " + err);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -29,9 +59,9 @@ const DriverPage = () => {
       .then((res) => {
         const data = res.data;
 
-        setDriver({
-          name: data.driver?.driverName || "Driver",
-          phone: data.driver?.phone || "Mobile Number",
+
+        setDriver2((prev) => ({
+          ...prev,
           driveAssigned: data.status === "ACTIVE",
           vehicle: data.vehicle
             ? {
@@ -44,7 +74,7 @@ const DriverPage = () => {
             data.latitude && data.longitude
               ? `${data.latitude}, ${data.longitude}`
               : "Location not available",
-        });
+        }));
 
         setLoading(false);
       })
@@ -53,14 +83,11 @@ const DriverPage = () => {
 
   useEffect(() => {
     axios
-      .get(
-        "http://localhost:8080/drive/getCurrentCheckpointLocation",
-        {
-          params: {
-            vehicleNumber: "MP20CG8989",
-          },
+      .get("http://localhost:8080/drive/getCurrentCheckpointLocation", {
+        params: {
+          vehicleNumber: "MP20CG8989",
         },
-      )
+      })
       .then((res) => {
         setCheckpointLocation(res.data.location || "Not in checkpoint area");
       })
@@ -76,7 +103,7 @@ const DriverPage = () => {
       return;
     }
 
-    if (!driver.vehicle?.number) {
+    if (!driver2.vehicle?.number) {
       alert("Vehicle not assigned");
       return;
     }
@@ -90,12 +117,12 @@ const DriverPage = () => {
 
         axios
           .post("http://localhost:8080/drive/updateLocation", {
-            vehicleNumber: driver.vehicle.number,
+            vehicleNumber: driver2.vehicle.number,
             latitude,
             longitude,
           })
           .then(() => {
-            setDriver((prev) => ({
+            setDriver2((prev) => ({
               ...prev,
               location: `${latitude}, ${longitude}`,
             }));
@@ -133,14 +160,16 @@ const DriverPage = () => {
           <div className="avatar">👤</div>
 
           <div className="profile-info">
-            <h5>{driver.name}</h5>
-            <span>📞 {driver.phone}</span>
+            <h5>{"Name: " + driver2.name}</h5>
+            <h5>{"Lisence Number: " + driver2.lisenceNumber}</h5>
+            <h5>{"Driver Email: " + driver2.email}</h5>
+            <span>📞 {driver2.phone}</span>
           </div>
 
           <Badge
-            className={`status-badge ${driver.driveAssigned ? "active" : ""}`}
+            className={`status-badge ${driver2.driveAssigned ? "active" : ""}`}
           >
-            {driver.driveAssigned ? "Drive Active" : "No Drive Assigned"}
+            {driver2.driveAssigned ? "Drive Active" : "No Drive Assigned"}
           </Badge>
         </div>
 
@@ -148,23 +177,23 @@ const DriverPage = () => {
         <Card className="info-card">
           <h6>🚚 Vehicle Information</h6>
 
-          {driver.driveAssigned && driver.vehicle ? (
+          {driver2.driveAssigned && driver2.vehicle ? (
             <>
               <div className="info-row">
                 <span>Number</span>
-                <strong>{driver.vehicle.number}</strong>
+                <strong>{driver2.vehicle.number}</strong>
               </div>
               <div className="info-row">
                 <span>Type</span>
-                <strong>{driver.vehicle.type}</strong>
+                <strong>{driver2.vehicle.type}</strong>
               </div>
               <div className="info-row">
                 <span>Owner</span>
-                <strong>{driver.vehicle.owner}</strong>
+                <strong>{driver2.vehicle.owner}</strong>
               </div>
-               <div className="info-row">
+              <div className="info-row">
                 <span>Current Checkpoint</span>
-                <strong>{checkpointLocation}</strong>
+                <strong>{checkpointLocation || "Not Found"}</strong>
               </div>
             </>
           ) : (
@@ -178,17 +207,17 @@ const DriverPage = () => {
         <Card className="info-card">
           <h6>📍 Live Location</h6>
 
-          <p className="location-text">{driver.location}</p>
+          <p className="location-text">{driver2.location}</p>
 
           <Button
             className="update-btn w-100 mb-2"
-            disabled={!driver.driveAssigned || updatingLocation}
+            disabled={!driver2.driveAssigned || updatingLocation}
             onClick={updateLocation}
           >
             {updatingLocation ? "Updating..." : "🔄 Update Location"}
           </Button>
 
-          <Button className="end-btn w-100" disabled={!driver.driveAssigned}>
+          <Button className="end-btn w-100" disabled={!driver2.driveAssigned}>
             ⛔ End Drive
           </Button>
         </Card>

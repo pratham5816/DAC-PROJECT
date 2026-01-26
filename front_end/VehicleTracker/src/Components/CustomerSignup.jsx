@@ -1,5 +1,5 @@
 import { useState } from "react";
-//import axios from "axios";
+import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 
 function CustomerSignup() {
@@ -17,8 +17,8 @@ function CustomerSignup() {
     e.preventDefault();
 
     try {
-     // await axios.post("http://localhost:8080/customer/signup", form);
-      alert("Driver registered successfully");
+     await axios.post("http://localhost:8080/customer/register", form);
+      alert("Customer registered successfully");
     } catch {
       alert("Signup failed");
     }

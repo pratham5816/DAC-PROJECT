@@ -18,7 +18,7 @@ function UserSignup() {
 
     try {
       await axios.post("http://localhost:8080/user/register", form);
-      alert("Driver registered successfully");
+      alert("User registered successfully");
     } catch {
       alert("Signup failed");
     }
