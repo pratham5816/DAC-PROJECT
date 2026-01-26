@@ -21,6 +21,7 @@ function DriverSignup() {
     e.preventDefault();
 
     try {
+      console.log("driver name : " + form.driverName);
       await axios.post("http://localhost:8080/driver/register", form);
       alert("Driver registered successfully! Please login.");
       navigate("/");
@@ -37,7 +38,7 @@ function DriverSignup() {
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3">
         <Form.Control
-          name="name"
+          name="driverName"
           placeholder="Full Name"
           required
           onChange={handleChange}
@@ -66,7 +67,7 @@ function DriverSignup() {
 
       <Form.Group className="mb-3">
         <Form.Control
-          name="LicenseNumber"
+          name="licenseNumber"
           type="text"
           placeholder="License Number"
           required

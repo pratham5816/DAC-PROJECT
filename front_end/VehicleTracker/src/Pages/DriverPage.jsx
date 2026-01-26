@@ -160,10 +160,11 @@ const DriverPage = () => {
           <div className="avatar">👤</div>
 
           <div className="profile-info">
-            <h5>{"Name: " + driver2.name}</h5>
-            <h5>{"Lisence Number: " + driver2.lisenceNumber}</h5>
-            <h5>{"Driver Email: " + driver2.email}</h5>
-            <span>📞 {driver2.phone}</span>
+            <div> <span>{"Name:  " + driver2.name}</span></div>
+           <div> <span>{"Lisence Number:  " + driver2.lisenceNumber}</span></div>
+            <div><span>{"Driver Email:  " + driver2.email}</span></div>
+            
+           <div> <span>📞 {driver2.phone}</span></div>
           </div>
 
           <Badge

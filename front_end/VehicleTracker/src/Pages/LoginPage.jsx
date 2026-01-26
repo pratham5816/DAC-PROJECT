@@ -46,12 +46,13 @@ const LoginPage = ({ onLogin }) => {
     localStorage.setItem("Email", email); // local storage used so that we can call apis
 
     const loginApiMap = {
-      driver: "http://localhost:8080/Auth/driver/login",
-      user: "http://localhost:8080/Auth/user/login",
-      customer: "http://localhost:8080/Auth/customer/login",
+      driver: "http://localhost:8080/auth/driver/login",
+      user: "http://localhost:8080/auth/user/login",
+      customer: "http://localhost:8080/auth/customer/login",
     };
 
     const loginUrl = loginApiMap[activeTab];
+
     try {
       const response = await axios.post(
         loginUrl,

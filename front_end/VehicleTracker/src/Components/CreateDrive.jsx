@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Card, Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import "./CreateDrive.css";
-//import AddCheckpoint from "./AddCheckpoint";
 import Checkpoint from "./Checkpoint";
 
 const CreateDrive = () => {
   const [driver, setDriver] = useState({
     email: "",
+    driverId: null,
   });
 
   const [vehicleNumber, setVehicleNumber] = useState("");
@@ -16,10 +16,13 @@ const CreateDrive = () => {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
+  const [loading, setLoading] = useState(false);
 
   const handleDriverChange = (e) => {
-    setDriver({ ...driver, [e.target.name]: e.target.value });
+    setDriver((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -27,38 +30,49 @@ const CreateDrive = () => {
     setError("");
     setSuccess("");
 
-    if (!vehicleNumber || !finalPoint) {
+    if (!vehicleNumber || !finalPoint || !driver.email) {
       setError("Please fill all required fields");
       return;
     }
 
+    setLoading(true);
+
     try {
-      console.log("Driver : ", driver.email);
+      // 🔹 1. Get driver by email
       const driverRes = await axios.post(
         "http://localhost:8080/driver/getDriverByEmail",
-        { email: driver.email },
+        { email: driver.email }
       );
-      console.log("Driver Response: ", driverRes.data);
 
       const driverId = driverRes.data.driverId;
 
-      const ResponseApi = await axios.post(
-        "http://localhost:8080/drive/createDrive",
-        {
-          vehicleNumber: vehicleNumber,
-          driverId: driverId,
-          startpointId: startPoint, // later add start point
-          endpointId: finalPoint, // later add end point
-          latitude: 0, // later add latitude
-          longitude: 0, // later add longitude
-          // logged-in user
-        },
-      );
+      // store driverId (optional, for later use)
+      setDriver((prev) => ({
+        ...prev,
+        driverId,
+      }));
+
+      // 🔹 2. Create drive
+      await axios.post("http://localhost:8080/drive/createDrive", {
+        vehicleNumber,
+        driverId,
+        startpointId: startPoint,
+        endpointId: finalPoint,
+        latitude: 0,
+        longitude: 0,
+      });
 
       setSuccess("Ride created successfully!");
-    } catch (error) {
-      console.error("Error creating ride: " + error);
-      setError("Failed to create ride");
+    } catch (err) {
+      console.error("Error creating ride:", err);
+
+      if (err.response) {
+        setError(err.response.data.message || "Failed to create ride");
+      } else {
+        setError("Server not responding");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,6 +85,7 @@ const CreateDrive = () => {
         {success && <div className="alert alert-success">{success}</div>}
 
         <Form onSubmit={handleSubmit}>
+          {/* 🚗 Vehicle Details */}
           <h6>🚗 Vehicle Details</h6>
           <Form.Control
             className="mb-3"
@@ -79,45 +94,21 @@ const CreateDrive = () => {
             onChange={(e) => setVehicleNumber(e.target.value)}
           />
 
+          {/* 👤 Driver Details */}
           <h6>👤 Driver Details</h6>
           <Row className="g-2">
-            <Col xs={12} md={6}>
-              {/* <Form.Control
-                placeholder="Driver Name"
-                name="name"
+            <Col xs={12} md={12}>
+              <Form.Control
+                className="my-2"
+                placeholder="Driver Email"
+                name="email"
+                value={driver.email}
                 onChange={handleDriverChange}
-              /> */}
-            </Col>
-            <Col xs={12} md={6}>
-              {/* <Form.Control
-                placeholder="Phone"
-                name="phone"
-                onChange={handleDriverChange}
-              /> */}
+              />
             </Col>
           </Row>
 
-          <Form.Control
-            className="my-2"
-            placeholder="Email"
-            name="email"
-            onChange={handleDriverChange}
-          />
-
-          {/* <Form.Control
-            className="mb-2"
-            placeholder="License Number"
-            name="license"
-            onChange={handleDriverChange}
-          /> */}
-
-          {/* <Form.Control
-            className="mb-3"
-            placeholder="Status (Active / Inactive)"
-            name="status"
-            onChange={handleDriverChange}
-          /> */}
-
+          {/* 📍 Route Details */}
           <h6>📍 Route Details</h6>
           <Form.Control
             className="mb-3"
@@ -132,13 +123,15 @@ const CreateDrive = () => {
             onChange={(e) => setFinalPoint(e.target.value)}
           />
 
-          {/* 🔥 SEPARATE COMPONENT */}
-          {/* <AddCheckpoint /> */}
-          {/* <h6>📍 Route Details</h6> */}
+          {/* 🔥 Checkpoints */}
           <Checkpoint />
 
-          <Button type="submit" className="createRide-btn w-100 mt-3">
-            Create Ride
+          <Button
+            type="submit"
+            className="createRide-btn w-100 mt-3"
+            disabled={loading}
+          >
+            {loading ? "Creating..." : "Create Ride"}
           </Button>
         </Form>
       </Card>
