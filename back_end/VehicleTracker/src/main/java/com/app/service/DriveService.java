@@ -1,9 +1,6 @@
 package com.app.service;
 
-import com.app.dto.EmailRequest;
-import com.app.dto.LocationNameRequest;
-import com.app.dto.RequestDrive;
-import com.app.dto.UpdateLocationRequest;
+import com.app.dto.*;
 import com.app.exception.*;
 import com.app.util.DiatanceUtil;
 import com.app.model.Checkpoint;
@@ -14,9 +11,11 @@ import com.app.repository.CheckpointRepository;
 import com.app.repository.DriveRepository;
 import com.app.repository.DriverRepository;
 import com.app.repository.VehicleRepository;
+import com.app.util.LocationUtil;
 import org.springframework.stereotype.Service;
 
 
+import javax.xml.stream.Location;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,8 +92,11 @@ public class DriveService {
                 .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
 
         try {
-            drive.setLatitude(updateLocationRequest.getLatitude());
-            drive.setLongitude(updateLocationRequest.getLongitude());
+            Double latitude = LocationUtil.roundLatLong(updateLocationRequest.getLatitude());
+            Double longitude = LocationUtil.roundLatLong(updateLocationRequest.getLongitude());
+
+            drive.setLatitude(latitude);
+            drive.setLongitude(longitude);
         }
         catch (Exception e) {
             throw new UnexpectedException(e.getMessage());
@@ -104,7 +106,7 @@ public class DriveService {
     }
 
 
-    public String getNearByCheckpointLocation(String VehicleNumber) {
+    public LocationResponse getNearByCheckpointLocation(String VehicleNumber) {
 
         Drive drive = driveRepository.findByVehicle_VechicleNumber(VehicleNumber)
                 .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
@@ -150,6 +152,6 @@ public class DriveService {
 
         if(nearestCheckpoint == null) throw new UnexpectedException("No checkpoints found nearby.");
         System.out.println("Nearest Checkpoint: " + nearestCheckpoint.getName() + " at distance " + minDistance + " km");
-        return nearestCheckpoint.getName();
+        return new LocationResponse(nearestCheckpoint.getName());
     }
 }

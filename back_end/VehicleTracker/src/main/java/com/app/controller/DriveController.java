@@ -2,6 +2,7 @@ package com.app.controller;
 
 
 import com.app.dto.EmailRequest;
+import com.app.dto.LocationResponse;
 import com.app.dto.RequestDrive;
 import com.app.dto.UpdateLocationRequest;
 import com.app.model.Drive;
@@ -33,8 +34,8 @@ public class DriveController {
 
     @GetMapping("/getCurrentCheckpointLocation")    // url?vehicleNumber=KA01AB1234
     public ResponseEntity<?> getCurrentCheckpointLocation(@RequestParam("vehicleNumber") String vehicleNumber){
-        String cityName = driveService.getNearByCheckpointLocation(vehicleNumber);
-        return ResponseEntity.ok().body(cityName);
+        LocationResponse res = driveService.getNearByCheckpointLocation(vehicleNumber);
+        return ResponseEntity.ok().body(res);
     }
 
 
