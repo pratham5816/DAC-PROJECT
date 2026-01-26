@@ -57,13 +57,13 @@ public class AuthService {
 
         loginRequest.setEmail(loginRequest.getEmail().trim().toLowerCase());  // trimming and converting to lowercase for uniformity
 
-        List<Driver> temp =  driverRepository.findByEmail(loginRequest.getEmail());
+        Optional<Driver> temp =  driverRepository.findByEmail(loginRequest.getEmail());
 
         if(temp.isEmpty()) throw new DriverNotFound(loginRequest);
         // Add password verification logic here
         // will be adding later
 
-        Driver driver = temp.get(0);
+        Driver driver = temp.get();
 
 //            System.out.println("Driver authenticated: " + driver.getEmail());
 //            System.out.println("From Object" + driver.getPassword());

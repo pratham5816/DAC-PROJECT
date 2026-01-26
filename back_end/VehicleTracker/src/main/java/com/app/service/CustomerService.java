@@ -3,6 +3,8 @@ package com.app.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.app.dto.RegisterCustomerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,14 +33,16 @@ public class CustomerService {
 
 
    @Transactional
-    public Customer addMyCustomer(Customer customer){
+    public RegisterCustomerResponse addMyCustomer(Customer customer){
 
         customer.setName(customer.getName().trim().toLowerCase());
 
        List<Customer> temp =  customerRepository.findByEmail(customer.getEmail());
        if(!temp.isEmpty()) throw new CustomerAlreadyExists(customer.getEmail());
        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
-       return customerRepository.save(customer);
+       customerRepository.save(customer);
+
+       return new RegisterCustomerResponse(customer.getCustomerId() , customer.getName() , customer.getEmail());
     }
 
     @Transactional

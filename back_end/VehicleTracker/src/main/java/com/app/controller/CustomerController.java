@@ -2,6 +2,7 @@ package com.app.controller;
 
 import java.util.List;
 
+import com.app.dto.RegisterCustomerResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +12,8 @@ import com.app.model.Customer;
 
 
 @RestController
-@RequestMapping("Customer")
+@RequestMapping("customer")
 @CrossOrigin("http://localhost:5173")
-
 public class CustomerController {
     
 
@@ -28,9 +28,9 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
-    @PostMapping("/addCustomer")
-    public ResponseEntity<Customer> add(@RequestBody Customer customer){
-        Customer savedCustomer = customerService.addMyCustomer(customer);
+    @PostMapping("/register")
+    public ResponseEntity<?> add(@RequestBody Customer customer){
+        RegisterCustomerResponse savedCustomer = customerService.addMyCustomer(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCustomer);
     }
     
@@ -39,12 +39,5 @@ public class CustomerController {
         customerService.deleteById(id);
         return ResponseEntity.ok("Request Accepted id " + id);
     }
-
-
-//    @GetMapping("/validateCusmoter")
-//    public ResponseEntity<Boolean> checkUser(@RequestBody Customer customer){
-//
-//    }
-
 
 }

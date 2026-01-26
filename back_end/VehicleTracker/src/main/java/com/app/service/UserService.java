@@ -2,6 +2,7 @@ package com.app.service;
 
 
 import com.app.dto.EmailRequest;
+import com.app.dto.RegisterUserResponse;
 import com.app.exception.UserAlreadyExists;
 import com.app.exception.UserNotFound;
 import com.app.model.User;
@@ -74,7 +75,7 @@ public class UserService {
     }
 
     @Transactional
-    public User addMyUser(User user) {  ///  "present" "absent"
+    public RegisterUserResponse addMyUser(User user) {  ///  "present" "absent"
 
         Optional<User> temp = userRepository.findByEmail(user.getEmail());
 
@@ -85,6 +86,8 @@ public class UserService {
         // encode password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        return userRepository.save(user);
+        userRepository.save(user);
+
+        return new RegisterUserResponse(user.getId() , user.getName() , user.getEmail());
     }
 }
