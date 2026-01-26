@@ -6,10 +6,10 @@ import { Form, Button } from "react-bootstrap";
 
 function DriverSignup() {
      const navigate = useNavigate(); 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: ""
+      const [form, setForm] = useState({
+          name: "",
+          email: "",
+          password: ""
   });
 
   const handleChange = (e) => {

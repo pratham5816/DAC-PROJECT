@@ -1,48 +1,145 @@
 import React, { useEffect, useState } from "react";
-import { Container, Card, Button, Badge } from "react-bootstrap";
+import { Container, Card, Button, Badge, Spinner } from "react-bootstrap";
 import axios from "axios";
 import "./DriverPage.css";
 
 const DriverPage = () => {
-
   const [driver, setDriver] = useState({
     name: "",
     phone: "",
     driveAssigned: false,
     vehicle: null,
-    location: ""
+    location: "",
   });
 
+  const [checkpointLocation, setCheckpointLocation] = useState("");
+
   const [loading, setLoading] = useState(true);
+  const [updatingLocation, setUpdatingLocation] = useState(false);
+
+  const ResponseObj = JSON.parse(localStorage.getItem("loginResponseObj"));
+
+  // 🔹 Fetch driver + drive info
 
   useEffect(() => {
-    axios.get("http://localhost:8080/driver/current")
-      .then(res => {
-        setDriver(res.data);
+    axios
+      .post("http://localhost:8080/drive/checkDriverAssigned", {
+        email: ResponseObj.email,
+      })
+      .then((res) => {
+        const data = res.data;
+
+        setDriver({
+          name: data.driver?.driverName || "Driver",
+          phone: data.driver?.phone || "Mobile Number",
+          driveAssigned: data.status === "ACTIVE",
+          vehicle: data.vehicle
+            ? {
+                number: data.vehicle.vechicleNumber,
+                type: data.vehicle.vehicleType,
+                owner: data.vehicle.user?.name,
+              }
+            : null,
+          location:
+            data.latitude && data.longitude
+              ? `${data.latitude}, ${data.longitude}`
+              : "Location not available",
+        });
+
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(
+        "http://localhost:8080/drive/getCurrentCheckpointLocation",
+        {
+          params: {
+            vehicleNumber: "MP20CG8989",
+          },
+        },
+      )
+      .then((res) => {
+        setCheckpointLocation(res.data.location || "Not in checkpoint area");
+      })
+      .catch((err) => {
+        console.error("Error fetching current checkpoint location: " + err);
+      });
+  }, []);
+
+  // 🔹 Update location logic
+  const updateLocation = () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation not supported");
+      return;
+    }
+
+    if (!driver.vehicle?.number) {
+      alert("Vehicle not assigned");
+      return;
+    }
+
+    setUpdatingLocation(true);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        axios
+          .post("http://localhost:8080/drive/updateLocation", {
+            vehicleNumber: driver.vehicle.number,
+            latitude,
+            longitude,
+          })
+          .then(() => {
+            setDriver((prev) => ({
+              ...prev,
+              location: `${latitude}, ${longitude}`,
+            }));
+            setUpdatingLocation(false);
+          })
+          .catch(() => {
+            alert("Failed to update location");
+            setUpdatingLocation(false);
+          });
+      },
+      (error) => {
+        alert("Location permission denied");
+        console.error(error);
+        setUpdatingLocation(false);
+      },
+      {
+        enableHighAccuracy: true,
+      },
+    );
+  };
+
+  if (loading) {
+    return (
+      <div className="text-center mt-5">
+        <Spinner animation="border" />
+      </div>
+    );
+  }
+
   return (
     <div className="driver-pro-wrapper">
       <Container className="driver-pro-container">
-
         {/* ===== PROFILE CARD ===== */}
         <div className="driver-profile">
           <div className="avatar">👤</div>
 
           <div className="profile-info">
-            <h5>
-              {driver.name || "Driver Name"}
-            </h5>
-
-            <span>
-              📞 {driver.phone || "Mobile Number"}
-            </span>
+            <h5>{driver.name}</h5>
+            <span>📞 {driver.phone}</span>
           </div>
 
-          <Badge className={`status-badge ${driver.driveAssigned ? "active" : ""}`}>
+          <Badge
+            className={`status-badge ${driver.driveAssigned ? "active" : ""}`}
+          >
             {driver.driveAssigned ? "Drive Active" : "No Drive Assigned"}
           </Badge>
         </div>
@@ -65,6 +162,10 @@ const DriverPage = () => {
                 <span>Owner</span>
                 <strong>{driver.vehicle.owner}</strong>
               </div>
+               <div className="info-row">
+                <span>Current Checkpoint</span>
+                <strong>{checkpointLocation}</strong>
+              </div>
             </>
           ) : (
             <p className="placeholder-text">
@@ -77,25 +178,20 @@ const DriverPage = () => {
         <Card className="info-card">
           <h6>📍 Live Location</h6>
 
-          <p className="location-text">
-            {driver.location || "Location not available"}
-          </p>
+          <p className="location-text">{driver.location}</p>
 
           <Button
             className="update-btn w-100 mb-2"
-            disabled={!driver.driveAssigned}
+            disabled={!driver.driveAssigned || updatingLocation}
+            onClick={updateLocation}
           >
-            🔄 Update Location
+            {updatingLocation ? "Updating..." : "🔄 Update Location"}
           </Button>
 
-          <Button
-            className="end-btn w-100"
-            disabled={!driver.driveAssigned}
-          >
+          <Button className="end-btn w-100" disabled={!driver.driveAssigned}>
             ⛔ End Drive
           </Button>
         </Card>
-
       </Container>
     </div>
   );
