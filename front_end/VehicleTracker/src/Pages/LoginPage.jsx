@@ -72,7 +72,6 @@ const LoginPage = ({ onLogin }) => {
         },
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true,
         },
       );
 
@@ -126,7 +125,7 @@ const LoginPage = ({ onLogin }) => {
           <div className="how-to-slide-box">
             <div className="how-to-slide">
               <div className="slide-content">
-                <strong>How it works:</strong>
+                <strong>How it works</strong>
                 <br />
                 Select your role and Login using your registered email and
                 password. Drivers share live location updates during trips,
@@ -136,7 +135,7 @@ const LoginPage = ({ onLogin }) => {
 
               {/* duplicate for seamless loop */}
               <div className="slide-content">
-                <strong>How it works:</strong>
+                <strong>How it works</strong>
                 <br />
                 Select your role and Login using your registered email and
                 password. Drivers share live location updates during trips,
