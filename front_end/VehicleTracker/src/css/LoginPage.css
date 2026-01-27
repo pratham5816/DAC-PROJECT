@@ -1,11 +1,27 @@
+/* ===== BASE ===== */
+.login-container {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
+.login-left {
+  background: linear-gradient(135deg, #6f42c1, #6610f2);
+  color: white;
+  padding: 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+.brand-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
 
-
-
-/* Base Styles */
+/* ===== MOVING TEXT ===== */
 .moving-text-box {
-  height: 60px;          /* visible area */
+  height: 3.5rem;
   overflow: hidden;
   margin-top: 20px;
 }
@@ -13,35 +29,28 @@
 .moving-text {
   display: flex;
   flex-direction: column;
-  animation: slideText 12s infinite;
+  animation: slideText 10s linear infinite;
 }
 
 .moving-text p {
   margin: 0;
+  height: 3.5rem;
+  line-height: 3.5rem;
   font-size: 15px;
-  line-height: 60px;     /* SAME as box height */
-  white-space: nowrap;
 }
 
-
-/* Animation */
 @keyframes slideText {
-  0%   { transform: translateY(0); }
-  20%  { transform: translateY(0); }
-
-  25%  { transform: translateY(-60px); }
-  45%  { transform: translateY(-60px); }
-
-  50%  { transform: translateY(-120px); }
-  70%  { transform: translateY(-120px); }
-
-  75%  { transform: translateY(-180px); }
-  100% { transform: translateY(-180px); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-14rem);
+  }
 }
 
-
+/* ===== HOW IT WORKS ===== */
 .how-to-slide-box {
-  height: 90px;        /* adjust based on text */
+  height: 6rem;
   overflow: hidden;
   margin-top: 30px;
 }
@@ -49,46 +58,29 @@
 .how-to-slide {
   display: flex;
   flex-direction: column;
-  animation: continuousSlide 12s linear infinite;
+  animation: howSlide 14s linear infinite;
 }
 
 .slide-content {
-  padding: 10px 0;
-  text-align: center;
-  opacity: 0.95;
+  padding: 0.75rem 0;
+  font-size: 14px;
 }
 
-@keyframes continuousSlide {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
+@keyframes howSlide {
+  to {
     transform: translateY(-50%);
   }
 }
 
-
-.login-container {
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-.login-left {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #6f42c1, #6610f2);
-  color: white;
-
+/* ===== STATS ===== */
+.stats {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 3rem;
+  justify-content: space-around;
+  margin-top: 40px;
 }
 
+/* ===== RIGHT PANEL ===== */
 .login-right {
-  min-height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,75 +92,35 @@
   max-width: 400px;
 }
 
+.login-btn {
+  background: linear-gradient(90deg, #6f42c1, #6610f2);
+  border: none;
+}
 
-
-/* ===== Tablets (≤ 992px) ===== */
-
+/* ===== TABLET ===== */
 @media (max-width: 992px) {
   .login-left {
     padding: 2rem;
   }
-
-  .login-right {
-    padding: 2rem;
-  }
 }
 
-/* ===== Mobile Devices (≤ 768px) ===== */
-
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
   .login-left {
+    display: flex;
     min-height: auto;
     padding: 2rem 1.5rem;
-  }
-
-  .login-left h1 {
-    font-size: 1.8rem;
-  }
-
-  .login-left p {
-    font-size: 0.9rem;
+    text-align: center;
   }
 
   .login-right {
-    min-height: auto;
     padding: 2rem 1.5rem;
   }
 
-  .login-form-wrapper {
-    max-width: 100%;
+  .stats {
+    margin-top: 20px;
   }
 }
-
-/* ===== Small Mobile (≤ 480px) ===== */
-
-@media (max-width: 480px) {
-  .login-left {
-    padding: 1.5rem 1rem;
-  }
-
-  .login-left h1 {
-    font-size: 1.5rem;
-  }
-
-  .login-right {
-    padding: 1.5rem 1rem;
-  }
-
-  .login-form-wrapper h2 {
-    font-size: 1.4rem;
-  }
-
-  .nav-tabs .nav-link {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.6rem;
-  }
-
-  button {
-    font-size: 0.9rem;
-  }
-}
-
 
 
 
