@@ -71,6 +71,15 @@
     transform: translateY(-50%);
   }
 }
+@keyframes slideText {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
 
 /* ===== STATS ===== */
 .stats {
@@ -119,6 +128,22 @@
 
   .stats {
     margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .moving-text-box {
+    height: 40px;
+  }
+
+  .moving-text p {
+    font-size: 12px;
+    line-height: 40px;
+    white-space: normal;   /* important for mobile */
+  }
+
+  .moving-text {
+    animation-duration: 16s; /* smoother on mobile */
   }
 }
 
