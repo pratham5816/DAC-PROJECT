@@ -57,7 +57,8 @@ const LoginPage = ({ onLogin }) => {
     const loginApiMap = {
       driver: "https://dac-project-production.up.railway.app/auth/driver/login",
       user: "https://dac-project-production.up.railway.app/auth/user/login",
-      customer: "https://dac-project-production.up.railway.app/auth/customer/login",
+      customer:
+        "https://dac-project-production.up.railway.app/auth/customer/login",
     };
 
     const loginUrl = loginApiMap[activeTab];
@@ -71,6 +72,7 @@ const LoginPage = ({ onLogin }) => {
         },
         {
           headers: { "Content-Type": "application/json" },
+          withCredentials: true,
         },
       );
 
@@ -108,9 +110,42 @@ const LoginPage = ({ onLogin }) => {
         <Col md={6} className="login-left">
           <h1 className="fw-bold mb-3"> VehicleTracker </h1>
 
-          <p className="lead text-center mb-2" style={{ fontSize: "15px" }}>
+          {/* <p className="lead text-center mb-2" style={{ fontSize: "15px" }}>
             Browser-based GPS tracking without hardware costs
-          </p>
+          </p> */}
+          <div className="moving-text-box">
+            <div className="moving-text">
+              <p>Browser-based vehicle tracking using smartphone GPS.</p>
+              <p>Track vehicle movement from Point A to B via checkpoints.</p>
+              <p>No hardware required. Works directly from the browser.</p>
+              <p>Drivers update location. Users track progress in real time.</p>
+            </div>
+          </div>
+
+          {/* Static content */}
+          <div className="how-to-slide-box">
+            <div className="how-to-slide">
+              <div className="slide-content">
+                <strong>How it works:</strong>
+                <br />
+                Select your role and Login using your registered email and
+                password. Drivers share live location updates during trips,
+                while users and customers monitor vehicle progress, checkpoints,
+                and route status in real time.
+              </div>
+
+              {/* duplicate for seamless loop */}
+              <div className="slide-content">
+                <strong>How it works:</strong>
+                <br />
+                Select your role and Login using your registered email and
+                password. Drivers share live location updates during trips,
+                while users and customers monitor vehicle progress, checkpoints,
+                and route status in real time.
+              </div>
+            </div>
+          </div>
+
           <div className="d-flex gap-5 mt-5 text-center">
             <div>
               <h3>500+</h3>

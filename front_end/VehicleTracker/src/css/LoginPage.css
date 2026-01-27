@@ -1,4 +1,67 @@
 /* Base Styles */
+.moving-text-box {
+  height: 60px;          /* visible area */
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.moving-text {
+  display: flex;
+  flex-direction: column;
+  animation: slideText 12s infinite;
+}
+
+.moving-text p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 60px;     /* SAME as box height */
+  white-space: nowrap;
+}
+
+
+/* Animation */
+@keyframes slideText {
+  0%   { transform: translateY(0); }
+  20%  { transform: translateY(0); }
+
+  25%  { transform: translateY(-60px); }
+  45%  { transform: translateY(-60px); }
+
+  50%  { transform: translateY(-120px); }
+  70%  { transform: translateY(-120px); }
+
+  75%  { transform: translateY(-180px); }
+  100% { transform: translateY(-180px); }
+}
+
+
+.how-to-slide-box {
+  height: 90px;        /* adjust based on text */
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.how-to-slide {
+  display: flex;
+  flex-direction: column;
+  animation: continuousSlide 12s linear infinite;
+}
+
+.slide-content {
+  padding: 10px 0;
+  text-align: center;
+  opacity: 0.95;
+}
+
+@keyframes continuousSlide {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
 
 .login-container {
   min-height: 100vh;
