@@ -51,8 +51,7 @@ public class SecurityConfig {
 
         config.setAllowedOrigins(List.of(
             "http://localhost:5173",
-            "https://browser-based-vehicle-tracker.vercel.app",
-            "https://browser-based-vehicle-tracker-jai-sakshis-projects.vercel.app"
+            "https://dac-project.vercel.app"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
