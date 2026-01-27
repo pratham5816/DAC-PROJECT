@@ -1,14 +1,24 @@
-Jan 2026
-Project C-DAC PG-DAC 
+January 2026
+Project: C-DAC PG-DAC
+Start Date: 19 January 2026
 
-Started on 19th Jan 2026. 
-
-Browser-based vehicle tracking using smartphone(Browser based)GPS + predefined routes 
+Browser-based vehicle tracking using smartphone + predefined routes 
 
 It is ONLY vehicle movement tracking from Point A → B (with multiple checkpoints A-B -------Y - X).
 
 Think of it as: “Simple, universal, browser-based vehicle tracking for ANY business that depends on vehicle movement.”
 
+Deployment Details & Future Improvements
+
+Application URL - https://dac-project.vercel.app
+The initial version of this application has been successfully deployed.
+This release focuses on establishing the core functionality and basic end-to-end flow.
+
+Spring-Boot Back-End Deployed By - Jai Sakshi ( https://github.com/jsakshi02 ) On Railway.
+Front-End Deployed By - Pratham Kumar ( https://github.com/pratham5816 ) On Vercel.
+Database Used MySql by - Pratham Kumar ( https://github.com/pratham5816 ) On Avien ( https://console.aiven.io ) 
+
+Further optimizations, performance improvements, and feature enhancements are planned and will be carried out by 31st January.
 
 Problem Statement
 
@@ -26,5 +36,8 @@ Project Objectives
 -To implement checkpoint-based validation of vehicle routes.
 -To allow vehicle owners and customers to monitor vehicle location and route status.
 -To reduce dependency on manual communication methods for vehicle tracking
+
+
+
 
 
