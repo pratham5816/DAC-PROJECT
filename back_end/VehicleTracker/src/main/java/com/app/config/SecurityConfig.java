@@ -29,20 +29,41 @@ public class SecurityConfig {
                 // Disable CSRF for simplicity for  Apis.
     }
 
+    // @Bean
+    // public CorsConfigurationSource corsConfigurationSource() {
+
+    //     CorsConfiguration config = new CorsConfiguration();
+    //     config.setAllowedOrigins(List.of("http://localhost:5173","https://browser-based-vehicle-tracker.vercel.app" , "https://browser-based-vehicle-tracker-jai-sakshis-projects.vercel.app"));   // Frontend origin
+    //     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+    //     config.setAllowedHeaders(List.of("*"));
+    //     config.setAllowCredentials(true);
+
+    //     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    //     source.registerCorsConfiguration("/**", config);
+
+    //     return source;
+
+        
+    // }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration config = new CorsConfiguration();
+    config.setAllowedOrigins(List.of(
+        "http://localhost:5173",
+        "https://browser-based-vehicle-tracker.vercel.app",
+        "https://browser-based-vehicle-tracker-jai-sakshis-projects.vercel.app"
+    ));
+    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+    config.setAllowedHeaders(List.of("*"));
+    config.setExposedHeaders(List.of("Set-Cookie"));
+    config.setAllowCredentials(true);
 
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173","https://browser-based-vehicle-tracker.vercel.app" , "https://browser-based-vehicle-tracker-jai-sakshis-projects.vercel.app"));   // Frontend origin
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", config);
+    return source;
+}
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-
-        return source;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
