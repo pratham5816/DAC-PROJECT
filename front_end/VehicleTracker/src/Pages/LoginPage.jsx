@@ -118,6 +118,10 @@ const LoginPage = ({ onLogin }) => {
               <p>Track vehicle movement from Point A to B via checkpoints.</p>
               <p>No hardware required. Works directly from the browser.</p>
               <p>Drivers update location. Users track progress in real time.</p>
+
+              {/* duplicate for smooth loop */}
+              <p>Browser-based vehicle tracking using smartphone GPS.</p>
+              <p>Track vehicle movement from Point A to B via checkpoints.</p>
             </div>
           </div>
 
