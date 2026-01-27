@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Card, Form, Button } from "react-bootstrap";
 import axios from "axios";
-import "./AddVehicle.css";
+import "../css/AddVehicle.css";
 
 const AddVehicle = () => {
   const [vehicle, setVehicle] = useState({

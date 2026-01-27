@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import DriverSignup from "../Components/DriverSignup";
-
 import UserSignup from "../Components/UserSignup";
 import CustomerSignup from "../Components/CustomerSignup";
-import "./LoginPage.css"; //
-import "./SignupPage.css";
+import "../css/LoginPage.css"; //
+import "../css/SignupPage.css";
 
 function SignupPage() {
   const [activeTab, setActiveTab] = useState("driver");

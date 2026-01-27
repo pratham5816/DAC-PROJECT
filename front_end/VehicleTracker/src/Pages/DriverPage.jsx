@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Card, Button, Badge, Spinner } from "react-bootstrap";
 import axios from "axios";
-import "./DriverPage.css";
+import "../css/DriverPage.css";
 
 const DriverPage = () => {
   // const [driver, setDriver] = useState({
@@ -33,7 +33,7 @@ const DriverPage = () => {
   // 🔹 Fetch driver + drive info
   useEffect(() => {
     axios
-      .post("http://localhost:8080/driver/getDriverByEmail", {
+      .post("https://dac-project-production.up.railway.app/driver/getDriverByEmail", {
         email: localStorage.getItem("Email"),
       })
       .then((res) => {
@@ -53,7 +53,7 @@ const DriverPage = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8080/drive/checkDriverAssigned", {
+      .post("https://dac-project-production.up.railway.app/drive/checkDriverAssigned", {
         email: ResponseObj.email,
       })
       .then((res) => {
@@ -83,7 +83,7 @@ const DriverPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/drive/getCurrentCheckpointLocation", {
+      .get("https://dac-project-production.up.railway.app/drive/getCurrentCheckpointLocation", {
         params: {
           vehicleNumber: "MP20CG8989",
         },
@@ -116,7 +116,7 @@ const DriverPage = () => {
         const longitude = position.coords.longitude;
 
         axios
-          .post("http://localhost:8080/drive/updateLocation", {
+          .post("https://dac-project-production.up.railway.app/drive/updateLocation", {
             vehicleNumber: driver2.vehicle.number,
             latitude,
             longitude,

@@ -1,26 +1,25 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import "../css/LoginPasswordIcon.css";
 
-function Login() {
+function PasswordInput({ value, onChange }) {
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
 
   return (
-    <div className="mb-3">
+    <div className="mb-3 password-wrapper">
       <label className="form-label">Password</label>
 
-      <div className="input-group">
+      <div className="password-input-container">
         <input
           type={showPassword ? "text" : "password"}
-          className="form-control"
+          className="form-control password-input"
           placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={value}
+          onChange={onChange}
         />
 
         <span
-          className="input-group-text"
-          style={{ cursor: "pointer" }}
+          className="password-toggle-icon"
           onClick={() => setShowPassword(!showPassword)}
         >
           {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -30,4 +29,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default PasswordInput;

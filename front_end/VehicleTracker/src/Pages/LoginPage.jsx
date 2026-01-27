@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Button, Tab, Nav } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Tab,
+  Nav,
+  InputGroup,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./LoginPage.css";
+import "../css/LoginPage.css";
 import "../Components/LoginPasswordIcon.jsx";
-import DriverSignup from "../Components/DriverSignup";
 
 const LoginPage = ({ onLogin }) => {
   const [activeTab, setActiveTab] = useState("driver");
@@ -12,12 +20,11 @@ const LoginPage = ({ onLogin }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loginResult, setLoginResult] = useState(null);
-  
 
   // Regex patterns
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // basic email validation
 
-  // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
   // min 6 chars, at least one letter and one number
 
   const handleLogin = async (e) => {
@@ -30,10 +37,12 @@ const LoginPage = ({ onLogin }) => {
       return;
     }
 
-    // if (!passwordRegex.test(password)) {
-    //   setError("Password must be at least 6 characters, with at least one letter and one number.");
-    //   return;
-    // }
+    if (!passwordRegex.test(password)) {
+      setError(
+        "Password must be at least 4 characters, with at least one letter and one number.",
+      );
+      return;
+    }
 
     if (!email || !password) {
       setError("Please enter email address and password");
@@ -46,9 +55,9 @@ const LoginPage = ({ onLogin }) => {
     localStorage.setItem("Email", email); // local storage used so that we can call apis
 
     const loginApiMap = {
-      driver: "http://localhost:8080/auth/driver/login",
-      user: "http://localhost:8080/auth/user/login",
-      customer: "http://localhost:8080/auth/customer/login",
+      driver: "https://dac-project-production.up.railway.app/auth/driver/login",
+      user: "https://dac-project-production.up.railway.app/auth/user/login",
+      customer: "https://dac-project-production.up.railway.app/auth/customer/login",
     };
 
     const loginUrl = loginApiMap[activeTab];
@@ -71,8 +80,6 @@ const LoginPage = ({ onLogin }) => {
         onLogin(activeTab, response.data.email);
 
         localStorage.setItem("loginResponseObj", JSON.stringify(response.data));
-
-        // console.log(response.email);
       } else {
         setError(response.data.message || "Login Failed");
       }
@@ -93,8 +100,6 @@ const LoginPage = ({ onLogin }) => {
   const handleSignup = () => {
     navigate(`/signup/${activeTab}`);
   };
-
-
 
   return (
     <Container fluid className="login-container">
@@ -168,23 +173,34 @@ const LoginPage = ({ onLogin }) => {
                   <Tab.Pane eventKey={role} key={role}>
                     <Form onSubmit={handleLogin}>
                       <Form.Group className="mb-3" controlId={`${role}Email`}>
-                        <Form.Control
-                          type="text"
-                          placeholder={`${role.charAt(0).toUpperCase() + role.slice(1)} Email`}
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
+                        <InputGroup>
+                          <InputGroup.Text>
+                            <i className="bi bi-envelope"></i>
+                          </InputGroup.Text>
+
+                          <Form.Control
+                            type="text"
+                            placeholder={`${role.charAt(0).toUpperCase() + role.slice(1)} Email`}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </InputGroup>
                       </Form.Group>
                       <Form.Group
                         className="mb-3"
                         controlId={`${role}Password`}
                       >
-                        <Form.Control
-                          type="password"
-                          placeholder="Password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <InputGroup>
+                          <InputGroup.Text>
+                            <i className="bi bi-lock"></i>
+                          </InputGroup.Text>
+                          <Form.Control
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                        </InputGroup>
                       </Form.Group>
 
                       <div className="d-flex justify-content-between align-items-center mb-3">

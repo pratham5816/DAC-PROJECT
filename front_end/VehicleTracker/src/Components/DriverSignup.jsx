@@ -22,7 +22,7 @@ function DriverSignup() {
 
     try {
       console.log("driver name : " + form.driverName);
-      await axios.post("http://localhost:8080/driver/register", form);
+      await axios.post("https://dac-project-production.up.railway.app/driver/register", form);
       alert("Driver registered successfully! Please login.");
       navigate("/");
     } catch (err) {
