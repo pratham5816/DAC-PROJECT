@@ -17,7 +17,7 @@ function UserSignup() {
     e.preventDefault();
 
     try {
-      await axios.post("https://dac-project-production.up.railway.app/user/register", form);
+      await axios.post("http://localhost:8080/user/register", form);
       alert("User registered successfully");
     } catch {
       alert("Signup failed");

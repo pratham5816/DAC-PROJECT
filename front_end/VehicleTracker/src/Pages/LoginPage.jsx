@@ -24,7 +24,7 @@ const LoginPage = ({ onLogin }) => {
   // Regex patterns
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // basic email validation
 
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
+  //const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
   // min 6 chars, at least one letter and one number
 
   const handleLogin = async (e) => {
@@ -37,12 +37,12 @@ const LoginPage = ({ onLogin }) => {
       return;
     }
 
-    if (!passwordRegex.test(password)) {
-      setError(
-        "Password must be at least 4 characters, with at least one letter and one number.",
-      );
-      return;
-    }
+    // if (!passwordRegex.test(password)) {
+    //   setError(
+    //     "Password must be at least 4 characters, with at least one letter and one number.",
+    //   );
+    //   return;
+    // }
 
     if (!email || !password) {
       setError("Please enter email address and password");
@@ -55,10 +55,10 @@ const LoginPage = ({ onLogin }) => {
     localStorage.setItem("Email", email); // local storage used so that we can call apis
 
     const loginApiMap = {
-      driver: "https://dac-project-production.up.railway.app/auth/driver/login",
-      user: "https://dac-project-production.up.railway.app/auth/user/login",
+      driver: "http://localhost:8080/auth/driver/login",
+      user: "http://localhost:8080/auth/user/login",
       customer:
-        "https://dac-project-production.up.railway.app/auth/customer/login",
+        "http://localhost:8080/auth/customer/login",
     };
 
     const loginUrl = loginApiMap[activeTab];
@@ -151,7 +151,7 @@ const LoginPage = ({ onLogin }) => {
             </div>
           </div>
 
-          <div className="d-flex gap-5 mt-5 text-center">
+          {/* <div className="stats-row d-flex gap-5 mt-5 text-center">
             <div>
               <h3>500+</h3>
               <small>Active Vehicles</small>
@@ -164,7 +164,7 @@ const LoginPage = ({ onLogin }) => {
               <h3>24/7</h3>
               <small>Support</small>
             </div>
-          </div>
+          </div> */}
         </Col>
 
         {/* Right Panel */}

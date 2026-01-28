@@ -20,7 +20,7 @@ const AddCheckpoint = () => {
 
   const handleAddCheckpoint = async () => {
     try {
-      await axios.post("https://dac-project-production.up.railway.app/checkpoint/addCheckpoint", {
+      await axios.post("http://localhost:8080/checkpoint/addCheckpoint", {
         name: checkpoint.name,
         latitude: Number(checkpoint.latitude),
         longitude: Number(checkpoint.longitude),
