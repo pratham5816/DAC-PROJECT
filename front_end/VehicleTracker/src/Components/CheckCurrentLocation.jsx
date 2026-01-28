@@ -21,7 +21,7 @@ const CheckCurrentLocation = () => {
 
     try {
       const res = await axios.get(
-        "http://localhost:8080/drive/getCurrentCheckpointLocation",
+        "https://dac-project-production.up.railway.app/drive/getCurrentCheckpointLocation",
         {
           params: {
             vehicleNumber: vehicleNumber,

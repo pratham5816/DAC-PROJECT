@@ -24,7 +24,7 @@ const GetExactLocation = () => {
 
     try {
       const res = await axios.get(
-        "http://localhost:8080/drive/getExactLocationInKms",
+        "https://dac-project-production.up.railway.app/drive/getExactLocationInKms",
         {
           params: { vehicleNumber },
         }

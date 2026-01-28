@@ -23,7 +23,7 @@ const AddVehicle = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8080/user/getUserIDbyEmail", {
+      .post("https://dac-project-production.up.railway.app/user/getUserIDbyEmail", {
         email: localStorage.getItem("Email"),
       })
       .then((res) => {
@@ -54,14 +54,14 @@ const AddVehicle = () => {
     //  console.log("User Email: " + userEmail);
 
       // const UserResponse = await axios
-      //   .post("http://localhost:8080/User/getUserIDbyEmail", {
+      //   .post("https://dac-project-production.up.railway.app/User/getUserIDbyEmail", {
       //     email: userEmail,
       //   })
       //   .catch((err) => {
       //     console.log("Error in fetching userId: " + err);
       //   });
 
-      await axios.post("http://localhost:8080/Vehicle/addVehicle", {
+      await axios.post("https://dac-project-production.up.railway.app/Vehicle/addVehicle", {
         vehicleNumber: vehicle.vehicleNumber,
         vehicleType: vehicle.vehicleType,
         challan_Exp: vehicle.challanExp,

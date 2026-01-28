@@ -55,10 +55,10 @@ const LoginPage = ({ onLogin }) => {
     localStorage.setItem("Email", email); // local storage used so that we can call apis
 
     const loginApiMap = {
-      driver: "http://localhost:8080/auth/driver/login",
-      user: "http://localhost:8080/auth/user/login",
+      driver: "https://dac-project-production.up.railway.app/auth/driver/login",
+      user: "https://dac-project-production.up.railway.app/auth/user/login",
       customer:
-        "http://localhost:8080/auth/customer/login",
+        "https://dac-project-production.up.railway.app/auth/customer/login",
     };
 
     const loginUrl = loginApiMap[activeTab];

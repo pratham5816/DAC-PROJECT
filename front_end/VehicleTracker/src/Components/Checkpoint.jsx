@@ -16,7 +16,7 @@ const Checkpoint = () => {
 
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:8080/checkpoint/getAll");
+      const res = await axios.get("https://dac-project-production.up.railway.app/checkpoint/getAll");
       setCheckpoints(res.data);
       setShow(true);
     } catch (error) {

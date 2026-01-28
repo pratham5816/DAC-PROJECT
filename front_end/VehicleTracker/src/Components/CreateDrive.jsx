@@ -40,7 +40,7 @@ const CreateDrive = () => {
     try {
       // 🔹 1. Get driver by email
       const driverRes = await axios.post(
-        "http://localhost:8080/driver/getDriverByEmail",
+        "https://dac-project-production.up.railway.app/driver/getDriverByEmail",
         { email: driver.email }
       );
 
@@ -53,7 +53,7 @@ const CreateDrive = () => {
       }));
 
       // 🔹 2. Create drive
-      await axios.post("http://localhost:8080/drive/createDrive", {
+      await axios.post("https://dac-project-production.up.railway.app/drive/createDrive", {
         vehicleNumber,
         driverId,
         startpointId: startPoint,
