@@ -25,10 +25,16 @@ Think of it as:
 
 Contributors
 
-- **Pratham Kumar Taheem** ([@pratham5816](https://github.com/pratham5816)) – Backend Development Using Spring-Boot 
-- **Jai Sakshi** ([@jsakshi02](https://github.com/jsakshi02)) – Frontend Using ReactJS
-- **Sairaj Chandrakant Kulkarni** ([https://github.com/Koolkarnisk](https://github.com/driver-ui-dev)) – Backend Development Using MS .NET Core
+- **Pratham Kumar Taheem** ([@pratham5816](https://github.com/pratham5816))
+  Backend Development Using Spring-Boot
+  Module: [Spring Boot Backend – Vehicle Tracker](https://github.com/pratham5816/DAC-PROJECT/tree/main/back_end/VehicleTracker)
+- **Jai Sakshi** ([@jsakshi02](https://github.com/jsakshi02))
+  Frontend Using ReactJS
+  Module: [ReactJS Frontend – Vehicle Tracker](https://github.com/pratham5816/DAC-PROJECT/tree/main/front_end/VehicleTracker)
+- **Sairaj Chandrakant Kulkarni** ([@Koolkarnisk](https://github.com/Koolkarnisk)) – Backend Development Using MS .NET Core
+  Module: [MS .NET Core Backend](https://github.com/pratham5816/DAC-PROJECT/tree/main/back_end_dotnet/vehicleTracker_dotnet)
 - **Shraddha Mahadev Kavale** ([ShraddhaKavale](https://github.com/ShraddhaKavale)) – Frontend Modules - Customer | Feedback
+  Module: [ReactJS Frontend Customer & Feedback UI](https://github.com/pratham5816/DAC-PROJECT/tree/main/front_end_customer_feedback)
 
 
 ---
@@ -47,9 +53,8 @@ Deployment Details:
   Jai Sakshi – [https://github.com/jsakshi02](https://github.com/jsakshi02)
 * **Front-End:** Deployed on Vercel by
   Pratham Kumar – [https://github.com/pratham5816](https://github.com/pratham5816)
-* **Database:** MySQL deployed on Aiven, managed by
-  Pratham Kumar – [https://github.com/pratham5816](https://github.com/pratham5816)
-  Aiven Console: [https://console.aiven.io](https://console.aiven.io)
+* **Database:** MySQL deployed on Railway, managed by
+  Jai Sakshi – [https://github.com/jsakshi02](https://github.com/jsakshi02)
 
 Further optimizations, performance improvements, and feature enhancements are planned and will be completed **by 31 January**.
 
