@@ -1,0 +1,23 @@
+.customer-page-wrapper {
+  padding: 20px;
+}
+
+.customer-header {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.customer-header h4 {
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.customer-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
