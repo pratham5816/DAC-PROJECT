@@ -1,0 +1,183 @@
+/* ================= BASE ================= */
+.login-container {
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ================= LEFT PANEL ================= */
+.login-left {
+  background: linear-gradient(135deg, #6f42c1, #6610f2);
+  color: white;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* desktop */
+  text-align: center;
+}
+
+/* ================= BRAND ================= */
+.login-left h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+/* ================= MOVING TEXT ================= */
+.moving-text-box {
+  height: 56px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.moving-text {
+  display: flex;
+  flex-direction: column;
+  animation: slideText 14s linear infinite;
+}
+
+.moving-text p {
+  margin: 0;
+  height: 56px;
+  line-height: 56px;
+  font-size: 15px;
+}
+
+/* animation depends on number of lines */
+@keyframes slideText {
+  to {
+    transform: translateY(-392px); /* 7 lines × 56px */
+  }
+}
+
+/* ================= HOW IT WORKS ================= */
+.how-to-slide-box {
+  height: 90px;
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.how-to-slide {
+  display: flex;
+  flex-direction: column;
+  animation: howSlide 18s linear infinite;
+}
+
+.slide-content {
+  font-size: 14px;
+  padding: 10px 0;
+  opacity: 0.95;
+}
+
+@keyframes howSlide {
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+/* ================= STATS ================= */
+.login-left .d-flex {
+  margin-top: 40px;
+}
+
+/* ================= RIGHT PANEL ================= */
+.login-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.login-form-wrapper {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ================= TABLET ================= */
+@media (max-width: 992px) {
+  .login-left {
+    padding: 2.5rem;
+    justify-content: flex-start; /* IMPORTANT */
+  }
+
+  .login-right {
+    padding: 2.5rem;
+  }
+
+  .moving-text p {
+    font-size: 14px;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .login-left {
+    min-height: auto;          /* KEY FIX */
+    justify-content: flex-start;
+    padding: 2rem 1.5rem;
+  }
+
+  .login-right {
+    padding: 2rem 1.5rem;
+  }
+
+  .moving-text-box {
+    height: 42px;
+  }
+
+  .moving-text p {
+    height: 42px;
+    line-height: 42px;
+    font-size: 12px;
+    white-space: normal;
+  }
+
+  .how-to-slide-box {
+    height: 70px;
+  }
+
+  /* Optional: hide stats on mobile */
+  .login-left .d-flex {
+    display: none;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width: 480px) {
+  .login-left h1 {
+    font-size: 2rem;
+  }
+
+  .moving-text p {
+    font-size: 11px;
+  }
+
+  .how-to-slide-box {
+    height: 60px;
+  }
+
+  .nav-tabs .nav-link {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .moving-text-box {
+    height: 80px;     /* enough for 2 lines */
+  }
+
+  .moving-text p {
+    min-height: 80px;
+    line-height: 1.4;
+    white-space: normal;
+    font-size: 12px;
+    text-align: center;
+    padding: 6px 0;
+  }
+
+  @keyframes slideText {
+    to {
+      transform: translateY(-400px); /* 5 items × 80px */
+    }
+  }
+}
