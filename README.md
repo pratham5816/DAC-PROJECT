@@ -49,7 +49,9 @@ Contributors
 ---
 
 
-Deployment & Future Improvements
+Deployment & Future Improvements | System Integration
+
+The ReactJS frontend implemented by [Jai Sakshi](https://github.com/jsakshi02) consumes REST APIs exposed by the Spring Boot backend developed by [Pratham Kumar Taheem](https://github.com/pratham5816).
 
 Application URL: [https://dac-project.vercel.app](https://dac-project.vercel.app)
 
