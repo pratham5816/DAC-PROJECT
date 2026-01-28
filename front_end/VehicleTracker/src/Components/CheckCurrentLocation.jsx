@@ -71,6 +71,7 @@ const CheckCurrentLocation = () => {
         </Form.Group>
 
         <Button
+          varient="none"
           className="checkLocation-btn w-100"
           onClick={handleCheckLocation}
           disabled={loading}

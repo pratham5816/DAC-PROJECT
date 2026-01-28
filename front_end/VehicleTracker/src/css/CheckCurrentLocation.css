@@ -1,12 +1,15 @@
 /* ===== Wrapper Card ===== */
+
 .check-location-card {
-  background: #b9c62c; /* yellow theme */
+  background-color: #b97bdd !important; /* example: Indigo */
+  color: #ffffff;
   border-radius: 16px;
   max-width: 420px;
   margin: 20px auto;
   padding: 24px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
+
 
 /* ===== Heading ===== */
 .check-location-card h5 {
@@ -50,9 +53,10 @@
 }
 
 /* ===== Button ===== */
+
 .checkLocation-btn {
-  background: #1f2937;
-  color: #fff;
+  background-color: #7b3aa0 !important; /* 💗 pink */
+  color: #ffffff !important;
   font-weight: 600;
   border-radius: 12px;
   padding: 10px;
@@ -61,9 +65,13 @@
 }
 
 .checkLocation-btn:hover {
-  background: #111827;
+  background-color: #edeaee !important; /* 💗 darker pink */
   transform: translateY(-1px);
 }
+
+
+
+
 
 /* ===== Alerts ===== */
 .alert {
