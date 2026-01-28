@@ -106,7 +106,7 @@ const LoginPage = ({ onLogin }) => {
     <Container fluid className="login-container">
       <Row className="h-100">
         {/* Left Panel */}
-        <Col md={6} className="login-left">
+        <Col lg={6} md={12} className="login-left">
           <h1 className="fw-bold mb-3"> VehicleTracker </h1>
 
           {/* <p className="lead text-center mb-2" style={{ fontSize: "15px" }}>
@@ -114,14 +114,15 @@ const LoginPage = ({ onLogin }) => {
           </p> */}
           <div className="moving-text-box">
             <div className="moving-text">
-              <p>Browser-based vehicle tracking using smartphone GPS.</p>
-              <p>Track vehicle movement from Point A to B via checkpoints.</p>
-              <p>No hardware required. Works directly from the browser.</p>
+              <p>Browser-based vehicle tracker.</p>
+              <p>Track vehicle movement from Point A to Z via checkpoints.</p>
+              <p>No hardware required. Works on any device with a browser</p>
               <p>Drivers update location. Users track progress in real time.</p>
+              <p>Predefined routes with checkpoints</p>
 
               {/* duplicate for smooth loop */}
-              <p>Browser-based vehicle tracking using smartphone GPS.</p>
-              <p>Track vehicle movement from Point A to B via checkpoints.</p>
+              <p>Browser-based vehicle tracker.</p>
+              <p>Track vehicle movement from Point A to Z via checkpoints.</p>
             </div>
           </div>
 
@@ -131,20 +132,21 @@ const LoginPage = ({ onLogin }) => {
               <div className="slide-content">
                 <strong>How it works</strong>
                 <br />
-                Select your role and Login using your registered email and
-                password. Drivers share live location updates during trips,
-                while users and customers monitor vehicle progress, checkpoints,
-                and route status in real time.
+                Users register vehicles and create rides by assigning registered
+                drivers. 
+                Drivers manage their own accounts and share location
+                updates during trips, while customers track vehicle status and
+                route progress in real time.
               </div>
 
               {/* duplicate for seamless loop */}
               <div className="slide-content">
                 <strong>How it works</strong>
                 <br />
-                Select your role and Login using your registered email and
-                password. Drivers share live location updates during trips,
-                while users and customers monitor vehicle progress, checkpoints,
-                and route status in real time.
+                Users register vehicles and create rides by assigning registered
+                drivers. Drivers manage their own accounts and share location
+                updates during trips, while customers track vehicle status and
+                route progress in real time.
               </div>
             </div>
           </div>
@@ -166,7 +168,7 @@ const LoginPage = ({ onLogin }) => {
         </Col>
 
         {/* Right Panel */}
-        <Col md={6} className="login-right">
+        <Col lg={6} md={12} className="login-right">
           <div className="login-form-wrapper">
             <h2 className="fw-semibold mb-2">Welcome Back!</h2>
             <p className="text-muted mb-4">Sign in to access your dashboard</p>
