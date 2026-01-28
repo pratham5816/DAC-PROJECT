@@ -1,0 +1,13 @@
+﻿using VehicleTracker.Models;
+
+namespace VehicleTracker.DAL.Interfaces;
+public interface ICustomerRepository
+{
+    Task<IEnumerable<Customer>> GetAllAsync();
+    Task<Customer?> GetByIdAsync(int id);
+    Task<Customer?> GetByEmailAsync(string email);
+    Task AddAsync(Customer customer);
+    Task UpdateAsync(Customer customer);
+    Task DeleteAsync(int id);
+    Task<bool> EmailExistsAsync(string email);
+}
