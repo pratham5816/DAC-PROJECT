@@ -85,6 +85,17 @@ public class DriveService {
         return driveRepository.save(drive);
     }
 
+    public VehicleNumberRequest endDrive(VehicleNumberRequest vehicleNumberRequest) {
+
+        Drive drive = driveRepository.findByVehicle_VechicleNumber(vehicleNumberRequest.getVehicleNumber())
+                .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
+
+        drive.setStatus("INACTIVE");
+
+        driveRepository.delete(drive);
+
+        return vehicleNumberRequest;
+    }
 
     public void upateLocationInDrive(UpdateLocationRequest updateLocationRequest) {
 
@@ -133,14 +144,14 @@ public class DriveService {
         double minDistance = Double.MAX_VALUE;
 
         Checkpoint nearestCheckpoint = null;
-        System.out.println("---------------------------------Current Location: Lat " + lat + " Long " + lon + "---------------------------------");
+        //System.out.println("---------------------------------Current Location: Lat " + lat + " Long " + lon + "---------------------------------");
 
         for(Checkpoint checkpoint : checkpoints) {
            double check_lat = checkpoint.getLatitude();
            double check_long = checkpoint.getLongitude();
-           System.out.println(checkpoint.getName() + " Checkpoint Location: Lat " + check_lat + " Long " + check_long);
+           //System.out.println(checkpoint.getName() + " Checkpoint Location: Lat " + check_lat + " Long " + check_long);
            double distance = DiatanceUtil.haversine(lat, lon, check_lat, check_long);
-           System.out.println("Current Location: Distance " + distance + " Kms");
+           //System.out.println("Current Location: Distance " + distance + " Kms");
               if(distance < minDistance) {
                     minDistance = distance;
                     nearestCheckpoint = checkpoint;
@@ -148,10 +159,13 @@ public class DriveService {
         }
 
         LocationNameRequest result = new LocationNameRequest();
+
         if(nearestCheckpoint != null) result.setLocationName(nearestCheckpoint.getName());
 
         if(nearestCheckpoint == null) throw new UnexpectedException("No checkpoints found nearby.");
-        System.out.println("Nearest Checkpoint: " + nearestCheckpoint.getName() + " at distance " + minDistance + " km");
+
+        //System.out.println("Nearest Checkpoint: " + nearestCheckpoint.getName() + " at distance " + minDistance + " km");
+
         return new LocationResponse(nearestCheckpoint.getName());
     }
 }

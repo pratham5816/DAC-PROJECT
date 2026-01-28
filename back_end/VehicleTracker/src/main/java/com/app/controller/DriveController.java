@@ -1,10 +1,7 @@
 package com.app.controller;
 
 
-import com.app.dto.EmailRequest;
-import com.app.dto.LocationResponse;
-import com.app.dto.RequestDrive;
-import com.app.dto.UpdateLocationRequest;
+import com.app.dto.*;
 import com.app.model.Drive;
 import com.app.service.DriveService;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +35,6 @@ public class DriveController {
         return ResponseEntity.ok().body(res);
     }
 
-
     @PostMapping("/checkDriverAssigned")
     public ResponseEntity<?> getDriverAssigned(@RequestBody EmailRequest emailRequest){
 
@@ -46,6 +42,13 @@ public class DriveController {
 
         return ResponseEntity.ok().body(temp);
     }
+
+    @PostMapping("/endDrive")
+    public ResponseEntity<?> endDrive(@RequestBody VehicleNumberRequest vehicleNumberRequest){
+        driveService.endDrive(vehicleNumberRequest);
+        return ResponseEntity.ok().body(vehicleNumberRequest);
+    }
+
 
 
 }

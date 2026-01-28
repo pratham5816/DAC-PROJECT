@@ -10,5 +10,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ErrorResponse {
-    private String error;
+    private String error;   // new ErrorResponse("User not found");
 }
