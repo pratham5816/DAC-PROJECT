@@ -6,7 +6,7 @@ import CheckCurrentLocation from "../Components/CheckCurrentLocation.jsx";
 
 
 
-const DriverPage = () => {;
+const DriverPage = () => {
   
   const [driver, setDriver] = useState({
     name: "Name not found",
