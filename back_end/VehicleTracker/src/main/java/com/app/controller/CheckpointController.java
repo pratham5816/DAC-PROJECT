@@ -33,10 +33,6 @@ public class CheckpointController {
         return ResponseEntity.status(201).body("Checkpoint added successfully: " + checkpoint.getName());
     }
 
-//    @PostMapping("/getCheckpoint")
-//    public ResponseEntity<?> getCheckpoint(@RequestBody Checkpoint checkpoint) {
-//
-//    }
 
 
     @GetMapping("/getAllCheckpoints")

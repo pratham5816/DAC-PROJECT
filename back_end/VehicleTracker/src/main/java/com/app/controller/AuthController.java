@@ -3,6 +3,9 @@ package com.app.controller;
 
 import com.app.dto.LoginRequest;
 import com.app.dto.LoginResponse;
+import com.app.exception.CustomerNotFound;
+import com.app.exception.DriverNotFound;
+import com.app.exception.UserNotFound;
 import com.app.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,9 +30,10 @@ public class AuthController {
 
     @PostMapping("/user/login")
     public ResponseEntity<?> userLogin(@RequestBody LoginRequest loginRequest) {
+
         boolean valid = authService.authenticateUser(loginRequest);
 
-        if(!valid) return ResponseEntity.status(401).body("Invalid credentials");
+        if(!valid) throw new UserNotFound("invalid credentials");
 
         return ResponseEntity.ok().body(new LoginResponse(loginRequest.getEmail()));
     }
@@ -40,7 +44,7 @@ public class AuthController {
 
         boolean valid = authService.authenticateDriver(loginRequest);
 
-        if(!valid) return ResponseEntity.status(401).body("Invalid credentials");
+        if(!valid) throw new DriverNotFound("invalid credentials");
 
         return ResponseEntity.ok(new LoginResponse(loginRequest.getEmail()));
     }
@@ -49,7 +53,7 @@ public class AuthController {
     public ResponseEntity<?> customerLogin(@RequestBody LoginRequest loginRequest) {
         boolean valid = authService.authenticateCustomer(loginRequest);
 
-        if(!valid) return ResponseEntity.status(401).body("Invalid credentials");
+        if(!valid) throw new CustomerNotFound("invalid credentials");
 
         return ResponseEntity.ok(new LoginResponse(loginRequest.getEmail()));
     }

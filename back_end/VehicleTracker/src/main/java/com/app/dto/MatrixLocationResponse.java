@@ -11,6 +11,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MatrixLocationResponse {  // reponse mapped to external api response.
+public class MatrixLocationResponse {  // response mapped to external api response.
     private List<Row> rows;
 }

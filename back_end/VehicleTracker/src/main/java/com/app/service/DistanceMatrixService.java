@@ -70,7 +70,7 @@ public class DistanceMatrixService {
 
         Optional<Checkpoint> nearestCheckpoint = checkpointRepository.findByName(res.getLocation());
 
-        if(nearestCheckpoint.isEmpty()) throw new CheckpointNotFound(new ErrorResponse("Checkpoint not found"));
+        if(nearestCheckpoint.isEmpty() ) throw new CheckpointNotFound(new ErrorResponse("Checkpoint not found"));
 
         Element elementNearCheckpoint = getElement(drive.get().getLatitude() , drive.get().getLongitude(), nearestCheckpoint.get().getLatitude(), nearestCheckpoint.get().getLongitude());
 
@@ -82,9 +82,6 @@ public class DistanceMatrixService {
 
         if(!("OK").equals(elementFromDestination.getStatus())) throw new DistanceCalulationError("Distance Calculation Error");
 
-        String DistanceFromDestination = elementFromDestination.getDistance().getText();
-        String DurationFromDestination = elementFromDestination.getDuration().getText();
-
-        return new DistanceTimeResponse(elementNearCheckpoint.getDistance().getText() , elementNearCheckpoint.getDuration().getText() , elementFromDestination.getDistance().getText() , elementFromDestination.getDuration().getText());
+        return new DistanceTimeResponse(elementNearCheckpoint.getDistance().getText() , elementNearCheckpoint.getDuration().getText() , nearestCheckpoint.get().getName(), elementFromDestination.getDistance().getText() , elementFromDestination.getDuration().getText() , destinationCheckpoint.getName());
     }
 }

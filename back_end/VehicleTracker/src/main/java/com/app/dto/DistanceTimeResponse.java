@@ -12,6 +12,8 @@ import lombok.Setter;
 public class DistanceTimeResponse {
     private String DistanceFromNearCP;
     private String TimeFromNearCP;
+    private String NearestCp;
     private String DistanceFromFinalCP;
     private String TimeFromFinalCP;
+    private String FinalCp;
 }
