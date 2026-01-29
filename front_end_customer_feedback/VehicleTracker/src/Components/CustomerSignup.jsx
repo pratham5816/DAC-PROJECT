@@ -6,7 +6,7 @@ function CustomerSignup() {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -17,7 +17,9 @@ function CustomerSignup() {
     e.preventDefault();
 
     try {
-     await axios.post("https://dac-project-production.up.railway.app/customer/register", form);
+      await axios.post("https://localhost:7073/api/customer/register", form, {
+        headers: { "Content-Type": "application/json" },
+      });
       alert("Customer registered successfully");
     } catch {
       alert("Signup failed");
@@ -60,7 +62,7 @@ function CustomerSignup() {
         className="w-100"
         style={{
           background: "linear-gradient(90deg, #6f42c1, #6610f2)",
-          border: "none"
+          border: "none",
         }}
       >
         Sign Up as Customer

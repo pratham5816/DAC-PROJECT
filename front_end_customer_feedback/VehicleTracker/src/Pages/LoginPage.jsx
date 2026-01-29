@@ -71,7 +71,7 @@ const LoginPage = ({ onLogin }) => {
 
     try {
       const response = await axios.post(
-        loginUrl,
+        "https://localhost:7073/api/auth/customer/login",// loginUrl,
         {
           email: email,
           password: password,
@@ -112,6 +112,7 @@ const LoginPage = ({ onLogin }) => {
           JSON.stringify(response.data.data),
         );
 
+        // onLogin(activeTab, response.data.data.email); //loc changed
         // Customer flow
         if (activeTab === "customer") {
           localStorage.setItem("customerId", response.data.data.customerId);

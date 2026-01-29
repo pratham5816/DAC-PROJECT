@@ -32,9 +32,7 @@ function LoginPageWrapper() {
 
 function App() {
   return (
-   
-    // watchout BrowserRouter tag
-    <BrowserRouter> 
+
       <Routes>
       
         <Route path="/" element={<LoginPageWrapper />} />
@@ -42,14 +40,13 @@ function App() {
           <Route element={<AppLayout />}>
         <Route path="/driver" element={<DriverPage />} />
         <Route path="/user" element={<UserPage />} />
-        <Route path="/customer" element={<CustomerPage />} />
+        <Route path="/customer/id" element={<CustomerPage />} />
         <Route path="/feedback" element={<FeedbackPage />} />
 
         </Route>
       </Routes>
-    
-    </BrowserRouter>
 
+      //removed BrowserRouter Tag
    
   );
 }

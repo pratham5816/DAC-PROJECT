@@ -29,18 +29,29 @@ useEffect(() => {
 
   setCustomerId(storedCustomerId);
 
-  axios
-    .get(`http://localhost:5073/api/customer/${storedCustomerId}`)
-    .then((res) => {
-      setCustomerName(res.data.name);
-      setAssignedVehicles(res.data.vehicles || []);
-      setError("");
-    })
-    .catch(() => {
-      setError("Failed to load customer profile");
-    });
-}, [navigate]);
+  // axios
+  //   .get(`http://localhost:5173/api/customer/${storedCustomerId}`)
+  //   .then((res) => {
+  //     setCustomerName(res.data.name);
+  //     setAssignedVehicles(res.data.vehicles || []);
+  //     setError("");
+  //   })
+  //   .catch(() => {
+  //     setError("Failed to load customer profile");
+  //   });
 
+  axios
+  .get(`/api/customer/${storedCustomerId}`)
+  .then((res) => {
+    setCustomerName(res.data.data.name);
+    setAssignedVehicles(res.data.data.vehicles || []);
+    setError("");
+  })
+  .catch(() => {
+    setError("Failed to load customer profile");
+  });
+
+}, [storedCustomerId, navigate]);
 
   //status checking
   const handleCheckStatus = () => {
@@ -58,19 +69,32 @@ useEffect(() => {
       return;
     }
 
+    // axios
+    //   .get(
+    //     `https://localhost:5173/api/customer/${customerId}/vehicle-status/${enteredVehicle}`,
+    //   )
+    //   .then((res) => {
+    //     setVehicleDetails(res.data);
+    //     setError("");
+    //     setShowStatus(true);
+    //   })
+    //   .catch(() => {
+    //     setError("Vehicle not found or not assigned to you");
+    //     setShowStatus(false);
+    //   });
+
     axios
-      .get(
-        `https://localhost:7073/api/customer/${customerId}/vehicle-status/${enteredVehicle}`,
-      )
-      .then((res) => {
-        setVehicleDetails(res.data);
-        setError("");
-        setShowStatus(true);
-      })
-      .catch(() => {
-        setError("Vehicle not found or not assigned to you");
-        setShowStatus(false);
-      });
+  .get(`/api/customer/${customerId}/vehicle-status/${enteredVehicle}`)
+  .then((res) => {
+    setVehicleDetails(res.data);
+    setError("");
+    setShowStatus(true);
+  })
+  .catch(() => {
+    setError("Vehicle not found or not assigned to you");
+    setShowStatus(false);
+  });
+
   };
 
   // for feedback
