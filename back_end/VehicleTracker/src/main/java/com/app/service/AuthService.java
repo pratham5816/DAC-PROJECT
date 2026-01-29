@@ -46,7 +46,7 @@ public class AuthService {
 
         Optional<User> temp =  userRepository.findByEmail(loginRequest.getEmail());
 
-        if(temp.isEmpty()) throw new UserNotFound(loginRequest);
+        if(temp.isEmpty()) throw new UserNotFound("User with email " + loginRequest.getEmail() + " not found!");
 
         // Add password verification logic here
         // will be adding later
@@ -65,7 +65,7 @@ public class AuthService {
 
         Optional<Driver> temp =  driverRepository.findByEmail(loginRequest.getEmail());
 
-        if(temp.isEmpty()) throw new DriverNotFound(loginRequest);
+        if(temp.isEmpty()) throw new DriverNotFound("Driver with email " + loginRequest.getEmail() + " not found!");
         // Add password verification logic here
         // will be adding later
 

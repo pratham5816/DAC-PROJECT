@@ -1,0 +1,117 @@
+/* ===== Wrapper Card ===== */
+
+.check-location-card {
+  background-color: #b97bdd !important; /* example: Indigo */
+  color: #ffffff;
+  border-radius: 16px;
+  max-width: 420px;
+  margin: 20px auto;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ===== Heading ===== */
+.check-location-card h5 {
+  font-weight: 700;
+  color: #2b2b2b;
+  margin-bottom: 20px;
+}
+
+/* ===== Labels ===== */
+.check-location-card label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+/* ===== Inputs ===== */
+.check-location-card input {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+/* Disabled input look */
+.check-location-card input:disabled {
+  background-color: #fff;
+  font-weight: 600;
+  color: #000;
+}
+
+/* ===== Map Link ===== */
+.check-location-card a {
+  font-size: 14px;
+  font-weight: 600;
+  color: #b97bdd;
+  text-decoration: none;
+}
+
+.check-location-card a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Button ===== */
+
+.checkLocation-btn {
+  background-color: #7b3aa0 !important; /* 💗 pink */
+  color: #ffffff !important;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 10px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.checkLocation-btn:hover {
+  background-color: #edeaee !important; /* 💗 darker pink */
+  transform: translateY(-1px);
+}
+
+
+
+
+
+/* ===== Alerts ===== */
+.alert {
+  border-radius: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* =======================
+   📱 Mobile (<=576px)
+   ======================= */
+@media (max-width: 576px) {
+  .check-location-card {
+    max-width: 95%;
+    padding: 18px;
+  }
+
+  .check-location-card h5 {
+    font-size: 16px;
+  }
+
+  .checkLocation-btn {
+    font-size: 14px;
+  }
+}
+
+/* =======================
+   📱 Tablet (577px–991px)
+   ======================= */
+@media (min-width: 577px) and (max-width: 991px) {
+  .check-location-card {
+    max-width: 480px;
+  }
+}
+
+/* =======================
+   🖥 Desktop (992px+)
+   ======================= */
+@media (min-width: 992px) {
+  .check-location-card {
+    max-width: 520px;
+  }
+}

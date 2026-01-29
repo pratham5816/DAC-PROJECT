@@ -2,21 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Container, Card, Button, Badge, Spinner } from "react-bootstrap";
 import axios from "axios";
 import "../css/DriverPage.css";
+import CheckCurrentLocation from "../Components/CheckCurrentLocation.jsx";
+import GetExactLocation from "../Components/GetExactLocationKm.jsx";
+
+
 
 const DriverPage = () => {
-  // const [driver, setDriver] = useState({
-  //   name: "",
-  //   phone: "Number Not Found",
-  //   driveAssigned: false,
-  //   vehicle: null,
-  //   location: "",
-  // });
-
-  const [driver2, setDriver2] = useState({
+  
+  const [driver, setDriver] = useState({
     name: "Name not found",
     lisenceNumber: "lisence not found",
     email: "Email not found",
-    phone: "Number Not Found",
+    // phone: "Number Not Found",
     driveAssigned: false,
     vehicle: null,
     location: "",
@@ -28,9 +25,13 @@ const DriverPage = () => {
 
   const [updatingLocation, setUpdatingLocation] = useState(false);
 
+  const [locationVersion, setLocationVersion] = useState(0);
+
   const ResponseObj = JSON.parse(localStorage.getItem("loginResponseObj")); // getting data entered at login
 
   // 🔹 Fetch driver + drive info
+
+
   useEffect(() => {
     axios
       .post("https://dac-project-production.up.railway.app/driver/getDriverByEmail", {
@@ -38,8 +39,8 @@ const DriverPage = () => {
       })
       .then((res) => {
         const data = res.data;
-        console.log(data.driverName); // pappu
-        setDriver2((prev) => ({
+        //console.log(data.driverName); // pappu
+        setDriver((prev) => ({
           ...prev,
             name: data.driverName,
             lisenceNumber: data.licenseNumber,
@@ -58,9 +59,10 @@ const DriverPage = () => {
       })
       .then((res) => {
         const data = res.data;
+        console.log("Drive data: ", data);
+        
 
-
-        setDriver2((prev) => ({
+        setDriver((prev) => ({
           ...prev,
           driveAssigned: data.status === "ACTIVE",
           vehicle: data.vehicle
@@ -77,15 +79,21 @@ const DriverPage = () => {
         }));
 
         setLoading(false);
+
+        
       })
       .catch(() => setLoading(false));
   }, []);
 
+
+
   useEffect(() => {
+    if (!driver.driveAssigned || !driver.vehicle) return;
     axios
       .get("https://dac-project-production.up.railway.app/drive/getCurrentCheckpointLocation", {
         params: {
-          vehicleNumber: "MP20CG8989",
+          vehicleNumber: driver.vehicle.number,
+           
         },
       })
       .then((res) => {
@@ -94,7 +102,7 @@ const DriverPage = () => {
       .catch((err) => {
         console.error("Error fetching current checkpoint location: " + err);
       });
-  }, []);
+  }, [driver.driveAssigned, driver.vehicle, locationVersion]);
 
   // 🔹 Update location logic
   const updateLocation = () => {
@@ -103,12 +111,14 @@ const DriverPage = () => {
       return;
     }
 
-    if (!driver2.vehicle?.number) {
+    if (!driver.vehicle?.number) {
       alert("Vehicle not assigned");
       return;
     }
 
     setUpdatingLocation(true);
+
+    
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -117,15 +127,18 @@ const DriverPage = () => {
 
         axios
           .post("https://dac-project-production.up.railway.app/drive/updateLocation", {
-            vehicleNumber: driver2.vehicle.number,
+            vehicleNumber: driver.vehicle.number,
             latitude,
             longitude,
           })
           .then(() => {
-            setDriver2((prev) => ({
+            setDriver((prev) => ({
               ...prev,
               location: `${latitude}, ${longitude}`,
             }));
+            
+
+            setLocationVersion((prev) => prev + 1);
             setUpdatingLocation(false);
           })
           .catch(() => {
@@ -152,6 +165,34 @@ const DriverPage = () => {
     );
   }
 
+ const endDrive = () => {
+  if (!driver.driveAssigned || !driver.vehicle) {
+    alert("No active drive to end.");
+    return;
+  }
+
+  if (!window.confirm("Are you sure you want to end the drive?")) return;
+
+  axios
+    .post("https://dac-project-production.up.railway.app/drive/endDrive", {
+      vehicleNumber: driver.vehicle.number, 
+    })
+    .then(() => {
+      alert("Drive ended successfully.");
+      setDriver((prev) => ({
+        ...prev,
+        driveAssigned: false,
+        vehicle: null,
+        location: "",
+      }));
+    })
+    .catch((err) => {
+      console.error("Error ending drive:", err);
+      alert("Failed to end drive. Please try again.");
+    });
+};
+
+
   return (
     <div className="driver-pro-wrapper">
       <Container className="driver-pro-container">
@@ -160,17 +201,17 @@ const DriverPage = () => {
           <div className="avatar">👤</div>
 
           <div className="profile-info">
-            <div> <span>{"Name:  " + driver2.name}</span></div>
-           <div> <span>{"Lisence Number:  " + driver2.lisenceNumber}</span></div>
-            <div><span>{"Driver Email:  " + driver2.email}</span></div>
+            <div> <span>{"Name:  " + driver.name}</span></div>
+           <div> <span>{"Lisence Number:  " + driver.lisenceNumber}</span></div>
+            <div><span>{"Driver Email:  " + driver.email}</span></div>
             
-           <div> <span>📞 {driver2.phone}</span></div>
+           {/* <div> <span>📞 {driver.phone}</span></div> */}
           </div>
 
           <Badge
-            className={`status-badge ${driver2.driveAssigned ? "active" : ""}`}
+            className={`status-badge ${driver.driveAssigned ? "active" : ""}`}
           >
-            {driver2.driveAssigned ? "Drive Active" : "No Drive Assigned"}
+            {driver.driveAssigned ? "Drive Active" : "No Drive Assigned"}
           </Badge>
         </div>
 
@@ -178,19 +219,19 @@ const DriverPage = () => {
         <Card className="info-card">
           <h6>🚚 Vehicle Information</h6>
 
-          {driver2.driveAssigned && driver2.vehicle ? (
+          {driver.driveAssigned && driver.vehicle ? (
             <>
               <div className="info-row">
                 <span>Number</span>
-                <strong>{driver2.vehicle.number}</strong>
+                <strong>{driver.vehicle.number}</strong>
               </div>
               <div className="info-row">
                 <span>Type</span>
-                <strong>{driver2.vehicle.type}</strong>
+                <strong>{driver.vehicle.type}</strong>
               </div>
               <div className="info-row">
                 <span>Owner</span>
-                <strong>{driver2.vehicle.owner}</strong>
+                <strong>{driver.vehicle.owner}</strong>
               </div>
               <div className="info-row">
                 <span>Current Checkpoint</span>
@@ -208,19 +249,28 @@ const DriverPage = () => {
         <Card className="info-card">
           <h6>📍 Live Location</h6>
 
-          <p className="location-text">{driver2.location}</p>
+          <p className="location-text">{driver.location}</p>
 
           <Button
             className="update-btn w-100 mb-2"
-            disabled={!driver2.driveAssigned || updatingLocation}
+            disabled={!driver.driveAssigned || updatingLocation}
             onClick={updateLocation}
           >
             {updatingLocation ? "Updating..." : "🔄 Update Location"}
           </Button>
 
-          <Button className="end-btn w-100" disabled={!driver2.driveAssigned}>
+          <Button className="end-btn w-100" disabled={!driver.driveAssigned}
+          onClick={endDrive}>
             ⛔ End Drive
           </Button>
+
+          {driver.driveAssigned && driver.vehicle && (
+            <>
+             <CheckCurrentLocation vehicleNumber={driver.vehicle.number} />
+            <GetExactLocation vehicleNumber={driver.vehicle.number} />
+            </>
+           
+            )}
         </Card>
       </Container>
     </div>

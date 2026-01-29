@@ -1,0 +1,148 @@
+.customer-page-wrapper {
+  min-height: 100vh;
+  width: 30vw !important;
+  max-width: none !important;
+  background: linear-gradient(135deg, #e0f2fe, #fdf2f8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Card */
+.customer-card {
+  background: #ffffff;
+  max-width: 500px !important;
+  width: 100% !important;
+  max-width: 900px;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Headings */
+.card-title {
+  font-size: 34px;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.customer-name {
+  font-size: 20px;
+  color: #2563eb;
+  margin-bottom: 20px;
+}
+
+/* Vehicle section */
+.vehicle-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vehicle-box label {
+  font-weight: 600;
+  color: #334155;
+  text-align: left;
+}
+
+.vehicle-box input {
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+}
+
+.vehicle-box input:focus {
+  border-color: #2563eb;
+}
+
+.vehicle-box button {
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Error text */
+.error-slot {
+  min-height: 16px;
+  font-size: 13px;
+  color: red;
+  text-align: left;
+}
+
+/* Status box */
+.status-box {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #ecfeff;
+  border-left: 6px solid #06b6d4;
+  text-align: left;
+}
+
+/* Rating */
+.rating-section {
+  margin-top: 18px;
+}
+
+.rating-label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+  color: #cbd5e1;
+}
+
+.star.filled {
+  color: #facc15;
+}
+
+/* Feedback button */
+.feedback-btn {
+  margin-top: 18px;
+  padding: 12px;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background: #16a34a;
+  color: white;
+  cursor: pointer;
+}
+
+.feedback-btn:hover {
+  opacity: 0.95;
+}
+
+@media (min-width: 768px) {
+  .customer-card {
+    max-width: 760px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .customer-card {
+    max-width: 900px;
+  }
+}

@@ -1,0 +1,41 @@
+/* FORCE tabs in single row on all screens */
+.signup-tabs {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Individual tab styling */
+.signup-tabs .nav-item {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+/* Link styling */
+.signup-tabs .nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+  border: none !important;
+  color: #6b7280;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Active tab */
+.signup-tabs .nav-link.active {
+  color: #6d28d9;
+  background: transparent !important;
+  border-bottom: 2px solid #6d28d9 !important;
+}
+
+/* Small mobile fix */
+@media (max-width: 480px) {
+  .signup-tabs .nav-link span {
+    font-size: 0.8rem;
+  }
+}
