@@ -1,8 +1,10 @@
 package com.app.service;
 
 import com.app.dto.LoginRequest;
+import com.app.dto.LoginResponse;
 import com.app.exception.CustomerNotFound;
 import com.app.exception.DriverNotFound;
+import com.app.exception.InvalidCredential;
 import com.app.exception.UserNotFound;
 import com.app.model.Customer;
 import com.app.model.Driver;
@@ -37,7 +39,7 @@ public class AuthService {
     }
 
 
-    public boolean authenticateUser(LoginRequest loginRequest) {
+    public LoginResponse authenticateUser(LoginRequest loginRequest) {
         // Authentication logic for user
 
         loginRequest.setPassword(loginRequest.getPassword().trim());
@@ -48,15 +50,14 @@ public class AuthService {
 
         if(temp.isEmpty()) throw new UserNotFound("User with email " + loginRequest.getEmail() + " not found!");
 
-        // Add password verification logic here
-        // will be adding later
-
         User user = temp.get();
 
-        return passwordEncoder.matches(loginRequest.getPassword() , user.getPassword());
+        if(!passwordEncoder.matches(loginRequest.getPassword() , user.getPassword())) throw new InvalidCredential("Invalid credentials provided!");
+
+        return new LoginResponse(user.getId() , user.getEmail());
     }
 
-    public boolean authenticateDriver(LoginRequest loginRequest) {
+    public LoginResponse authenticateDriver(LoginRequest loginRequest) {
 
         // Authentication logic for driver
         loginRequest.setPassword(loginRequest.getPassword().trim());    // trimming spaces
@@ -66,19 +67,16 @@ public class AuthService {
         Optional<Driver> temp =  driverRepository.findByEmail(loginRequest.getEmail());
 
         if(temp.isEmpty()) throw new DriverNotFound("Driver with email " + loginRequest.getEmail() + " not found!");
-        // Add password verification logic here
-        // will be adding later
 
         Driver driver = temp.get();
 
-//            System.out.println("Driver authenticated: " + driver.getEmail());
-//            System.out.println("From Object" + driver.getPassword());
-//            System.out.println("From Api" + loginRequest.getPassword());
-        return passwordEncoder.matches(loginRequest.getPassword() , driver.getPassword());
+        if(!passwordEncoder.matches(loginRequest.getPassword() , driver.getPassword())) throw new InvalidCredential("Invalid credentials provided!");
+
+        return new LoginResponse(driver.getDriverId() , driver.getEmail());
 
     }
 
-    public boolean authenticateCustomer(LoginRequest loginRequest) {
+    public LoginResponse authenticateCustomer(LoginRequest loginRequest) {
 
         // Authentication logic for customer
 
@@ -92,7 +90,9 @@ public class AuthService {
 
         Customer customer = temp.get();
 
-        return passwordEncoder.matches(loginRequest.getPassword() , customer.getPassword());
+        if(!passwordEncoder.matches(loginRequest.getPassword() , customer.getPassword())){ throw new InvalidCredential("Invalid credentials provided!");}
+
+        return  new LoginResponse(customer.getCustomerId() , customer.getEmail());
     }
 
 

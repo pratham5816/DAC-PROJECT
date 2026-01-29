@@ -36,7 +36,8 @@ public class CustomerService {
     public RegisterCustomerResponse addMyCustomer(Customer customer){
 
         customer.setName(customer.getName().trim().toLowerCase());
-
+        customer.setEmail(customer.getEmail().trim().toLowerCase());
+        customer.setPassword( customer.getPassword().trim());
        Optional<Customer> temp =  customerRepository.findByEmail(customer.getEmail());
        if(!temp.isEmpty()) throw new CustomerAlreadyExists(customer.getEmail());
        customer.setPassword(passwordEncoder.encode(customer.getPassword()));

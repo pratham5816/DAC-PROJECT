@@ -29,6 +29,9 @@ public class DriverService {
 
     public RegisterDriverResponse registerDriver(Driver driver) {
 
+        driver.setPassword(driver.getPassword().trim());
+        driver.setEmail(driver.getEmail().trim().toLowerCase());
+        driver.setDriverName(driver.getDriverName().trim().toLowerCase());
         Optional<Driver> temp = driverRepository.findByEmail(driver.getEmail());
         if(temp.isPresent()) throw  new DriverAlreadyExists("Driver already exists with email " + driver.getEmail());
         driver.setPassword(passwordEncoder.encode(driver.getPassword()));
@@ -38,6 +41,7 @@ public class DriverService {
     }
 
     public Driver getDriver(EmailRequest emailRequest) {
+        emailRequest.setEmail(emailRequest.getEmail().trim().toLowerCase());
         Optional<Driver> driver = driverRepository.findByEmail(emailRequest.getEmail());
         if(driver.isEmpty()) throw new DriverNotFound("Driver not found with email " + emailRequest.getEmail());
         return driver.get();

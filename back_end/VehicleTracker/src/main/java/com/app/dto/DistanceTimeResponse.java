@@ -10,10 +10,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DistanceTimeResponse {
-    private String DistanceFromNearCP;
-    private String TimeFromNearCP;
-    private String NearestCp;
-    private String DistanceFromFinalCP;
-    private String TimeFromFinalCP;
-    private String FinalCp;
+    private String distanceFromNearCP;
+    private String timeFromNearCP;
+    private String nearestCp;
+    private String distanceFromFinalCP;
+    private String timeFromFinalCP;
+    private String finalCp;
+    private String recentUpdatedMapUrl;
 }

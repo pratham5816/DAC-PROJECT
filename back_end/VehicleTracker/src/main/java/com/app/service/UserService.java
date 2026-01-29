@@ -32,7 +32,6 @@ public class UserService {
     public String getUserIDbyEmail(EmailRequest emailRequest) {
 
         emailRequest.setEmail(emailRequest.getEmail().trim());
-
         Optional<User> temp = userRepository.findByEmail(emailRequest.getEmail());
 
         if(temp.isEmpty()) throw new UserNotFound(emailRequest);     // handler with parameter EmailRequest will handler.
@@ -76,7 +75,8 @@ public class UserService {
 
     @Transactional
     public RegisterUserResponse addMyUser(User user) {  ///  "present" "absent"
-
+        user.setName(user.getName().trim().toLowerCase());
+        user.setPassword(user.getPassword().trim().toLowerCase());
         Optional<User> temp = userRepository.findByEmail(user.getEmail());
 
         if (!temp.isEmpty()) {

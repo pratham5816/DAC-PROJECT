@@ -23,6 +23,9 @@ public class CheckpointService {
     }
 
     public Checkpoint addCheckpoint(Checkpoint checkpoint) {
+
+        checkpoint.setName(checkpoint.getName().trim().toLowerCase());
+
         Optional<Checkpoint> temp = checkpointRepository.findByName(checkpoint.getName());
 
        if(temp.isPresent()) throw new CheckpointAlreadyExists(checkpoint.getName());
@@ -33,11 +36,13 @@ public class CheckpointService {
     public List<Checkpoint> getAllCheckpoint2() {
         return checkpointRepository.findAll();
     }
+
     public List<CheckpointResponse> getAllCheckpoints() {
         return checkpointRepository.findAll().stream().map(cp -> new CheckpointResponse(cp.getId(), cp.getName())).toList();
     }
 
     public Checkpoint updateCoordinates(CheckpointUpdateCoordinatesRequest request){
+        request.setCheckpointName(request.getCheckpointName().trim().toLowerCase());
         Checkpoint existingCheckpoint = checkpointRepository.findByName(request.getCheckpointName()).orElseThrow(() -> new CheckpointNotFound("Checkpoint not found with name: " + request.getCheckpointName()));
 
         existingCheckpoint.setLatitude(request.getLatitude());

@@ -21,13 +21,10 @@ public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
 
-    private final UserRepository userRepository;
-
     private final UserService userService;
 
-    public VehicleService(VehicleRepository vehicleRepository, UserRepository userRepository, UserService userService) {
+    public VehicleService(VehicleRepository vehicleRepository, UserService userService) {
         this.vehicleRepository = vehicleRepository;
-        this.userRepository = userRepository;
         this.userService = userService;
     }
     public List<Vehicle> fetchAllVehicle(){
@@ -37,6 +34,9 @@ public class VehicleService {
 
     @Transactional
     public Vehicle addVehicle(VehicleRequest vehicleRequest){
+
+        vehicleRequest.setVehicleNumber(vehicleRequest.getVehicleNumber().trim().toLowerCase());
+        vehicleRequest.setVehicleType(vehicleRequest.getVehicleType().trim().toLowerCase());
         Optional<User> user = userService.getUserById(vehicleRequest.getUserId());
 
         if(user.isEmpty()) throw new UserNotFound(vehicleRequest.getUserId());
@@ -44,10 +44,9 @@ public class VehicleService {
         if (vehicleRepository.existsByVechicleNumber(vehicleRequest.getVehicleNumber()))
             throw new VehicleAlreadyExists("Vehicle with vehicle number "+ vehicleRequest.getVehicleNumber() + " already exists");
 
-
         Integer id = vehicleRequest.getUserId();
         Vehicle vehicle = new Vehicle();
-        vehicle.setVechicleNumber(vehicleRequest.getVehicleNumber());
+        vehicle.setVechicleNumber(vehicleRequest.getVehicleNumber().trim().toLowerCase());
         vehicle.setVehicleType(vehicleRequest.getVehicleType());
         vehicle.setVehicle_Exp(vehicleRequest.getVehicle_Exp());
         vehicle.setChallan_Exp(vehicleRequest.getChallan_Exp());

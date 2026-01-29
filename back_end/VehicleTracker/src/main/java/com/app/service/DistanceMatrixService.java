@@ -58,6 +58,8 @@ public class DistanceMatrixService {
     public DistanceTimeResponse calculateDistanceMatrix(String vehicleNumber){
         // Logic to call external distance matrix API using restClient
         // and process the response to create MatrixLocationResponse
+        vehicleNumber = vehicleNumber.trim().toLowerCase();
+
         Optional<Drive> drive = driveRepository.findByVehicle_VechicleNumber(vehicleNumber);
 
         if(drive.isEmpty()) throw new DriveNotFound(new ErrorResponse("Drive not found for vehicle number: " + vehicleNumber));
@@ -81,7 +83,9 @@ public class DistanceMatrixService {
         Element elementFromDestination = getElement(drive.get().getLatitude() , drive.get().getLongitude(), destinationCheckpoint.getLatitude(), destinationCheckpoint.getLongitude());
 
         if(!("OK").equals(elementFromDestination.getStatus())) throw new DistanceCalulationError("Distance Calculation Error");
+        String gmapsUrl = "https://www.google.com/maps?q=" + drive.get().getLatitude() + "," + drive.get().getLongitude();
 
-        return new DistanceTimeResponse(elementNearCheckpoint.getDistance().getText() , elementNearCheckpoint.getDuration().getText() , nearestCheckpoint.get().getName(), elementFromDestination.getDistance().getText() , elementFromDestination.getDuration().getText() , destinationCheckpoint.getName());
+
+        return new DistanceTimeResponse(elementNearCheckpoint.getDistance().getText() , elementNearCheckpoint.getDuration().getText() , nearestCheckpoint.get().getName(), elementFromDestination.getDistance().getText() , elementFromDestination.getDuration().getText() , destinationCheckpoint.getName() , gmapsUrl);
     }
 }

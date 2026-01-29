@@ -2,20 +2,11 @@ package com.app.service;
 
 import com.app.dto.*;
 import com.app.exception.*;
+import com.app.model.*;
+import com.app.repository.*;
 import com.app.util.DiatanceUtil;
-import com.app.model.Checkpoint;
-import com.app.model.Drive;
-import com.app.model.Driver;
-import com.app.model.Vehicle;
-import com.app.repository.CheckpointRepository;
-import com.app.repository.DriveRepository;
-import com.app.repository.DriverRepository;
-import com.app.repository.VehicleRepository;
 import com.app.util.LocationUtil;
 import org.springframework.stereotype.Service;
-
-
-import javax.xml.stream.Location;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +22,8 @@ public class DriveService {
     private final CheckpointRepository checkpointRepository;
 
 
-    public DriveService(DriveRepository driveRepository, VehicleRepository vehicleRepository, DriverRepository driverRepository , CheckpointRepository checkpointRepository) {
+
+    public DriveService(DriveRepository driveRepository, VehicleRepository vehicleRepository, DriverRepository driverRepository , CheckpointRepository checkpointRepository ) {
         this.driveRepository = driveRepository;
         this.vehicleRepository = vehicleRepository;
         this.driverRepository = driverRepository;
@@ -55,11 +47,19 @@ public class DriveService {
         if(driveRepository.existsByDriver_DriverId(requestDrive.getDriverId())) throw new DriverIsAlreadyActive("Driver is already active in another drive.");
         if(driveRepository.existsByVehicle_VechicleNumber(requestDrive.getVehicleNumber())) throw new DriveAlreadyExists("Vehicle is already active.");
 
-        //
+
+        requestDrive.setVehicleNumber(requestDrive.getVehicleNumber().trim().toLowerCase());
 
         //Fetch Vehicle
-        Optional<Vehicle> vehicle = vehicleRepository.findByVechicleNumber(requestDrive.getVehicleNumber());
-        if(vehicle.isEmpty()) throw new VehicleNotFound("Vehicle not found");
+        Vehicle vehicle = vehicleRepository.findByVechicleNumber(requestDrive.getVehicleNumber()).orElseThrow(() -> new VehicleNotFound("Vehicle not found"));
+
+        User owner = vehicle.getUser();
+
+        Integer x = owner.getId();
+
+        if(!x.equals(requestDrive.getUserId())){
+            throw new VehicleNotFound("User is not authorized to start drive for this vehicle.");
+        }
 
         //Fetch Driver
         Driver driver = driverRepository.findById(requestDrive.getDriverId())
@@ -78,7 +78,7 @@ public class DriveService {
         Drive drive = new Drive();
         drive.setStatus("ACTIVE");
         drive.setDriver(driver);
-        drive.setVehicle(vehicle.get());
+        drive.setVehicle(vehicle);
         drive.setStart_point(startCheckpoint);
         drive.setEnd_point(endCheckpoint);
         drive.setLatitude(requestDrive.getLatitude());
@@ -88,7 +88,7 @@ public class DriveService {
     }
 
     public VehicleNumberRequest endDrive(VehicleNumberRequest vehicleNumberRequest) {
-
+        vehicleNumberRequest.setVehicleNumber(vehicleNumberRequest.getVehicleNumber().trim().toLowerCase());
         Drive drive = driveRepository.findByVehicle_VechicleNumber(vehicleNumberRequest.getVehicleNumber())
                 .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
 
@@ -99,8 +99,7 @@ public class DriveService {
         return vehicleNumberRequest;
     }
 
-    public void upateLocationInDrive(UpdateLocationRequest updateLocationRequest) {
-
+    public void updateLocationInDrive(UpdateLocationRequest updateLocationRequest) {
         Drive drive = driveRepository.findByVehicle_VechicleNumber(updateLocationRequest.getVehicleNumber())
                 .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
 
@@ -120,6 +119,8 @@ public class DriveService {
 
 
     public LocationResponse getNearByCheckpointLocation(String VehicleNumber) {
+
+        VehicleNumber = VehicleNumber.trim().toLowerCase();
 
         Drive drive = driveRepository.findByVehicle_VechicleNumber(VehicleNumber)
                 .orElseThrow(() -> new DriveNotFound("Active drive not found for the given vehicle number"));
