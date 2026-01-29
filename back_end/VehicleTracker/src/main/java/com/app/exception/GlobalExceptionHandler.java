@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CheckpointAlreadyExists.class)
-    public ResponseEntity<String> handlerCheckpointAlreadyExists(CheckpointAlreadyExists ex){
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    public ResponseEntity<ErrorResponse> handlerCheckpointAlreadyExists(CheckpointAlreadyExists ex){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(ex.getMessage()));
     }
     @ExceptionHandler(CheckpointNotFound.class)
-    public ResponseEntity<String> handleCheckpointNotFound(Exception ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    public ResponseEntity<ErrorResponse> handleCheckpointNotFound(Exception ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(ex.getMessage()));
     }
 
     @ExceptionHandler(UserNotFound.class)
@@ -56,8 +56,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(DriveNotFound.class)
-    public ResponseEntity<String> handlerDriveNotFound(DriveNotFound ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    public ResponseEntity<ErrorResponse> handlerDriveNotFound(DriveNotFound ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(ex.getMessage()));
     }
 
     @ExceptionHandler(UnexpectedException.class)
@@ -72,6 +72,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DriverIsAlreadyActive.class)
     public ResponseEntity<?> handlerDriverIsAlreadyActive(DriverIsAlreadyActive ex){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler(DistanceCalulationError.class)
+    public ResponseEntity<?> handlerDistanceCalulationError(DistanceCalulationError ex){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(ex.getMessage()));
     }
 }
