@@ -1,0 +1,246 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\vehicleTracker_dotnet\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\vehicletracker.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\vehicletracker.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{95134B26-F12C-478F-90A9-9E938F61670F}|src\\VehicleTracker.DAL\\VehicleTracker.DAL.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.dal\\repositories\\checkpointrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95134B26-F12C-478F-90A9-9E938F61670F}|src\\VehicleTracker.DAL\\VehicleTracker.DAL.csproj|solutionrelative:src\\vehicletracker.dal\\repositories\\checkpointrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8AEECF0-B066-4C8B-B94E-6523E3042095}|src\\VehicleTracker.Models\\VehicleTracker.Models.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.models\\vehicletracker.models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D8AEECF0-B066-4C8B-B94E-6523E3042095}|src\\VehicleTracker.Models\\VehicleTracker.Models.csproj|solutionrelative:src\\vehicletracker.models\\vehicletracker.models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\controllers\\customerauthcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\controllers\\customerauthcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\dtos\\errorcodes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\dtos\\errorcodes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\dtos\\customerupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\dtos\\customerupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\dtos\\customerresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\dtos\\customerresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\dtos\\customerlogindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\dtos\\customerlogindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\dtos\\customercreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\dtos\\customercreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|d:\\vehicletracker_dotnet\\src\\vehicletracker.api\\dtos\\apiresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F05B207-0155-4C94-8C1E-816BA5010FA6}|src\\VehicleTracker.API\\VehicleTracker.API.csproj|solutionrelative:src\\vehicletracker.api\\dtos\\apiresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dockerfile",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\Dockerfile",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dockerfile",
+              "RelativeToolTip": "src\\VehicleTracker.API\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-01-29T12:42:09.55Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CheckpointRepository.cs",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.DAL\\Repositories\\CheckpointRepository.cs",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.DAL\\Repositories\\CheckpointRepository.cs",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.DAL\\Repositories\\CheckpointRepository.cs",
+              "RelativeToolTip": "src\\VehicleTracker.DAL\\Repositories\\CheckpointRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T12:24:49.551Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\Program.cs",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Program.cs",
+              "RelativeToolTip": "src\\VehicleTracker.API\\Program.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAowCIAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T12:20:02.688Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\appsettings.json",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\appsettings.json",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\appsettings.json",
+              "RelativeToolTip": "src\\VehicleTracker.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-01-29T12:18:23.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CustomerResponseDto.cs",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\CustomerResponseDto.cs",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\Dtos\\CustomerResponseDto.cs",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\CustomerResponseDto.cs",
+              "RelativeToolTip": "src\\VehicleTracker.API\\Dtos\\CustomerResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T12:12:13.403Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "VehicleTracker.Models.csproj",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.Models\\VehicleTracker.Models.csproj",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.Models\\VehicleTracker.Models.csproj",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.Models\\VehicleTracker.Models.csproj",
+              "RelativeToolTip": "src\\VehicleTracker.Models\\VehicleTracker.Models.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-01-29T12:09:41.504Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\Controllers\\CustomerController.cs",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "src\\VehicleTracker.API\\Controllers\\CustomerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T12:12:28.017Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "VehicleTracker.API.csproj",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\VehicleTracker.API.csproj",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\VehicleTracker.API.csproj",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\VehicleTracker.API.csproj",
+              "RelativeToolTip": "src\\VehicleTracker.API\\VehicleTracker.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-01-29T12:09:13.341Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CustomerUpdateDto.cs",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\CustomerUpdateDto.cs",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\Dtos\\CustomerUpdateDto.cs",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\CustomerUpdateDto.cs",
+              "RelativeToolTip": "src\\VehicleTracker.API\\Dtos\\CustomerUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T12:12:17.1Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ErrorCodes.cs",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\ErrorCodes.cs",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\Dtos\\ErrorCodes.cs",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\ErrorCodes.cs",
+              "RelativeToolTip": "src\\VehicleTracker.API\\Dtos\\ErrorCodes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T12:12:23.58Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CustomerAuthController.cs",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Controllers\\CustomerAuthController.cs",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\Controllers\\CustomerAuthController.cs",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Controllers\\CustomerAuthController.cs",
+              "RelativeToolTip": "src\\VehicleTracker.API\\Controllers\\CustomerAuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T12:10:37.08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CustomerLoginDTO.cs",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\CustomerLoginDTO.cs",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\Dtos\\CustomerLoginDTO.cs",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\CustomerLoginDTO.cs",
+              "RelativeToolTip": "src\\VehicleTracker.API\\Dtos\\CustomerLoginDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T12:12:09.434Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CustomerCreateDto.cs",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\CustomerCreateDto.cs",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\Dtos\\CustomerCreateDto.cs",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\CustomerCreateDto.cs",
+              "RelativeToolTip": "src\\VehicleTracker.API\\Dtos\\CustomerCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T12:12:04.341Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ApiResponseDto.cs",
+              "DocumentMoniker": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\ApiResponseDto.cs",
+              "RelativeDocumentMoniker": "src\\VehicleTracker.API\\Dtos\\ApiResponseDto.cs",
+              "ToolTip": "D:\\vehicleTracker_dotnet\\src\\VehicleTracker.API\\Dtos\\ApiResponseDto.cs",
+              "RelativeToolTip": "src\\VehicleTracker.API\\Dtos\\ApiResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T12:12:00.51Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
