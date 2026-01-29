@@ -49,9 +49,7 @@ const LoginPage = ({ onLogin }) => {
       return;
     }
 
-    // console.log(email);
-    // console.log(password);
-
+   
     localStorage.setItem("Email", email); // local storage used so that we can call apis
 
     const loginApiMap = {
@@ -76,11 +74,21 @@ const LoginPage = ({ onLogin }) => {
       );
 
       if (response.status == 200) {
+
+        const {personId, email} = response.data;
+
         setLoginResult(response.data);
 
-        onLogin(activeTab, response.data.email);
+        onLogin(activeTab, email);
+        localStorage.setItem("role", activeTab); // USER / DRIVER / CUSTOMER
+        localStorage.setItem("email", email);
+        localStorage.setItem("personId", personId);
 
-        localStorage.setItem("loginResponseObj", JSON.stringify(response.data));
+        localStorage.setItem("loginResponseObj", JSON.stringify({
+          personId,
+          email,
+          role: activeTab,
+        }));
       } else {
         setError(response.data.message || "Login Failed");
       }
@@ -109,9 +117,7 @@ const LoginPage = ({ onLogin }) => {
         <Col lg={6} md={12} className="login-left">
           <h1 className="fw-bold mb-3"> VehicleTracker </h1>
 
-          {/* <p className="lead text-center mb-2" style={{ fontSize: "15px" }}>
-            Browser-based GPS tracking without hardware costs
-          </p> */}
+        
           <div className="moving-text-box">
             <div className="moving-text">
               <p>Browser-based vehicle tracker.</p>

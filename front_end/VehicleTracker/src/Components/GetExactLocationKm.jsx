@@ -1,13 +1,12 @@
+
 import React, { useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import axios from "axios";
 import "../css/CheckCurrentLocation.css";
 
-
 const GetExactLocation = () => {
   const [vehicleNumber, setVehicleNumber] = useState("");
-  const [result, setResult] = useState("");
-  const [mapUrl, setMapUrl] = useState("");
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -19,21 +18,20 @@ const GetExactLocation = () => {
 
     setLoading(true);
     setError("");
-    setResult("");
-    setMapUrl("");
+    setData(null);
 
     try {
+      console.log("Fetching exact location for vehicle:", vehicleNumber);
       const res = await axios.get(
-        "https://dac-project-production.up.railway.app/drive/getExactLocationInKms",
+        `https://dac-project-production.up.railway.app/matrix/details/${vehicleNumber}`,
         {
           params: { vehicleNumber },
         }
       );
 
-      setResult(`${res.data.distanceKm} km`);
-      setMapUrl(res.data.mapUrl);
+      setData(res.data);
     } catch (err) {
-        console.error("Error fetching exact location:", err);
+      console.error("Error fetching exact location:", err);
       setError("Unable to fetch exact location");
     } finally {
       setLoading(false);
@@ -42,12 +40,11 @@ const GetExactLocation = () => {
 
   return (
     <Card className="check-location-card shadow-lg p-4">
-      <h5 className="text-center mb-3">
-        📍 Get Exact Location In Kms
-      </h5>
+      <h5 className="text-center mb-3">📍 Get Exact Location Details</h5>
 
       {error && <div className="alert alert-danger">{error}</div>}
 
+      {/* Vehicle Number Input */}
       <Form.Group className="mb-3">
         <Form.Label>Vehicle Number</Form.Label>
         <Form.Control
@@ -58,25 +55,42 @@ const GetExactLocation = () => {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Result</Form.Label>
-        <Form.Control value={result} disabled />
-      </Form.Group>
+      {/* Result Section */}
+      {data && (
+        <div className="location-result mb-3">
+          <p>
+            <strong>Nearest Checkpoint:</strong>{" "}
+            {data.nearestCp}
+          </p>
 
-      <Form.Group className="mb-3">
-        <Form.Label>Map URL</Form.Label>
-        <Form.Control value={mapUrl} disabled />
-        {mapUrl && (
-          <a
-            href={mapUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="d-block mt-1"
-          >
-            📍 Open in Google Maps
-          </a>
-        )}
-      </Form.Group>
+          <p>
+            <strong>Distance from Nearest CP:</strong>{" "}
+            {data.distanceFromNearCP} ({data.timeFromNearCP})
+          </p>
+
+          <p>
+            <strong>Final Checkpoint:</strong>{" "}
+            {data.finalCp}
+          </p>
+
+          <p>
+            <strong>Distance from Final CP:</strong>{" "}
+            {data.distanceFromFinalCP} ({data.timeFromFinalCP})
+          </p>
+
+          {data.recentUpdatedMapUrl && (
+            <a
+              href={data.recentUpdatedMapUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="google-maps d-block mt-2"
+              style={{ color: "black" }} 
+            >
+              📍 Open in Google Maps
+            </a>
+          )}
+        </div>
+      )}
 
       <Button
         className="checkLocation-btn w-100"
@@ -90,3 +104,4 @@ const GetExactLocation = () => {
 };
 
 export default GetExactLocation;
+

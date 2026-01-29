@@ -1,0 +1,23 @@
+.user-page-wrapper {
+  padding: 20px;
+}
+
+.user-header {
+  background: #f1eef5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(167, 161, 161, 0.08);
+}
+
+.user-header h4 {
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.user-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}

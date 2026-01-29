@@ -1,7 +1,7 @@
 /* ===== Wrapper Card ===== */
 
 .check-location-card {
-  background-color: #b97bdd !important; /* example: Indigo */
+  background-color: #d2b9e1 !important; /* example: Indigo */
   color: #ffffff;
   border-radius: 16px;
   max-width: 420px;
@@ -55,7 +55,7 @@
 /* ===== Button ===== */
 
 .checkLocation-btn {
-  background-color: #7b3aa0 !important; /* 💗 pink */
+  background-color: #9781a4 !important; 
   color: #ffffff !important;
   font-weight: 600;
   border-radius: 12px;
@@ -65,10 +65,9 @@
 }
 
 .checkLocation-btn:hover {
-  background-color: #edeaee !important; /* 💗 darker pink */
+  background-color: #edeaee !important; 
   transform: translateY(-1px);
 }
-
 
 
 

@@ -29,7 +29,7 @@ const DriverPage = () => {
 
   const ResponseObj = JSON.parse(localStorage.getItem("loginResponseObj")); // getting data entered at login
 
-  // 🔹 Fetch driver + drive info
+  //Fetch driver + drive info
 
 
   useEffect(() => {
@@ -104,7 +104,7 @@ const DriverPage = () => {
       });
   }, [driver.driveAssigned, driver.vehicle, locationVersion]);
 
-  // 🔹 Update location logic
+  // Update location logic
   const updateLocation = () => {
     if (!navigator.geolocation) {
       alert("Geolocation not supported");
@@ -215,7 +215,7 @@ const DriverPage = () => {
           </Badge>
         </div>
 
-        {/* ===== VEHICLE INFO ===== */}
+        {/* VEHICLE INFO*/}
         <Card className="info-card">
           <h6>🚚 Vehicle Information</h6>
 
@@ -223,7 +223,7 @@ const DriverPage = () => {
             <>
               <div className="info-row">
                 <span>Number</span>
-                <strong>{driver.vehicle.number}</strong>
+                <strong>{driver.vehicle.number.toUpperCase()}</strong>
               </div>
               <div className="info-row">
                 <span>Type</span>
@@ -245,7 +245,7 @@ const DriverPage = () => {
           )}
         </Card>
 
-        {/* ===== LOCATION ===== */}
+        {/*LOCATION*/}
         <Card className="info-card">
           <h6>📍 Live Location</h6>
 

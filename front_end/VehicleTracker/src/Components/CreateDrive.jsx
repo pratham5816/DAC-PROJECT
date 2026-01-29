@@ -5,11 +5,7 @@ import "../css/CreateDrive.css";
 import Checkpoint from "./Checkpoint";
 
 const CreateDrive = () => {
-  const [driver, setDriver] = useState({
-    email: "",
-    driverId: null,
-  });
-
+  const [driverEmail, setDriverEmail] = useState("");
   const [vehicleNumber, setVehicleNumber] = useState("");
   const [startPoint, setStartPoint] = useState("");
   const [finalPoint, setFinalPoint] = useState("");
@@ -18,58 +14,64 @@ const CreateDrive = () => {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleDriverChange = (e) => {
-    setDriver((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
 
-    if (!vehicleNumber || !finalPoint || !driver.email) {
+    if (!vehicleNumber || !driverEmail || !startPoint || !finalPoint) {
       setError("Please fill all required fields");
+      return;
+    }
+
+    const userId = localStorage.getItem("personId");
+
+    if (!userId) {
+      setError("User not logged in");
       return;
     }
 
     setLoading(true);
 
     try {
-      // 🔹 1. Get driver by email
+      // 🔹 1. Get driverId by driver email
       const driverRes = await axios.post(
         "https://dac-project-production.up.railway.app/driver/getDriverByEmail",
-        { email: driver.email }
+        { email: driverEmail }
       );
 
-      const driverId = driverRes.data.driverId;
+      const driverId = driverRes.data?.driverId;
 
-      // store driverId (optional, for later use)
-      setDriver((prev) => ({
-        ...prev,
-        driverId,
-      }));
+      if (!driverId) {
+        throw new Error("Driver not found");
+      }
 
       // 🔹 2. Create drive
-      await axios.post("https://dac-project-production.up.railway.app/drive/createDrive", {
-        vehicleNumber,
-        driverId,
-        startpointId: startPoint,
-        endpointId: finalPoint,
-        latitude: 0,
-        longitude: 0,
-      });
+      await axios.post(
+        "https://dac-project-production.up.railway.app/drive/createDrive",
+        {
+          vehicleNumber,
+          driverId,
+          userId: Number(userId),
+          startpointId: Number(startPoint),
+          endpointId: Number(finalPoint),
+          latitude: 0,
+          longitude: 0,
+        }
+      );
 
-      setSuccess("Ride created successfully!");
+      setSuccess("✅ Drive created successfully!");
+      setVehicleNumber("");
+      setDriverEmail("");
+      setStartPoint("");
+      setFinalPoint("");
     } catch (err) {
-      console.error("Error creating ride:", err);
+      console.error(err);
 
-      if (err.response) {
-        setError(err.response.data.message || "Failed to create ride");
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
       } else {
-        setError("Server not responding");
+        setError(err.message || "Something went wrong");
       }
     } finally {
       setLoading(false);
@@ -85,7 +87,7 @@ const CreateDrive = () => {
         {success && <div className="alert alert-success">{success}</div>}
 
         <Form onSubmit={handleSubmit}>
-          {/* 🚗 Vehicle Details */}
+          {/* 🚗 Vehicle */}
           <h6>🚗 Vehicle Details</h6>
           <Form.Control
             className="mb-3"
@@ -94,21 +96,20 @@ const CreateDrive = () => {
             onChange={(e) => setVehicleNumber(e.target.value)}
           />
 
-          {/* 👤 Driver Details */}
+          {/* 👤 Driver */}
           <h6>👤 Driver Details</h6>
-          <Row className="g-2">
-            <Col xs={12} md={12}>
+          <Row>
+            <Col>
               <Form.Control
-                className="my-2"
+                className="mb-3"
                 placeholder="Driver Email"
-                name="email"
-                value={driver.email}
-                onChange={handleDriverChange}
+                value={driverEmail}
+                onChange={(e) => setDriverEmail(e.target.value)}
               />
             </Col>
           </Row>
 
-          {/* 📍 Route Details */}
+          {/* 📍 Route */}
           <h6>📍 Route Details</h6>
           <Form.Control
             className="mb-3"
@@ -131,7 +132,7 @@ const CreateDrive = () => {
             className="createRide-btn w-100 mt-3"
             disabled={loading}
           >
-            {loading ? "Creating..." : "Create Ride"}
+            {loading ? "Creating..." : "Create Drive"}
           </Button>
         </Form>
       </Card>

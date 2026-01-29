@@ -15,7 +15,11 @@ const AddVehicle = () => {
   const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
-    setVehicle({ ...vehicle, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+     setVehicle((prev) => ({
+      ...prev,
+      [name]: name === "vehicleNumber" ? value.toUpperCase() : value,
+    }));
   };
 
   const [userIdfromApi, setUserIdfromApi] = useState(0);
@@ -33,7 +37,7 @@ const AddVehicle = () => {
       .catch((err) => {
         console.log("Error in fetching userId: " + err);
       });
-  });
+  },[]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,6 +74,7 @@ const AddVehicle = () => {
       });
 
       setSuccess("Vehicle registered successfully!");
+
       setVehicle({
         vehicleNumber: "",
         vehicleType: "",

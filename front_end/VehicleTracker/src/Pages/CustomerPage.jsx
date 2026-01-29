@@ -18,7 +18,7 @@ const CustomerPage = () => {
 
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setCustomer({
-        name: responseObj?.name || "Customer",
+        name: responseObj?.name || "customer",
         email: responseObj?.email || "",
         phone: responseObj?.phone || "",
       });
