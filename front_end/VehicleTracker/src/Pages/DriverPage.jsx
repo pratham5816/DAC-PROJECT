@@ -3,6 +3,7 @@ import { Container, Card, Button, Badge, Spinner } from "react-bootstrap";
 import axios from "axios";
 import "../css/DriverPage.css";
 import CheckCurrentLocation from "../Components/CheckCurrentLocation.jsx";
+import GetExactLocation from "../Components/GetExactLocationKm.jsx";
 
 
 
@@ -12,7 +13,7 @@ const DriverPage = () => {
     name: "Name not found",
     lisenceNumber: "lisence not found",
     email: "Email not found",
-    phone: "Number Not Found",
+    // phone: "Number Not Found",
     driveAssigned: false,
     vehicle: null,
     location: "",
@@ -204,7 +205,7 @@ const DriverPage = () => {
            <div> <span>{"Lisence Number:  " + driver.lisenceNumber}</span></div>
             <div><span>{"Driver Email:  " + driver.email}</span></div>
             
-           <div> <span>📞 {driver.phone}</span></div>
+           {/* <div> <span>📞 {driver.phone}</span></div> */}
           </div>
 
           <Badge
@@ -264,7 +265,12 @@ const DriverPage = () => {
           </Button>
 
           {driver.driveAssigned && driver.vehicle && (
-            <CheckCurrentLocation vehicleNumber={driver.vehicle.number} />)}
+            <>
+             <CheckCurrentLocation vehicleNumber={driver.vehicle.number} />
+            <GetExactLocation vehicleNumber={driver.vehicle.number} />
+            </>
+           
+            )}
         </Card>
       </Container>
     </div>

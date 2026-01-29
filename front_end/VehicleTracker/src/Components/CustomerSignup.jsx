@@ -1,13 +1,19 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 
 function CustomerSignup() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
   });
+
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -15,57 +21,88 @@ function CustomerSignup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
     try {
-     await axios.post("https://dac-project-production.up.railway.app/customer/register", form);
-      alert("Customer registered successfully");
-    } catch {
-      alert("Signup failed");
+      await axios.post(
+        "https://dac-project-production.up.railway.app/customer/register",
+        form
+      );
+
+      setSuccess(true); // ✅ show success UI
+    } catch (err) {
+      if (err.response?.status === 409) {
+        setError("This email is already registered. Please login.");
+      } else {
+        setError("Signup failed. Try again.");
+      }
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3">
-        <Form.Control
-          name="name"
-          placeholder="Full Name"
-          required
-          onChange={handleChange}
-        />
-      </Form.Group>
+    <>
+      {/* ❌ Error message */}
+      {error && <Alert variant="danger">{error}</Alert>}
 
-      <Form.Group className="mb-3">
-        <Form.Control
-          name="email"
-          type="email"
-          placeholder="Email"
-          required
-          onChange={handleChange}
-        />
-      </Form.Group>
+      {/* ✅ Success message */}
+      {success ? (
+        <Alert variant="success" className="text-center">
+          <h6 className="mb-3">✅ Registration successful!</h6>
+          <p>Please login to continue.</p>
 
-      <Form.Group className="mb-3">
-        <Form.Control
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-          onChange={handleChange}
-        />
-      </Form.Group>
+          <Button
+            className="w-100"
+            variant="primary"
+            onClick={() => navigate("/")}
+          >
+            🔐 Go to Login
+          </Button>
+        </Alert>
+      ) : (
+        /* 📝 Signup Form */
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Control
+              name="name"
+              placeholder="Full Name"
+              required
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-      <Button
-        type="submit"
-        className="w-100"
-        style={{
-          background: "linear-gradient(90deg, #6f42c1, #6610f2)",
-          border: "none"
-        }}
-      >
-        Sign Up as Customer
-      </Button>
-    </Form>
+          <Form.Group className="mb-3">
+            <Form.Control
+              name="email"
+              type="email"
+              placeholder="Email"
+              required
+              onChange={handleChange}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="Password"
+              required
+              onChange={handleChange}
+            />
+          </Form.Group>
+
+          <Button
+            type="submit"
+            className="w-100"
+            style={{
+              background: "linear-gradient(90deg, #6f42c1, #6610f2)",
+              border: "none",
+            }}
+          >
+            Sign Up as Customer
+          </Button>
+        </Form>
+      )}
+    </>
   );
 }
 

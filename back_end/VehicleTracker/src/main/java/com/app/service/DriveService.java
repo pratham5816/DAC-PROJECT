@@ -55,6 +55,8 @@ public class DriveService {
         if(driveRepository.existsByDriver_DriverId(requestDrive.getDriverId())) throw new DriverIsAlreadyActive("Driver is already active in another drive.");
         if(driveRepository.existsByVehicle_VechicleNumber(requestDrive.getVehicleNumber())) throw new DriveAlreadyExists("Vehicle is already active.");
 
+        //
+
         //Fetch Vehicle
         Optional<Vehicle> vehicle = vehicleRepository.findByVechicleNumber(requestDrive.getVehicleNumber());
         if(vehicle.isEmpty()) throw new VehicleNotFound("Vehicle not found");
