@@ -1,0 +1,16 @@
+services:
+  vehicle-tracker:
+    build: .
+    image: vehicle-tracker:latest
+    container_name: vehicle-tracker-app
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_URL=${DB_URL}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - SPRING_USER_NAME=${SPRING_USER_NAME}
+      - SPRING_USER_PASSWORD=${SPRING_USER_PASSWORD}
+      - MATRIX_SERVICE_URL=${MATRIX_SERVICE_URL}
+      - MATRIX_SERVICE_KEY=${MATRIX_SERVICE_KEY}
+    restart: always
