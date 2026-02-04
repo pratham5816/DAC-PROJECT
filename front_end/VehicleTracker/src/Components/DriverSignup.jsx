@@ -30,7 +30,7 @@ function DriverSignup() {
         form
       );
 
-      setSuccess(true); // ✅ show success UI
+      setSuccess(true); // show success UI
     } catch (err) {
       if (err.response?.status === 409) {
         setError("This email is already registered. Please login.");
@@ -42,10 +42,10 @@ function DriverSignup() {
 
   return (
     <>
-      {/* ❌ Error */}
+      {/*  Error */}
       {error && <Alert variant="danger">{error}</Alert>}
 
-      {/* ✅ Success */}
+      {/* Success */}
       {success ? (
         <Alert variant="success" className="text-center">
           <h6 className="mb-3">✅ Registration successful!</h6>
@@ -60,7 +60,7 @@ function DriverSignup() {
           </Button>
         </Alert>
       ) : (
-        /* 📝 Signup Form */
+        /*  Signup Form */
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Control

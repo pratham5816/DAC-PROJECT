@@ -17,7 +17,7 @@ function LoginPageWrapper() {
     console.log("Logged in as:", role, "with email:", email);
 
     if (role === "driver") {
-      navigate("/driver");   // ✅ Navigate to DriverPage
+      navigate("/driver");   //  Navigate to DriverPage
     } else if (role === "user") {
       navigate("/user");     // later add UserPage
     } else if (role === "customer") {

@@ -41,7 +41,7 @@ function CustomerSignup() {
 
   return (
     <>
-      {/* ❌ Error message */}
+      {/*  Error message */}
       {error && <Alert variant="danger">{error}</Alert>}
 
       {/* ✅ Success message */}

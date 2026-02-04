@@ -46,7 +46,7 @@ const GetExactLocation = () => {
 
       {/* Vehicle Number Input */}
       <Form.Group className="mb-3">
-        <Form.Label>Vehicle Number</Form.Label>
+        <Form.Label>Enter Vehicle Number</Form.Label>
         <Form.Control
           type="text"
           placeholder="MH12AB1234"
@@ -59,12 +59,12 @@ const GetExactLocation = () => {
       {data && (
         <div className="location-result mb-3">
           <p>
-            <strong>Nearest Checkpoint:</strong>{" "}
+            <strong>Nearest checkpoint:</strong>{" "}
             {data.nearestCp}
           </p>
 
           <p>
-            <strong>Distance from Nearest CP:</strong>{" "}
+            <strong>Distance & estimated time to reach nearest checkPoint:</strong>{" "}
             {data.distanceFromNearCP} ({data.timeFromNearCP})
           </p>
 
@@ -74,7 +74,7 @@ const GetExactLocation = () => {
           </p>
 
           <p>
-            <strong>Distance from Final CP:</strong>{" "}
+            <strong>Distance & estimated time to reach final checkPoint:</strong>{" "}
             {data.distanceFromFinalCP} ({data.timeFromFinalCP})
           </p>
 

@@ -26,10 +26,10 @@ const CheckCurrentLocation = () => {
           params: {
             vehicleNumber: vehicleNumber,
           },
-        }
+        },
       );
 
-      // ✅ backend response: { location: "PUNE" }
+      // backend response: { location: "PUNE" }
       setResult(res.data.location || "Not in checkpoint area");
     } catch (err) {
       console.error("Error fetching checkpoint location:", err);
@@ -51,7 +51,7 @@ const CheckCurrentLocation = () => {
 
         {/* Vehicle Number */}
         <Form.Group className="mb-3">
-          <Form.Label>Vehicle Number</Form.Label>
+          <Form.Label>Enter Vehicle Number</Form.Label>
           <Form.Control
             type="text"
             placeholder="MH12AB1234"
@@ -60,14 +60,11 @@ const CheckCurrentLocation = () => {
           />
         </Form.Group>
 
-        {/* Result */}
         <Form.Group className="mb-3">
-          <Form.Label>Result</Form.Label>
-          <Form.Control
-            type="text"
-            value={loading ? "Checking..." : result}
-            disabled
-          />
+
+          {loading && <strong>Checking...</strong>}
+
+          {!loading && result && <strong>{result}</strong>}
         </Form.Group>
 
         <Button

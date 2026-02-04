@@ -53,18 +53,6 @@ const AddVehicle = () => {
    // console.log("User Email: " + userEmail);
 
     try {
-    //  console.log("Vehicle Number: " + vehicle.vehicleNumber);
-      //const userEmail = localStorage.getItem("Email");
-    //  console.log("User Email: " + userEmail);
-
-      // const UserResponse = await axios
-      //   .post("https://dac-project-production.up.railway.app/User/getUserIDbyEmail", {
-      //     email: userEmail,
-      //   })
-      //   .catch((err) => {
-      //     console.log("Error in fetching userId: " + err);
-      //   });
-
       await axios.post("https://dac-project-production.up.railway.app/Vehicle/addVehicle", {
         vehicleNumber: vehicle.vehicleNumber,
         vehicleType: vehicle.vehicleType,

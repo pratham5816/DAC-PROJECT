@@ -24,8 +24,8 @@ const LoginPage = ({ onLogin }) => {
   // Regex patterns
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // basic email validation
 
-  //const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
-  // min 6 chars, at least one letter and one number
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
+  //min 4 chars, at least one letter and one number
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -37,19 +37,18 @@ const LoginPage = ({ onLogin }) => {
       return;
     }
 
-    // if (!passwordRegex.test(password)) {
-    //   setError(
-    //     "Password must be at least 4 characters, with at least one letter and one number.",
-    //   );
-    //   return;
-    // }
+    if (!passwordRegex.test(password)) {
+      setError(
+        "Password must be at least 4 characters, with at least one letter and one number.",
+      );
+      return;
+    }
 
     if (!email || !password) {
       setError("Please enter email address and password");
       return;
     }
 
-   
     localStorage.setItem("Email", email); // local storage used so that we can call apis
 
     const loginApiMap = {
@@ -74,8 +73,7 @@ const LoginPage = ({ onLogin }) => {
       );
 
       if (response.status == 200) {
-
-        const {personId, email} = response.data;
+        const { personId, email } = response.data;
 
         setLoginResult(response.data);
 
@@ -84,11 +82,14 @@ const LoginPage = ({ onLogin }) => {
         localStorage.setItem("email", email);
         localStorage.setItem("personId", personId);
 
-        localStorage.setItem("loginResponseObj", JSON.stringify({
-          personId,
-          email,
-          role: activeTab,
-        }));
+        localStorage.setItem(
+          "loginResponseObj",
+          JSON.stringify({
+            personId,
+            email,
+            role: activeTab,
+          }),
+        );
       } else {
         setError(response.data.message || "Login Failed");
       }
@@ -96,12 +97,6 @@ const LoginPage = ({ onLogin }) => {
       console.error(err);
       setError("Server error. Please try again later.");
     }
-  };
-
-  const handleGoogleLogin = () => {
-    setEmail(email);
-    setPassword(password);
-    onLogin(activeTab, email);
   };
 
   const navigate = useNavigate();
@@ -117,7 +112,6 @@ const LoginPage = ({ onLogin }) => {
         <Col lg={6} md={12} className="login-left">
           <h1 className="fw-bold mb-3"> VehicleTracker </h1>
 
-        
           <div className="moving-text-box">
             <div className="moving-text">
               <p>Browser-based vehicle tracker.</p>
@@ -139,8 +133,7 @@ const LoginPage = ({ onLogin }) => {
                 <strong>How it works</strong>
                 <br />
                 Users register vehicles and create rides by assigning registered
-                drivers. 
-                Drivers manage their own accounts and share location
+                drivers. Drivers manage their own accounts and share location
                 updates during trips, while customers track vehicle status and
                 route progress in real time.
               </div>
@@ -156,21 +149,6 @@ const LoginPage = ({ onLogin }) => {
               </div>
             </div>
           </div>
-
-          {/* <div className="stats-row d-flex gap-5 mt-5 text-center">
-            <div>
-              <h3>500+</h3>
-              <small>Active Vehicles</small>
-            </div>
-            <div>
-              <h3>99.9%</h3>
-              <small>Uptime</small>
-            </div>
-            <div>
-              <h3>24/7</h3>
-              <small>Support</small>
-            </div>
-          </div> */}
         </Col>
 
         {/* Right Panel */}
@@ -274,20 +252,6 @@ const LoginPage = ({ onLogin }) => {
                       </Button>
 
                       <div className="text-center text-muted mb-3">OR</div>
-
-                      <Button
-                        variant="outline-secondary"
-                        className="w-100 mb-3"
-                        onClick={handleGoogleLogin}
-                      >
-                        <img
-                          src="https://www.svgrepo.com/show/475656/google-color.svg"
-                          alt="Google"
-                          width="20"
-                          className="me-2"
-                        />
-                        Continue with Google
-                      </Button>
 
                       <p>
                         Don't have an account?{" "}

@@ -29,7 +29,7 @@ function UserSignup() {
         form
       );
 
-      setSuccess(true); // ✅ show success message
+      setSuccess(true); // show success message
     } catch (err) {
       if (err.response?.status === 409) {
         setError("This email is already registered. Please login.");
@@ -41,10 +41,10 @@ function UserSignup() {
 
   return (
     <>
-      {/* ❌ Error */}
+      {/*  Error */}
       {error && <Alert variant="danger">{error}</Alert>}
 
-      {/* ✅ Success */}
+      {/*  Success */}
       {success ? (
         <Alert variant="success" className="text-center">
           <h6 className="mb-3">✅ Registration successful!</h6>
@@ -58,7 +58,7 @@ function UserSignup() {
           </Button>
         </Alert>
       ) : (
-        /* 📝 Signup Form */
+        /* Signup Form */
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Control
