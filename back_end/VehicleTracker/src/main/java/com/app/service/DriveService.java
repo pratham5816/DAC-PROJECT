@@ -44,47 +44,48 @@ public class DriveService {
 
     public Drive startDrive(RequestDrive requestDrive) {
 
-        if(driveRepository.existsByDriver_DriverId(requestDrive.getDriverId())) throw new DriverIsAlreadyActive("Driver is already active in another drive.");
-        if(driveRepository.existsByVehicle_VechicleNumber(requestDrive.getVehicleNumber())) throw new DriveAlreadyExists("Vehicle is already active.");
+            if(driveRepository.existsByDriver_DriverId(requestDrive.getDriverId())) throw new DriverIsAlreadyActive("Driver is already active in another drive.");
+            if(driveRepository.existsByVehicle_VechicleNumber(requestDrive.getVehicleNumber())) throw new DriveAlreadyExists("Vehicle is already active.");
 
 
-        requestDrive.setVehicleNumber(requestDrive.getVehicleNumber().trim().toLowerCase());
+            requestDrive.setVehicleNumber(requestDrive.getVehicleNumber().trim().toLowerCase());
 
-        //Fetch Vehicle
-        Vehicle vehicle = vehicleRepository.findByVechicleNumber(requestDrive.getVehicleNumber()).orElseThrow(() -> new VehicleNotFound("Vehicle not found"));
+            //Fetch Vehicle
+            Vehicle vehicle = vehicleRepository.findByVechicleNumber(requestDrive.getVehicleNumber()).orElseThrow(() -> new VehicleNotFound("Vehicle not found"));
 
-        User owner = vehicle.getUser();
+            User owner = vehicle.getUser();
 
-        Integer x = owner.getId();
+            Integer x = owner.getId();
+            System.out.println("onwner / user id from logic : " + x);
+            System.out.println("user id from request : " + requestDrive.getUserId());
+            if(!x.equals(requestDrive.getUserId())){
+                throw new VehicleNotFound("User is not authorized to start drive for this vehicle.");
+            }
 
-        if(!x.equals(requestDrive.getUserId())){
-            throw new VehicleNotFound("User is not authorized to start drive for this vehicle.");
-        }
+            //Fetch Driver
+            Driver driver = driverRepository.findById(requestDrive.getDriverId())
+                    .orElseThrow(() -> new DriverNotFound("Driver not found"));
 
-        //Fetch Driver
-        Driver driver = driverRepository.findById(requestDrive.getDriverId())
-                .orElseThrow(() -> new DriverNotFound("Driver not found"));
+            //Fetch Start Checkpoint
+            Checkpoint startCheckpoint = checkpointRepository
+                    .findById(requestDrive.getStartpointId())
+                    .orElseThrow(() -> new CheckpointNotFound("Start checkpoint not found"));
 
-        //Fetch Start Checkpoint
-        Checkpoint startCheckpoint = checkpointRepository
-                .findById(requestDrive.getStartpointId())
-                .orElseThrow(() -> new CheckpointNotFound("Start checkpoint not found"));
+            //Fetch End Checkpoint
+            Checkpoint endCheckpoint = checkpointRepository
+                    .findById(requestDrive.getEndpointId())
+                    .orElseThrow(() -> new CheckpointNotFound("End checkpoint not found"));
 
-        //Fetch End Checkpoint
-        Checkpoint endCheckpoint = checkpointRepository
-                .findById(requestDrive.getEndpointId())
-                .orElseThrow(() -> new CheckpointNotFound("End checkpoint not found"));
+            Drive drive = new Drive();
+            drive.setStatus("ACTIVE");
+            drive.setDriver(driver);
+            drive.setVehicle(vehicle);
+            drive.setStart_point(startCheckpoint);
+            drive.setEnd_point(endCheckpoint);
+            drive.setLatitude(requestDrive.getLatitude());
+            drive.setLongitude(requestDrive.getLongitude());
 
-        Drive drive = new Drive();
-        drive.setStatus("ACTIVE");
-        drive.setDriver(driver);
-        drive.setVehicle(vehicle);
-        drive.setStart_point(startCheckpoint);
-        drive.setEnd_point(endCheckpoint);
-        drive.setLatitude(requestDrive.getLatitude());
-        drive.setLongitude(requestDrive.getLongitude());
-
-        return driveRepository.save(drive);
+            return driveRepository.save(drive);
     }
 
     public VehicleNumberRequest endDrive(VehicleNumberRequest vehicleNumberRequest) {
