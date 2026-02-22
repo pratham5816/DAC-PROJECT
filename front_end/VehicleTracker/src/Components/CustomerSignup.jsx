@@ -25,7 +25,7 @@ function CustomerSignup() {
 
     try {
       await axios.post(
-        "https://dac-project-production.up.railway.app/customer/register",
+        "https://dac-project-production-d60f.up.railway.app/customer/register",
         form
       );
 

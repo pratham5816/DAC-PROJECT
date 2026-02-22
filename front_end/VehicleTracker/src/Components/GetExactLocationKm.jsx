@@ -23,7 +23,7 @@ const GetExactLocation = () => {
     try {
       console.log("Fetching exact location for vehicle:", vehicleNumber);
       const res = await axios.get(
-        `https://dac-project-production.up.railway.app/matrix/details/${vehicleNumber}`,
+        `https://dac-project-production-d60f.up.railway.app/matrix/details/${vehicleNumber}`,
         {
           params: { vehicleNumber },
         }

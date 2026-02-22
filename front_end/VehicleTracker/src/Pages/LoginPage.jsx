@@ -52,10 +52,10 @@ const LoginPage = ({ onLogin }) => {
     localStorage.setItem("Email", email); // local storage used so that we can call apis
 
     const loginApiMap = {
-      driver: "https://dac-project-production.up.railway.app/auth/driver/login",
-      user: "https://dac-project-production.up.railway.app/auth/user/login",
+      driver: "https://dac-project-production-d60f.up.railway.app/auth/driver/login",
+      user: "https://dac-project-production-d60f.up.railway.app/auth/user/login",
       customer:
-        "https://dac-project-production.up.railway.app/auth/customer/login",
+        "https://dac-project-production-d60f.up.railway.app/auth/customer/login",
     };
 
     const loginUrl = loginApiMap[activeTab];

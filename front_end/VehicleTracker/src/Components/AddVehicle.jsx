@@ -27,7 +27,7 @@ const AddVehicle = () => {
 
   useEffect(() => {
     axios
-      .post("https://dac-project-production.up.railway.app/user/getUserIDbyEmail", {
+      .post("https://dac-project-production-d60f.up.railway.app/user/getUserIDbyEmail", {
         email: localStorage.getItem("Email"),
       })
       .then((res) => {
@@ -53,7 +53,7 @@ const AddVehicle = () => {
    // console.log("User Email: " + userEmail);
 
     try {
-      await axios.post("https://dac-project-production.up.railway.app/Vehicle/addVehicle", {
+      await axios.post("https://dac-project-production-d60f.up.railway.app/Vehicle/addVehicle", {
         vehicleNumber: vehicle.vehicleNumber,
         vehicleType: vehicle.vehicleType,
         challan_Exp: vehicle.challanExp,

@@ -34,7 +34,7 @@ const DriverPage = () => {
 
   useEffect(() => {
     axios
-      .post("https://dac-project-production.up.railway.app/driver/getDriverByEmail", {
+      .post("https://dac-project-production-d60f.up.railway.app/driver/getDriverByEmail", {
         email: localStorage.getItem("Email"),
       })
       .then((res) => {
@@ -54,7 +54,7 @@ const DriverPage = () => {
 
   useEffect(() => {
     axios
-      .post("https://dac-project-production.up.railway.app/drive/checkDriverAssigned", {
+      .post("https://dac-project-production-d60f.up.railway.app/drive/checkDriverAssigned", {
         email: ResponseObj.email,
       })
       .then((res) => {
@@ -90,7 +90,7 @@ const DriverPage = () => {
   useEffect(() => {
     if (!driver.driveAssigned || !driver.vehicle) return;
     axios
-      .get("https://dac-project-production.up.railway.app/drive/getCurrentCheckpointLocation", {
+      .get("https://dac-project-production-d60f.up.railway.app/drive/getCurrentCheckpointLocation", {
         params: {
           vehicleNumber: driver.vehicle.number,
            
@@ -126,7 +126,7 @@ const DriverPage = () => {
         const longitude = position.coords.longitude;
 
         axios
-          .post("https://dac-project-production.up.railway.app/drive/updateLocation", {
+          .post("https://dac-project-production-d60f.up.railway.app/drive/updateLocation", {
             vehicleNumber: driver.vehicle.number,
             latitude,
             longitude,
@@ -174,7 +174,7 @@ const DriverPage = () => {
   if (!window.confirm("Are you sure you want to end the drive?")) return;
 
   axios
-    .post("https://dac-project-production.up.railway.app/drive/endDrive", {
+    .post("https://dac-project-production-d60f.up.railway.app/drive/endDrive", {
       vehicleNumber: driver.vehicle.number, 
     })
     .then(() => {
